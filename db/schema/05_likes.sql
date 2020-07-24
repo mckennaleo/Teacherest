@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS resources;
+CREATE TABLE resources
+(
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  ressource_id INTEGER REFERENCES ressources(id) ON DELETE CASCADE,
+  liked BOOLEAN,
+  created_at TIMESTAMP DEFAULT now()
+);
