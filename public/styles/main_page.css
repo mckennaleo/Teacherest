@@ -1,0 +1,16 @@
+ nav {
+   background-image: url('/img/books-1163695_1920.jpeg');
+  background-position: 50%;
+ }
+
+ .title-container {
+   display: flex;
+   justify-content: center;
+ }
+
+ .title {
+   margin: 1.2em;
+   color: whitesmoke;
+   font-family: 'Permanent Marker', cursive;
+   font-size: 2.5em;
+   }
