@@ -6,6 +6,6 @@ CREATE TABLE resources
   description TEXT,
   category_id TINYINT,
   title TEXT,
-  screenshot ETXT,
+  screenshot TEXT,
   created_at TIMESTAMP DEFAULT now()
 );
