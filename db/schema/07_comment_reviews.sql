@@ -1,9 +1,11 @@
-DROP TABLE IF EXISTS comment_reviews CASCADE;
+DROP TABLE IF EXISTS comment_reviews
+CASCADE;
 
 
-CREATE TABLE comment_reviews (
+CREATE TABLE comment_reviews
+(
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   comment_id INTEGER REFERENCES comments(id) ON DELETE CASCADE,
-  like BOOLEAN DEFAULT FALSE,
+  liked BOOLEAN DEFAULT FALSE,
 );
