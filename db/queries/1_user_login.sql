@@ -1,3 +1,3 @@
-SELECT id, name, email, password
+SELECT *
 FROM users
 WHERE email = 'slim@jim.com';
