@@ -1,7 +1,3 @@
-DROP TABLE IF EXISTS comment_reviews
-CASCADE;
-
-
 CREATE TABLE comment_reviews
 (
   id SERIAL PRIMARY KEY NOT NULL,
