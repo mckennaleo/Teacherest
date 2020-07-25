@@ -10,4 +10,4 @@ VALUES
   (5, 4, 'fantastic!'),
   (2, 4, 'WoW!!!'),
   (3, 5, 'This is the most incredible thing I''ve seen!'),
-  (4, 5, 'Very impressive.')
+  (4, 5, 'Very impressive.');

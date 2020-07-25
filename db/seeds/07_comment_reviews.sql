@@ -8,4 +8,4 @@ VALUES
   (5, 5, TRUE),
   (1, 1, TRUE),
   (6, 3, TRUE),
-  (6, 6, TRUE)
+  (6, 6, TRUE);

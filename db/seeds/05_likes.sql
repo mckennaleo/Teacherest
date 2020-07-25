@@ -7,4 +7,4 @@ VALUES
   (3, 5, TRUE),
   (5, 1, TRUE),
   (2, 4, TRUE),
-  (5, 1, TRUE)
+  (5, 1, TRUE);
