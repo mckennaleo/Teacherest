@@ -1,0 +1,2 @@
+SELECT resources.*
+FROM resources;
