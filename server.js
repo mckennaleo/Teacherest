@@ -16,6 +16,7 @@ const widgetsRoutes = require("./routes/widgets");
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
+const { getAllResources } = require('./db/index.js');
 const db = new Pool(dbParams);
 db.connect();
 
@@ -23,8 +24,7 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
-
-app.set("view engine", "ejs");
+// app.use(express.static(__dirname + "/../public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -37,7 +37,9 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 
-
+app.set('views', __dirname + '/public/views');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
@@ -51,9 +53,36 @@ app.use("/api/widgets", widgetsRoutes(db));
 
 
 //-----------GETS-----------//
+const showResources = (db) => {
+  let resourceList = {};
+  for (let objects in db) {
+    resourceList[objects] = db[objects]
+  }
+  return resourceList;
+};
+
+
+
+
 app.get("/", (req, res) => {
-  res.render("index");
+  // let obj = [];
+  db.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected");
+    let sql = "SELECT * FROM resources";
+    db.query(sql, function (err, result) {
+        if (err) {
+            console.log(err)
+            throw err;
+        } else {
+            // obj = JSON.parse(JSON.stringify(result.rows))
+            res.render('index');
+        }
+    });
+  })
 });
+
+
 
 app.get("/new", (req, res) => {
   res.render("new_resource");
@@ -67,6 +96,15 @@ app.get("/profile", (req, res) => {
   res.render("index");
 });
 
+app.get("/display", (req, res) => {
+  console.log(req)
+  console.log("This is the res: ", res)
+})
+
+app.post("/display", (req, res) => {
+  console.log(req)
+  console.log("This is the res: ", res)
+})
 
 //-----------APP LISTEN-----------//
 app.listen(PORT, () => {
