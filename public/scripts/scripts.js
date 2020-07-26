@@ -5,8 +5,8 @@ $(document).ready(function () {
     console.log(input)
     $.ajax({
       url: "/display",
-      context: input,
-      method: "POST"
+      data: {input},
+      type: "POST"
     }).done(function() {
       console.log('Done')
     })

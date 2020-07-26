@@ -96,14 +96,10 @@ app.get("/profile", (req, res) => {
   res.render("index");
 });
 
-app.get("/display", (req, res) => {
-  console.log(req)
-  console.log("This is the res: ", res)
-})
 
 app.post("/display", (req, res) => {
-  console.log(req)
-  console.log("This is the res: ", res)
+  console.log(req.body)
+  // console.log("This is the res: ", res)
 })
 
 //-----------APP LISTEN-----------//
