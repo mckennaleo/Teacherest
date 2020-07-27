@@ -1,6 +1,6 @@
 const renderResource = (data) => {
   for (let item of data) {
-    $('.display').append(createResourceElement(item)); 
+    $('.display').append(createResourceElement(item));
   }
 };
 
@@ -47,15 +47,15 @@ const createResourceElement = (item) => {
 
 
 $(document).ready(function () {
-  $('.search-form').submit(function(e) {
+  $('.search-form').submit(function (e) {
     e.preventDefault();
     let input = $('.category-search').val();
     console.log(input)
     $.ajax({
       url: "/display",
-      data: {input},
+      data: { input },
       type: "POST"
-    }).done(function() {
+    }).done(function () {
       console.log('Done')
     })
   })
@@ -66,20 +66,18 @@ $(document).ready(function () {
       //response.data because thats what the getter is returning
       renderResource(response.data);
     })
-      .done(function() {
+      .done(function () {
         console.log("second success");
       })
-      .fail(function() {
+      .fail(function () {
         console.log("error");
       })
-      .always(function() {
+      .always(function () {
         console.log("complete");
       });
   };
 
-loadResources();
+  loadResources();
 
-      console.log('Done');
-    });
-  });
+  console.log('Done');
 });
