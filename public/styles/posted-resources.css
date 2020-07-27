@@ -1,96 +1,59 @@
 .display{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
-.article-tweet {
+.resource-box {
   display: flex;
   flex-direction: column;
-  border-radius: 25px;
-  border: 2px solid;
+  
   align-items: center;
-  width: 100%;
+  background-color: #CE6C47;
   margin-top: 30px;
-  font-size: medium;
+  font-size: small;
   padding: 1em;
+  transition: transform .2s;
 }
 
-/* adds drop-shadow when hovering on posted tweets */
-
-.article-tweet:hover {
-  box-shadow: 10px 10px #BBC5F2;
+.container {
+  position: relative;
+  maxwidth: 100%;
+  border-radius: 25px;
 }
 
-/* container for profile pic, name and @handle */
-
-.article-tweet-header {
-  display: flex;
+.image {
+  opacity: 1;
+  display: block;
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  font-size: large;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
 }
 
-/* containers for profile pic and name */
-
-.tweet-profile {
-  display: flex;
-  align-items: center;
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-.tweet-profile-name {
-  padding-left: 0.75em;
+.container:hover .image {
+  opacity: 0.3;
 }
 
-/* bolds @handle on hover */
-
-.article-tweet:hover .tweet-handle {
-  color: #BBC5F2;
-  font-weight: 700;
-  visibility: visible;
+.container:hover .middle {
+  opacity: 1;
 }
 
-/* text area of posted tweet */
-
-.tweet-content {
-  display: flex;
-  width: 100%;
-  height: 5em;
-  border-bottom: solid;
-  font-weight: 300;
-}
-
-/* slightly indented placement of text within tweet-content */
-
-.tweet-content p {
-  display: flex;
-  align-items: center;
-  margin: 15px 0px 0px 10px;
-}
-
-/* containers for date posted and icons*/
-
-.article-tweet-footer {
-  display: flex;
-  width: 95%;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-top: 0.4em;
-}
-
-.tweet-date {
-  font-size: x-small;
-}
-
-.tweet-icons {
-  display: flex;
-  justify-content: space-around;
-  padding-left: 0.1em;
-}
-
-/* spacing of icons */
-
-.tweet-icons img {
-  margin: 0 7px 0 0;
+.title {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
 }
