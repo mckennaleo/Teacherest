@@ -12,6 +12,7 @@ const morgan = require('morgan');
 
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
+const categoriesRoutes = require("./routes/categories");
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -44,6 +45,8 @@ app.set('view engine', 'html');
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/categories", categoriesRoutes(db));
+
 // Note: mount other resources here, using the same pattern above
 
 
@@ -56,7 +59,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 const showResources = (db) => {
   let resourceList = {};
   for (let objects in db) {
-    resourceList[objects] = db[objects]
+    resourceList[objects] = db[objects];
   }
   return resourceList;
 };
@@ -66,20 +69,18 @@ const showResources = (db) => {
 
 app.get("/", (req, res) => {
   // let obj = [];
-  db.connect(function (err) {
+  db.connect(function(err) {
     if (err) throw err;
-    console.log("Connected");
     let sql = "SELECT * FROM resources";
-    db.query(sql, function (err, result) {
-        if (err) {
-            console.log(err)
-            throw err;
-        } else {
-            // obj = JSON.parse(JSON.stringify(result.rows))
-            res.render('index');
-        }
+    db.query(sql, function(err, result) {
+      if (err) {
+        throw err;
+      } else {
+        // obj = JSON.parse(JSON.stringify(result.rows))
+        res.render('index');
+      }
     });
-  })
+  });
 });
 
 
@@ -98,9 +99,8 @@ app.get("/profile", (req, res) => {
 
 
 app.post("/display", (req, res) => {
-  console.log(req.body)
   // console.log("This is the res: ", res)
-})
+});
 
 //-----------APP LISTEN-----------//
 app.listen(PORT, () => {

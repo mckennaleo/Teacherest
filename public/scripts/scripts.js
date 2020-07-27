@@ -9,6 +9,6 @@ $(document).ready(function () {
       type: "POST"
     }).done(function() {
       console.log('Done')
-    })
-  })
+    });
+  });
 });
