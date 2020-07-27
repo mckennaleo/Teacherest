@@ -1,3 +1,78 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+  /* = global
+-------------------------------------------------------------- */
+  #wrapper, #header, #page, #content, #sidebar, #footer {
+      overflow: hidden;
+  }
+  #nav-products, #content {
+      float: left;
+      width: 180px;
+  }
+  #sidebar {
+      float: right;
+      position: relative;
+      width: 265px;
+  }
+  /* = font
+-------------------------------------------------------------- */
+  html {
+      font-size: 62.5%;
+  }
+  body {
+      color: #404041;
+      font: 1.2em Verdana, Geneva, sans-serif;
+      padding-bottom: 50px;
+  }
+  body > p {
+      display: none;
+  }
+  h1, h2, h3, h4, h5, h6 {
+      font-size: 1.16666666666667em;
+      /* 14px / 12px */
+      font-weight: bold;
+      margin: 1em 0 .5em;
+  }
+  h1 {
+      font-size: 1.33333333333333em;
+      /* 16px / 12px */
+      margin-top: 0;
+  }
+  h2 {
+  }
+  h3 {
+  }
+  p {
+      line-height: 1.5em;
+      /* 18px / 12px */
+      margin: 1em 0 .5em;
+  }
+  a {
+      color: #2e3191;
+  }
+  a:hover, a:active {
+      color: #5762e5;
+  }
+
+ 
+ 
+ 
  nav {
    background-image: url('/img/books-1163695_1920.jpeg');
   background-position: 50%;
@@ -37,6 +112,72 @@
      align-items: center;
    }
 
-   .search-subdivision {
+   #nav {
+    float: left;
+    font-size: 1.25em;
+    /* 15px / 12px */
+    font-weight: bold;
+}
+#nav li {
+    display: inline;
+}
+#nav ul a {
+    color: #fff;
+    display: block;
+    float: left;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+}
+#nav .current_page_item a, #nav li a:hover, #nav li a:active {
+    color: whitesmoke;
+}
+.sidebar h4, #nav-products nav a {
+    background: #404041;
+    border-radius: 2px;
+    color: #fff;
+    display: block;
+    font-size: 1em;
+    margin: 0 0 2px;
+    padding: .83333333333333em 2.08333333333333em;
+    text-transform: uppercase;
+}
+#nav-products nav li {
+    position: relative;
+    z-index: 2;
+}
 
-   }
+#nav-products nav a {
+    background-color: whitesmoke;
+    color: #404041;
+    text-decoration: none;
+}
+#nav-products nav li:hover > a, #nav-products nav a:active {
+    background-color: #404041;
+    color: whitesmoke;
+}
+
+#nav-products .dropdown ul {
+    display: none;
+    position: absolute;
+    left: 182px;
+    top: 0;
+    width: 180px;
+    z-index: 1;
+}
+
+aside#nav-products.sidebar {
+  background-color: whitesmoke;
+  display: none;
+}
+
+nav.navbar-expand-md {
+  display: flex;
+  flex-direction: row;
+}
+
+div.menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

@@ -79,4 +79,7 @@ $(document).ready(function () {
 
 loadResources();
 
+      console.log('Done');
+    });
+  });
 });
