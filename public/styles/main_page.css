@@ -67,7 +67,7 @@ ol, ul {
       color: #2e3191;
   }
   a:hover, a:active {
-      color: #5762e5;
+      color: rgb(172, 172, 235);
   }
 
  
@@ -86,9 +86,10 @@ ol, ul {
  .navbar-brand {
    color: whitesmoke;
    font-family: 'Permanent Marker', cursive;
-   font-size: 2.5em;
+   font-size: 2.4em;
    display: flex;
    justify-content: center;
+   margin: 1em;
    }
 
    .search-form {
@@ -164,6 +165,7 @@ ol, ul {
     top: 0;
     width: 180px;
     z-index: 1;
+    margin-right: 2em;
 }
 
 aside#nav-products.sidebar {
@@ -177,7 +179,47 @@ nav.navbar-expand-md {
 }
 
 div.menu {
+  margin: 1em;
+  font-family: 'Permanent Marker', cursive;
+  color: white;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-size: larger;
 }
+
+div.menu:hover {
+  color: rgb(172, 172, 235)
+}
+
+  .big_wrapper {
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    margin-top: 20px;
+  }
+
+  .nav div{
+    display: flex;
+    height: 5px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 25px;
+    transition: 0.8s;
+  }
+
+  .one{
+    width: 40px;
+  }
+
+  .two{
+    width: 20px;
+  }
+
+  .three{
+    width: 30px;
+  }
+
+  .nav:hover div {
+    width: 40px;
+  }
