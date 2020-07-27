@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router = express.Router();
-
+const { getResourceByCategory } = require('../db/index');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -25,10 +25,10 @@ module.exports = (db) => {
   });
 
   router.get("/search", (req, res) => {
-
     const searchQuery = req.query.s;
-
-    db.query(`SELECT * FROM categories WHERE name ILIKE $1;`, [searchQuery])
+    console.log(req.query.s);
+    /* db.query(`SELECT * FROM categories WHERE name ILIKE $1;`, [searchQuery]) */
+    getResourceByCategory(searchQuery)
       .then(data => {
         const categories = data.rows;
         res.json({ categories });

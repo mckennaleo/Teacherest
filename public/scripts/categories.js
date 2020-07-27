@@ -9,16 +9,17 @@ $(document).ready(function() {
   });
 });
 
-$(document).ready(function () {
+
+$(document).ready(function() {
   $('.search-form').submit(function(e) {
     e.preventDefault();
     let input = $('.category-search').val();
-    console.log(input)
     $.ajax({
       url: "/api/categories/search",
       data: { s: input },
       type: "GET"
-    }).done(function(data) {
+    }).success(function(data) {
+      //prepend or whatever
       console.log('Done', data);
     });
   });

@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  users: 'labber',
+  user: 'labber',
   password: 'labber',
   host: 'localhost',
   database: 'midterm'
@@ -37,7 +37,7 @@ const getResourceByCategory = function(category) {
   FROM resources
   WHERE category_id = $1`, [category])
     .then(res => res.rows)
-    .catch((res, err) => res.send(err));
+    .catch((res, err) => console.log(res, err));
 };
 exports.getResourceByCategory = getResourceByCategory;
 
