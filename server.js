@@ -11,7 +11,7 @@ const app = express();
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 
-const usersRoutes = require("./routes/users");
+
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
@@ -47,7 +47,6 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
