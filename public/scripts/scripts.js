@@ -8,7 +8,7 @@ $(document).ready(function () {
       data: {input},
       type: "POST"
     }).done(function() {
-      console.log('Done')
+      console.log('Done');
     });
   });
 });
