@@ -55,7 +55,7 @@ $(document).ready(function() {
       url: "/display",
       data: { input },
       type: "POST"
-    }).done(function() {
+    }).done(function () {
       console.log('Done')
     })
   })
@@ -66,13 +66,13 @@ $(document).ready(function() {
       //response.data because thats what the getter is returning
       renderResource(response.data);
     })
-      .done(function() {
+      .done(function () {
         console.log("second success");
       })
-      .fail(function() {
+      .fail(function () {
         console.log("error");
       })
-      .always(function() {
+      .always(function () {
         console.log("complete");
       });
   };
