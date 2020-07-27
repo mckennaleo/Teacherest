@@ -17,7 +17,6 @@ const categoriesRoutes = require("./routes/categories");
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
-const { getAllResources } = require('./db/index.js');
 const db = new Pool(dbParams);
 db.connect();
 
