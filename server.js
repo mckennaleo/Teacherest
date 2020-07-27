@@ -15,6 +15,7 @@ const cookieSession = require('cookie-session');
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
+const {addUser} = require('./db/index')
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -89,16 +90,8 @@ app.get("/", (req, res) => {
 
 
 
-app.get("/new", (req, res) => {
-  res.render("new_resource");
-});
-
-app.get("/:resource", (req, res) => {
-  res.render("index");
-});
-
-app.get("/profile", (req, res) => {
-  res.render("index");
+app.get("/register", (req, res) => {
+  res.render("register");
 });
 
 
@@ -106,6 +99,18 @@ app.post("/display", (req, res) => {
   // console.log("This is the res: ", res)
 });
 
+
+//-----------APP POST----------//
+app.post("/register", (req, res) => {
+  const {name, email, password, bio} = req.body;
+  if (name === "" || email === "" || password === "" || bio === "") {
+    res.redirect('/error')
+  } else {
+    addUser(req.body);
+    res.redirect('/')
+  }
+  
+});
 //-----------APP LISTEN-----------//
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
