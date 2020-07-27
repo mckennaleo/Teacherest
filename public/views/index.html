@@ -20,6 +20,7 @@
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/categories.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
     <script src="/scripts/scripts.js"></script>
 
 
@@ -39,6 +40,7 @@
           <a class="nav-item nav-link" href="/new">New Resource</a>
           <a class="nav-item nav-link" href="/profile">My Profile</a>
           <button class="btn1">search</button>
+          <button class="btn2">Login</button>
         </div>
       </div>
     </nav>
@@ -46,10 +48,19 @@
   <aside class= "search-container">
     
     <form action="submit" type="POST" class="search-form">
-      <div class= search-subdivision>
+      <div class="search-subdivision">
       <input type="text" placeholder="search by category" class="category-search">
       <button type="submit" class="category-button">Search</button>
     </div>
+    </form>
+  </aside>
+  <aside>
+    <form action="/login" type="POST" class="login-form">
+      <div class="login-form">
+        <input type="text" placeholder="email" class="email-field">
+        <input type="text" placeholder="password" class="pw-field">
+        <button type="submit" class="login-button">Login</button>
+      </div>
     </form>
   </aside>
   <main>

@@ -16,7 +16,7 @@ const getUserWithEmail = function(email) {
   FROM users
   WHERE email = $1`, [email])
     .then(res => res.rows[0])
-    .catch((res, err) => res.send(err));
+    .catch((err) => console.log(err));
 };
 exports.getUserWithEmail = getUserWithEmail;
 

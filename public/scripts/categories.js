@@ -18,7 +18,7 @@ $(document).ready(function() {
       url: "/api/categories/search",
       data: { s: input },
       type: "GET"
-    }).success(function(data) {
+    }).done(function(data) {
       //prepend or whatever
       console.log('Done', data);
     });
