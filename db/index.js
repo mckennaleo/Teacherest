@@ -16,7 +16,7 @@ const getUserWithEmail = function(email) {
   FROM users
   WHERE email = $1`, [email])
     .then(res => res.rows[0])
-    .catch(err => res.send(err));
+    .catch((res, err) => res.send(err));
 };
 exports.getUserWithEmail = getUserWithEmail;
 
@@ -27,7 +27,7 @@ const getUserResources = function(userId) {
   JOIN users ON users.id = resources.created_by
   WHERE users.id = $1`, [userId])
     .then(res => res.rows)
-    .catch(err => res.send(err));
+    .catch((res, err) => res.send(err));
 };
 exports.getUserResources = getUserResources;
 
@@ -37,7 +37,7 @@ const getResourceByCategory = function(category) {
   FROM resources
   WHERE category_id = $1`, [category])
     .then(res => res.rows)
-    .catch(err => res.send(err));
+    .catch((res, err) => res.send(err));
 };
 exports.getResourceByCategory = getResourceByCategory;
 
@@ -47,7 +47,7 @@ const getAllResources = function() {
   SELECT *
   FROM resources`)
     .then(res => res.rows)
-    .catch(err => res.send(err));
+    .catch((res, err) => res.send(err));
 };
 exports.getAllResources = getAllResources;
 
@@ -58,7 +58,7 @@ const addUser = function(user) {
   VALUES ($1, $2, $3)
   RETURNING *`, [email, name, password])
     .then(res => res.rows[0])
-    .catch(err => res.send(err));
+    .catch((res, err) => res.send(err));
 };
 exports.addUser = addUser;
 
@@ -69,7 +69,7 @@ const addResource = function(resource) {
   VALUES ($1, $2, $3, $4, $5, $6)
   RETURNING *`, [created_by, link, description, category_id, title, screenshot])
     .then(res => res.rows[0])
-    .catch(err => res.send(err));
+    .catch((res, err) => res.send(err));
 };
 exports.addResource = addResource;
 
