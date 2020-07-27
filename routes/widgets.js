@@ -7,14 +7,17 @@
 
 const express = require('express');
 const router  = express.Router();
+const { getAllResources } = require('../db/index');
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    let query = `SELECT * FROM widgets`;
-    db.query(query)
+  router.get("/all", (req, res) => {
+    console.log("WHAT IS THIS:", req.body)
+    //let query = `SELECT * FROM resources`;
+    getAllResources(req)
       .then(data => {
-        const widgets = data.rows;
-        res.json({ widgets });
+        //data = query response from getAllResources!
+        console.log(data)
+        res.json({ data });
       })
       .catch(err => {
         res
@@ -22,5 +25,7 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  
   return router;
 };
