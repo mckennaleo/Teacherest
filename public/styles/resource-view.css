@@ -15,6 +15,7 @@
 .resource-content {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   width: 100%;
 }
 
@@ -39,26 +40,19 @@
   padding-bottom: 1em;
 }
 
-.a.website:link {
-  text-decoration: none;
+.website-button {
+  background-color: #CE6C47;
+  border: none;
+  border-radius: 25%;
+  color: white;
+  font-size: small;
   font-weight: 600;
-  color: #CE6C47;
+  width: 6em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
-a.website:visited {
-  text-decoration: none;
-  color: #960200;
-  font-weight: 600;
-  font-size: medium;
-}
 
-a.website:hover {
-  text-decoration: underline;
-}
-
-a.website:active {
-  text-decoration: underline;
-}
 
 .resource-content-main {
   display: flex;
@@ -89,15 +83,10 @@ a.website:active {
   margin: 0 7px 0 0;
 }
 
-
-.resource-content-footer {
-
-}
-
 .resource-image {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding-right: 3em;
 }
@@ -105,6 +94,7 @@ a.website:active {
 .resource-image-header {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   width: 100%;
   padding-top: 1em;
   padding-bottom: 3em;
@@ -125,4 +115,8 @@ a.website:active {
   width: 6em;
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+.resource-content-footer {
+
 }
