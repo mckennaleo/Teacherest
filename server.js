@@ -16,7 +16,8 @@ const cookieParser = require('cookie-parser');
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
-const {addUser, getResourceById} = require('./db/index')
+const newResourceRoutes = require("./routes/newResource");
+const {addUser, getResourceById} = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -49,6 +50,8 @@ app.set('view engine', 'html');
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
+app.use("/api/newResource", newResourceRoutes(db));
+
 
 
 // Note: mount other resources here, using the same pattern above
@@ -73,7 +76,6 @@ const showResources = (db) => {
 
 app.get("/", (req, res) => {
   db.connect(function(err) {
-    console.log(req)
     let templateVars = {user: req.cookies.user_id}
     if (err) throw err;
     let sql = "SELECT * FROM resources";
@@ -94,7 +96,7 @@ app.get("/resource/:id", (req, res) => {
     const { id } = req.params;
     getResourceById(id)
     .then(res => {
-      console.log("IS THIS IT:", res)
+      // console.log("IS THIS IT:", res)
       //res.render(`resource_view`);
     })
     // const dbQuery = getResourceById(id);
@@ -118,6 +120,8 @@ app.get("/register", (req, res) => {
     res.render("register");
  
 });
+
+
 
 
 app.post("/display", (req, res) => {

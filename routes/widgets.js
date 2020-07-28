@@ -12,12 +12,12 @@ const { getResourceByCategories } = require('../db/index');
 
 module.exports = (db) => {
   router.get("/all", (req, res) => {
-    console.log("WHAT IS THIS:", req.body)
+    // console.log("WHAT IS THIS:", req.body)
     //let query = `SELECT * FROM resources`;
     getAllResources(req)
       .then(data => {
         //data = query response from getAllResources!
-        console.log(data)
+        // console.log(data)
         res.json({ data });
       })
       .catch(err => {

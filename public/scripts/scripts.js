@@ -54,7 +54,7 @@ $(document).ready(function() {
 
   const loadResources = () => {
     $.getJSON('/api/widgets/all', (response) => {
-      console.log('success');
+      // console.log('success');
       //response.'data' because thats what the getter is returning
       renderResource(response.data);
     })
@@ -71,5 +71,5 @@ $(document).ready(function() {
 
   loadResources();
 
-  console.log('Done');
+  // console.log('Done');
 });

@@ -29,6 +29,7 @@
   <script type="text/javascript" src="/scripts/categories.js"></script>
   <script type="text/javascript" src="/scripts/login.js"></script>
   <script type="text/javascript" src="/scripts/menu.js"></script>
+  <script type="text/javascript" src="/scripts/newResource.js"></script>
 </head>
 
 <body>
@@ -48,7 +49,7 @@
     <h4>Menu</h4>
     <nav>
       <ul>
-        <li><a class="nav-item nav-link" href="/new">New Resource</a>
+        <li><a class="nav-item nav-link" href="/newResource">New Resource</a>
         </li>
         <li><a class="nav-item nav-link" href="/profile">My Profile</a>
         </li>
@@ -128,6 +129,33 @@
     </nav>
   </aside>
   <main>
+    <div>
+      <form action="/api/newResource" method="POST" class="new-resource">
+        <label for="link">URL: </label>
+        <input type="text" class="link">
+        <label for="title">Title: </label>
+        <input type="text" class="title">
+        <label for="description">Description: </label>
+        <input type="text" class="description">
+        <label for="category">Category: </label>
+        <select class="category">
+          <option value="1">Science</option>
+          <option value="2">News</option>
+          <option value="3">Arts & Entertainment</option>
+          <option value="4">Sports</option>
+          <option value="5">Health</option>
+          <option value="6">Work</option>
+          <option value="7">Hobbies</option>
+          <option value="8">Nature</option>
+          <option value="9">Music</option>
+          <option value="10">Literature</option>
+          <option value="11">Misc</option>
+        </select>
+        <label for="screenshotUrl">Screenshot URL: </label>
+        <input type="text" class="screenshotUrl">
+        <button type="submit">Submit</button>
+        </form>
+    </div>
     <div class="display">
     </div>
   </main>
