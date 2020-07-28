@@ -9,7 +9,8 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
-const cookieSession = require('cookie-session');
+
+const cookieParser = require('cookie-parser');
 
 
 const widgetsRoutes = require("./routes/widgets");
@@ -27,10 +28,7 @@ db.connect();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 // app.use(express.static(__dirname + "/../public"));
-app.use(cookieSession({
-  name: 'session',
-  keys: ['userID']
-}));
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -51,6 +49,7 @@ app.set('view engine', 'html');
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
+
 
 // Note: mount other resources here, using the same pattern above
 
@@ -73,15 +72,15 @@ const showResources = (db) => {
 
 
 app.get("/", (req, res) => {
-  // let obj = [];
   db.connect(function(err) {
+    console.log(req)
+    let templateVars = {user: req.cookies.user_id}
     if (err) throw err;
     let sql = "SELECT * FROM resources";
     db.query(sql, function(err, result) {
       if (err) {
         throw err;
       } else {
-        // obj = JSON.parse(JSON.stringify(result.rows))
         res.render('index');
       }
     });
@@ -114,7 +113,14 @@ app.get("/resource/:id", (req, res) => {
 
 
 app.get("/register", (req, res) => {
-  res.render("register");
+  const user = req.cookies.user_id;
+  if (user) {
+    let templateVars = {user: user}
+    res.render(templateVars, "register");
+    
+  } else {
+    res.render("alreadyLoggedInError")
+  }
 });
 
 

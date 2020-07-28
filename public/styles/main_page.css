@@ -68,16 +68,16 @@ ol, ul {
 
    .search-form {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 4em;
-    border-radius: 15px 50px 30px;
+    justify-content: space-around;
+    margin-left: 2em;
+    margin-right: 2em;
+    width: 75%;
+    border-radius: 25px;
     background: whitesmoke;
     border: 1px solid black;
     padding: 20px;
-    width: 25em;
     height: 12.5em;
+    position: fixed;
    }
    
 
@@ -150,6 +150,7 @@ aside#nav-products.sidebar {
 nav.navbar-expand-md {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 div.menu {
@@ -198,3 +199,11 @@ div.menu:hover {
     width: 40px;
   }
 
+  .search-box {
+    display: flex;
+    flex-direction: row;
+    
+    width: 100%;
+    height:100%;
+    margin: 1em;
+  }
