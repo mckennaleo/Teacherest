@@ -40,38 +40,12 @@ ol, ul {
       font: 1.2em Verdana, Geneva, sans-serif;
       padding-bottom: 50px;
   }
-  body > p {
-      display: none;
-  }
-  h1, h2, h3, h4, h5, h6 {
-      font-size: 1.16666666666667em;
-      /* 14px / 12px */
-      font-weight: bold;
-      margin: 1em 0 .5em;
-  }
-  h1 {
-      font-size: 1.33333333333333em;
-      /* 16px / 12px */
-      margin-top: 0;
-  }
-  h2 {
-  }
-  h3 {
-  }
-  p {
-      line-height: 1.5em;
-      /* 18px / 12px */
-      margin: 1em 0 .5em;
-  }
-  a {
-      color: #2e3191;
-  }
+
+  
   a:hover, a:active {
-      color: #5762e5;
+      color: rgb(172, 172, 235);
   }
 
- 
- 
  
  nav {
    background-image: url('/img/books-1163695_1920.jpeg');
@@ -86,9 +60,10 @@ ol, ul {
  .navbar-brand {
    color: whitesmoke;
    font-family: 'Permanent Marker', cursive;
-   font-size: 2.5em;
+   font-size: 2.4em;
    display: flex;
    justify-content: center;
+   margin: 1em;
    }
 
    .search-form {
@@ -164,6 +139,7 @@ ol, ul {
     top: 0;
     width: 180px;
     z-index: 1;
+    margin-right: 2em;
 }
 
 aside#nav-products.sidebar {
@@ -177,7 +153,48 @@ nav.navbar-expand-md {
 }
 
 div.menu {
+  margin: 1em;
+  font-family: 'Permanent Marker', cursive;
+  color: white;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-size: larger;
 }
+
+div.menu:hover {
+  color: rgb(172, 172, 235)
+}
+
+  .big_wrapper {
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    margin-top: 20px;
+  }
+
+  .nav div{
+    display: flex;
+    height: 5px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 25px;
+    transition: 0.8s;
+  }
+
+  .one{
+    width: 40px;
+  }
+
+  .two{
+    width: 20px;
+  }
+
+  .three{
+    width: 30px;
+  }
+
+  .nav:hover div {
+    width: 40px;
+  }
+

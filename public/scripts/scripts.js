@@ -37,15 +37,15 @@ $(document).ready(function() {
   $('.search-form').submit(function(e) {
     e.preventDefault();
     let input = $('.category-search').val();
-    console.log(input)
+    console.log(input);
     $.ajax({
       url: "/display",
       data: { input },
       type: "POST"
-    }).done(function () {
-      console.log('Done')
-    })
-  })
+    }).done(function() {
+      console.log('Done');
+    });
+  });
 
   const loadResources = () => {
     $.getJSON('/api/widgets/all', (response) => {
@@ -53,13 +53,13 @@ $(document).ready(function() {
       //response.data because thats what the getter is returning
       renderResource(response.data);
     })
-      .done(function () {
+      .done(function() {
         console.log("second success");
       })
-      .fail(function () {
+      .fail(function() {
         console.log("error");
       })
-      .always(function () {
+      .always(function() {
         console.log("complete");
       });
   };

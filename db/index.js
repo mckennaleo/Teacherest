@@ -52,13 +52,13 @@ const getAllResources = function() {
 exports.getAllResources = getAllResources;
 
 const addUser = function(user) {
-  let { email, name, password } = user;
+  let { email, name, password, bio} = user;
   return pool.query(`
-  INSERT INTO users (email, name, password)
-  VALUES ($1, $2, $3)
-  RETURNING *`, [email, name, password])
+  INSERT INTO users (email, name, password, bio)
+  VALUES ($1, $2, $3, $4)
+  RETURNING *`, [email, name, password, bio])
     .then(res => res.rows[0])
-    .catch((res, err) => res.send(err));
+    .catch((err) => console.log(err));
 };
 exports.addUser = addUser;
 

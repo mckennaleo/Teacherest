@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $(".menu").click(function() {
+  $(".big_wrapper").click(function() {
     if ($("#nav-products.sidebar").is(":visible")) {
       $("#nav-products.sidebar").slideUp();
     } else {

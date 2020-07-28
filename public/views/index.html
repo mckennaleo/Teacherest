@@ -32,10 +32,15 @@
 </head>
 
 <body>
-  <div class="column">
     <header>
       <nav class="navbar-expand-md">
-        <div type= "onclick" class="menu" > Menu </div>
+        <div class="big_wrapper">
+          <a href="#" class="nav">
+            <div class="one"></div>
+            <div class="two"></div>
+            <div class="three"></div>
+          </a>
+        </div>
         <a class="navbar-brand" href="/">T e a c h e r e s t</a>
       </nav>
     </header>
@@ -47,8 +52,9 @@
             </li>
             <li><a class="nav-item nav-link" href="/profile">My Profile</a>
             </li>
-            <li id="search" class="dropdown"> <a href="#">Search</a>
-              <ul>
+            <li class="dropdown">
+              <a id="search" href="#">Search</a>
+              <ul class="search-container" id="search-container" style="display: none;">
                 <li>
                   <!-- <div class="btn1">search</div> -->
                   <form action="submit" type="POST" class="search-form">
@@ -59,10 +65,12 @@
                   </form>
                 </li>
               </ul>
+            </li>
+            <li> <a class="nav-item nav-link" href="/new">login</a></li>
           </ul>
         </nav>
       </aside>
-      <aside>
+     <!--  <aside>
         <form action="/login" type="POST" class="login-form">
           <div class="login-form">
             <input type="text" placeholder="email" class="email-field">
@@ -70,7 +78,7 @@
             <button type="submit" class="login-button">Login</button>
           </div>
         </form>
-      </aside>
+      </aside> -->
     <main>
       <div class="display">
       </div>
@@ -78,3 +86,4 @@
 </body>
 
 </html>
+
