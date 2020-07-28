@@ -16,8 +16,8 @@ const cookieParser = require('cookie-parser');
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
-const newResourceRoutes = require('./routes/newResource')
-const { addUser, getResourceById } = require('./db/index')
+const newResourceRoutes = require('./routes/newResource');
+const { addUser, getResourceById } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');

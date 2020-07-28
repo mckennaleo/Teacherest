@@ -63,7 +63,7 @@ const getAllResources = function() {
 exports.getAllResources = getAllResources;
 
 const addUser = function(user) {
-  let { email, name, password, bio} = user;
+  let { email, name, password, bio } = user;
   return pool.query(`
   INSERT INTO users (email, name, password, bio)
   VALUES ($1, $2, $3, $4)
@@ -80,7 +80,10 @@ const addResource = function(resource) {
   VALUES ($1, $2, $3, $4, $5, $6)
   RETURNING *`, [created_by, link, description, category_id, title, screenshot])
     .then(res => res.rows[0])
-    .catch((res, err) => console.log(err));
+    .catch((err) => {
+      console.error(err);
+      throw err;
+    });
 };
 exports.addResource = addResource;
 
