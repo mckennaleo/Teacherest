@@ -97,17 +97,29 @@
       <div class="resource-content">
 
         <div class="resource-content-header">
-          <%= resource.link %>
+
+          <div class="resource-content-header-link">
+            <a href="<%= resource.link %>">visit the website</a>
+          </div>
+          
           <button>Save</button>
         </div>
 
         <div class="resource-content-main">
-          <%= resource.title %>
-          <%= resource.description %>
+
+          <div class="resource-content-main-title">
+            <%= resource.title %>
+          </div>
+          
+          <div class="resource-content-main-description">
+            <%= resource.description %>
+          </div>
+          
           <div class="resource-content-buttons">
             heart
             comment
           </div>
+
         </div>
 
         <div class="resource-content-footer">
