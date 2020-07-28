@@ -35,14 +35,25 @@
   padding-bottom: 1em;
 }
 
-.resource-content-header-link:link {
-  font-weight: 600;
-  color: black;
-}
-
-.resource-content-header-link:visited {
+.a.website:link {
+  text-decoration: none;
   font-weight: 600;
   color: #CE6C47;
+}
+
+a.website:visited {
+  text-decoration: none;
+  color: #960200;
+  font-weight: 600;
+  font-size: medium;
+}
+
+a.website:hover {
+  text-decoration: underline;
+}
+
+a.website:active {
+  text-decoration: underline;
 }
 
 .resource-content-main {
