@@ -43,7 +43,16 @@ const getResourceByCategories = function(categories) {
 };
 exports.getResourceByCategories = getResourceByCategories;
 
-//SHOULD THIS BE A QUERY?
+const getResourceById = function(resourceId) {
+  return pool.query(`
+  SELECT * 
+  FROM resources
+  WHERE resources.id = $1`, [resourceId])
+    .then(res => res.rows[0])
+    .catch((res, err) => console.log(res, err));
+};
+exports.getResourceById = getResourceById;
+
 const getAllResources = function() {
   return pool.query(`
   SELECT *

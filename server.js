@@ -16,7 +16,7 @@ const cookieParser = require('cookie-parser');
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
-const {addUser} = require('./db/index');
+const {addUser, getResourceById} = require('./db/index')
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -87,6 +87,29 @@ app.get("/", (req, res) => {
   });
 });
 
+//when you click on a resource, 
+app.get("/resource/:id", (req, res) => {
+  db.connect(function(err) {
+    if (err) throw err;
+    const { id } = req.params;
+    getResourceById(id)
+    .then(res => {
+      console.log("IS THIS IT:", res)
+      //res.render(`resource_view`);
+    })
+    // const dbQuery = getResourceById(id);
+    // console.log("REQ.PARAMS", id)
+    // db.query(dbQuery, function(err, result) {
+    //   if (err) {
+    //     throw err;
+    //   } else {
+    //     result = JSON.parse(JSON.stringify(result))
+    //     console.log('WHAT IS THIS????????', result)
+    //     
+    //   }
+    // });
+  });
+});
 
 
 app.get("/register", (req, res) => {
