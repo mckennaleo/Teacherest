@@ -88,6 +88,21 @@ app.get("/", (req, res) => {
   });
 });
 
+//when you 
+app.get("/resource/:id", (req, res) => {
+  db.connect(function(err) {
+    if (err) throw err;
+    let sql = "SELECT * FROM resources WHERE ";
+    db.query(sql, function(err, result) {
+      if (err) {
+        throw err;
+      } else {
+        // obj = JSON.parse(JSON.stringify(result.rows))
+        res.render('index');
+      }
+    });
+  });
+});
 
 
 app.get("/register", (req, res) => {
