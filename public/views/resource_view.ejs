@@ -95,9 +95,6 @@
       
       <div class="resource-content">
         <div class="resource-content-header">
-            <form method="GET" action="<%= resource.link %>">
-              <button class="website-button">visit the website</button>
-            </form>
           <button class="save-button">Save</button>
         </div>
 
@@ -105,6 +102,9 @@
           <div class="resource-content-main-title">
             <%= resource.title %>
           </div>
+          <form method="GET" action="<%= resource.link %>" target="blank">
+            <button class="website-button">go to website</button>
+          </form>
           <div class="resource-content-main-description">
             <%= resource.description %>
           </div>
