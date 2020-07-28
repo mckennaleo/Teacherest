@@ -21,10 +21,9 @@
 
 .resource-content-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
-  padding-top: 1em;
   padding-bottom: 3em;
 }
 
@@ -40,20 +39,6 @@
   padding-bottom: 1em;
 }
 
-.website-button {
-  background-color: #CE6C47;
-  border: none;
-  border-radius: 25%;
-  color: white;
-  font-size: small;
-  font-weight: 600;
-  width: 6em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
-
-
-
 .resource-content-main {
   display: flex;
   flex-direction: column;
@@ -65,12 +50,20 @@
   font-weight: 600;
   font-size: xx-large;
   color: #960200;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-bottom: 0.2em;
+}
+
+.website-button {
+  background-color: whitesmoke;
+  border: 1px #960200;
+  color: #960200;
+  font-size: x-small;
+  width: 6.6em;
 }
 
 .resource-content-main-description {
   font-size: medium;
+  padding-top: 1em;
   padding-bottom: 1em;
 }
 
@@ -96,7 +89,6 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  padding-top: 1em;
   padding-bottom: 3em;
 }
 
