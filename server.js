@@ -10,6 +10,7 @@ const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser');
 
 
 const widgetsRoutes = require("./routes/widgets");
@@ -31,6 +32,7 @@ app.use(cookieSession({
   name: 'session',
   keys: ['userID']
 }));
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -73,15 +75,14 @@ const showResources = (db) => {
 
 
 app.get("/", (req, res) => {
-  // let obj = [];
   db.connect(function(err) {
+    let templateVars = {user: req.session}
     if (err) throw err;
     let sql = "SELECT * FROM resources";
     db.query(sql, function(err, result) {
       if (err) {
         throw err;
       } else {
-        // obj = JSON.parse(JSON.stringify(result.rows))
         res.render('index');
       }
     });

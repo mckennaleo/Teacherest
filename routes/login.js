@@ -29,8 +29,10 @@ module.exports = (db) => {
         const users = JSON.parse(JSON.stringify(data));
         console.log("USERS", users);
         if (password === users.password) {
+          res.cookie('id', users.id);
           req.session.id = users.id;
           console.log('Works!!!', req.session)
+          res.redirect('index')
         } else {
           console.log('FAILED')
         }

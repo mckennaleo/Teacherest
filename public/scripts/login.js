@@ -8,8 +8,7 @@ $(document).ready(function() {
       data: { email, password },
       type: "POST"
     }).done(function(data) {
-      //prepend or whatever
-      console.log('Done', data);
+      console.log(data)
     });
   });
 });
