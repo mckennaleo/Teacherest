@@ -49,6 +49,8 @@ app.set('view engine', 'html');
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
+app.use("/api/newResource", newResourceRoutes(db));
+
 
 
 // Note: mount other resources here, using the same pattern above
@@ -127,6 +129,8 @@ app.get("/register", (req, res) => {
     res.render("alreadyLoggedInError")
   }
 }); */
+
+
 
 
 app.post("/display", (req, res) => {
