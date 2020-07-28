@@ -113,14 +113,10 @@ app.get("/resource/:id", (req, res) => {
 
 
 app.get("/register", (req, res) => {
-  const user = req.cookies.user_id;
-  if (user) {
-    let templateVars = {user: user}
-    res.render(templateVars, "register");
-    
-  } else {
-    res.render("alreadyLoggedInError")
-  }
+  // const user = req.cookies.user_id;
+  //   let templateVars = {user: user}
+    res.render("register");
+ 
 });
 
 
