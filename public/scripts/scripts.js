@@ -14,7 +14,7 @@ const createResourceElement = (item) => {
   //html for posted resources
   const $resource = `
   <article class='resource-box'>
-  <a href="http://localhost:8080/${item.id}">
+  <a href="http://localhost:8080/resource/${item.id}">
   <div class="container">
 
     <img src="${item.screenshot}" alt="screenshot" class="image" style="width:100%">
