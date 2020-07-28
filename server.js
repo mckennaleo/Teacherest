@@ -88,7 +88,7 @@ app.get("/", (req, res) => {
   });
 });
 
-//when you 
+//when you click on a resource, 
 app.get("/resource/:id", (req, res) => {
   db.connect(function(err) {
     if (err) throw err;
@@ -98,7 +98,7 @@ app.get("/resource/:id", (req, res) => {
         throw err;
       } else {
         // obj = JSON.parse(JSON.stringify(result.rows))
-        res.render('index');
+        res.render(`/resource/${resourceId}`);
       }
     });
   });
