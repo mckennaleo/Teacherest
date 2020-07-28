@@ -43,7 +43,7 @@ app.use(express.static("public"));
 
 app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/widgets", widgetsRoutes(db));
@@ -89,26 +89,14 @@ app.get("/", (req, res) => {
 
 //when you click on a resource, 
 app.get("/resource/:id", (req, res) => {
-  db.connect(function(err) {
-    if (err) throw err;
-    const { id } = req.params;
-    getResourceById(id)
-    .then(res => {
-      console.log("IS THIS IT:", res)
-      //res.render(`resource_view`);
-    })
-    // const dbQuery = getResourceById(id);
-    // console.log("REQ.PARAMS", id)
-    // db.query(dbQuery, function(err, result) {
-    //   if (err) {
-    //     throw err;
-    //   } else {
-    //     result = JSON.parse(JSON.stringify(result))
-    //     console.log('WHAT IS THIS????????', result)
-    //     
-    //   }
-    // });
-  });
+  const { id } = req.params;
+    db.connect(function(err) {
+      if (err) throw err;
+      getResourceById(id)
+      .then(result => {
+        res.render('resource_view', {resource: result});
+      })
+    });
 });
 
 
@@ -116,7 +104,7 @@ app.get("/register", (req, res) => {
   const user = req.cookies.user_id;
   if (user) {
     let templateVars = {user: user}
-    res.render(templateVars, "register");
+    res.render("register", templateVars);
     
   } else {
     res.render("alreadyLoggedInError")
