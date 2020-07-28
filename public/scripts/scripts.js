@@ -17,14 +17,16 @@ const createResourceElement = (item) => {
 
   <div class="container">
 
-  <img src="${item.screenshot}" alt="Avatar" class="image" style="width:100%">
+    <img src="${item.screenshot}" alt="screenshot" class="image" style="width:100%">
 
-  <div class="middle">
-    <div class="title">${item.title}</div>
-    <div class="description">${item.description}</div>
-    <div class="time">${readableDate}</div>
+    <div class="middle">
+      <div class="title">${item.title}</div>
+      <div class="description">${item.description}</div>
+      <div class="time">${readableDate}</div>
+    </div>
+    
   </div>
-</div>
+
   </article>`;
 
   return $resource;
