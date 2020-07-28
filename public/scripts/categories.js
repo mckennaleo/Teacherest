@@ -13,7 +13,6 @@ $(document).ready(function() {
         console.log((data));
         clearResources();
         renderResource(data.data);
-        // pass resources to render function
       });
   });
 });
