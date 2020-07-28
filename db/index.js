@@ -49,6 +49,7 @@ const getResourceById = function(resourceId) {
     .then(res => res.rows[0])
     .catch((res, err) => console.log(res, err));
 };
+exports.getResourceById = getResourceById;
 
 const getAllResources = function() {
   return pool.query(`
