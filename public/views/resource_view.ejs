@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/posted-resources.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/resource-view.css" type="text/css" />
 
   <!-- External JS -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -80,12 +80,39 @@
         </form>
       </aside> -->
     <main>
-    <div>
-      <%= resource.id %>
-      <%= resource.title %>
-      <%= resource.description %>
-      <%= resource.url %>
-      <%= resource.screenshot %>
+    <div class="resource-box">
+
+      <div class="resource-image">
+        <img src="<%= resource.screenshot %>" alt="screenshot for <%= resource.url %>">
+      </div>
+      
+      <div class="resource-content">
+
+        <div class="resource-content-header">
+          <%= resource.url %>
+          <button>Save</button>
+        </div>
+
+        <div class="resource-content-main">
+          <%= resource.title %>
+          <%= resource.description %>
+          <div class="resource-content-buttons">
+            heart
+            comment
+          </div>
+        </div>
+
+        <div class="resource-content-footer">
+          comment box
+        </div>
+
+
+        <%= resource.id %>
+      
+      
+      </div>
+      
+      
 
     </div>
       
