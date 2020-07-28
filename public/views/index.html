@@ -25,52 +25,113 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
   <!-- App JS -->
+  <script src="/scripts/scripts.js"></script>
   <script type="text/javascript" src="/scripts/categories.js"></script>
   <script type="text/javascript" src="/scripts/login.js"></script>
-  <script src="/scripts/scripts.js"></script>
   <script type="text/javascript" src="/scripts/menu.js"></script>
 </head>
 
 <body>
-    <header>
-      <nav class="navbar-expand-md">
-        <div class="big_wrapper">
-          <a href="#" class="nav">
-            <div class="one"></div>
-            <div class="two"></div>
-            <div class="three"></div>
-          </a>
-        </div>
-        <a class="navbar-brand" href="/">T e a c h e r e s t</a>
-      </nav>
-    </header>
-      <aside id="nav-products" class="sidebar">
-        <h4>Menu</h4>
-        <nav>
-          <ul>
-            <li><a class="nav-item nav-link" href="/new">New Resource</a>
+  <header>
+    <nav class="navbar-expand-md">
+      <div class="big_wrapper">
+        <a href="#" class="nav">
+          <div class="one"></div>
+          <div class="two"></div>
+          <div class="three"></div>
+        </a>
+      </div>
+      <a class="navbar-brand" href="/">T e a c h e r e s t</a>
+    </nav>
+  </header>
+  <aside id="nav-products" class="sidebar">
+    <h4>Menu</h4>
+    <nav>
+      <ul>
+        <li><a class="nav-item nav-link" href="/new">New Resource</a>
+        </li>
+        <li><a class="nav-item nav-link" href="/profile">My Profile</a>
+        </li>
+        <li class="dropdown">
+          <a id="search" href="#">Search</a>
+          <ul class="search-container" id="search-container" style="display: none;">
+            <li>
+              <!-- <div class="btn1">search</div> -->
+              <form action="submit" type="POST" class="search-form">
+                <div class=search-subdivision>
+                  <input type="text" placeholder="search by category" class="category-search">
+                  <button type="submit" class="category-button">Search</button>
+                </div>
+                <div class="search-box">
+                <label class="container-checkmark">sports
+                  <input type="checkbox" name="categories" value="4">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="container-checkmark">Science
+                  <input type="checkbox" name="categories" value="1">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="container-checkmark">News
+                  <input type="checkbox" name="categories" value="2">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="container-checkmark">Arts and Entertainment
+                  <input type="checkbox" name="categories" value="3">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container-checkmark">Nature
+                  <input type="checkbox" name="categories" value="8">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="container-checkmark">Health
+                  <input type="checkbox" name="categories" value="5">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="container-checkmark">Work
+                  <input type="checkbox" name="categories" value="6">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="container-checkmark">Hobbies
+                  <input type="checkbox" name="categories" value="7">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container-checkmark">Music
+                  <input type="checkbox" name="categories" value="9">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container-checkmark">literature
+                  <input type="checkbox" name="categories" value="10">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label class="container-checkmark">Misc
+                  <input type="checkbox" name="categories" value="11">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              </form>
             </li>
-            <li><a class="nav-item nav-link" href="/profile">My Profile</a>
-            </li>
-            <li class="dropdown">
-              <a id="search" href="#">Search</a>
-              <ul class="search-container" id="search-container" style="display: none;">
-                <li>
-                  <!-- <div class="btn1">search</div> -->
-                  <form action="submit" type="POST" class="search-form">
-                    <div class=search-subdivision>
-                      <input type="text" placeholder="search by category" class="category-search">
-                      <button type="submit" class="category-button">Search</button>
-                    </div>
-                  </form>
-                </li>
-              </ul>
-            </li>
-            <li> <a class="nav-item nav-link" href="/new">login</a></li>
           </ul>
-        </nav>
-      </aside>
-     <!--  <aside>
+        </li>
+        <li> <a class="nav-item nav-link" href="/new">login</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <main>
+    <div class="display">
+    </div>
+  </main>
+</body>
+
+</html>
+
+<!--  <aside>
         <form action="/login" type="POST" class="login-form">
           <div class="login-form">
             <input type="text" placeholder="email" class="email-field">
@@ -79,11 +140,3 @@
           </div>
         </form>
       </aside> -->
-    <main>
-      <div class="display">
-      </div>
-    </main>
-</body>
-
-</html>
-
