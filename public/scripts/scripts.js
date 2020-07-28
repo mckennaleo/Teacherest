@@ -14,7 +14,7 @@ const createResourceElement = (item) => {
   //html for posted tweets
   const $resource = `
   <article class='resource-box'>
-
+  <a href="http://localhost:8080/${item.id}">
   <div class="container">
 
     <img src="${item.screenshot}" alt="screenshot" class="image" style="width:100%">
@@ -26,7 +26,7 @@ const createResourceElement = (item) => {
     </div>
     
   </div>
-
+  </a>
   </article>`;
 
   return $resource;
