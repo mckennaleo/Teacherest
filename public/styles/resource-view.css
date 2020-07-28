@@ -4,8 +4,12 @@
   justify-content: space-between;
   padding-top: 3em;
   font-family: 'Source Sans Pro', sans-serif;
-  padding-left: 20%;
-  padding-right: 20%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 25%;
+  padding: 5em;
 }
 
 .resource-content {
@@ -77,7 +81,14 @@ a.website:active {
 }
 
 .resource-content-buttons {
+  display: flex;
+  justify-content: flex-end;
 }
+
+.resource-content-buttons img {
+  margin: 0 7px 0 0;
+}
+
 
 .resource-content-footer {
 
