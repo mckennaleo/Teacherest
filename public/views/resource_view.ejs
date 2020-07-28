@@ -83,43 +83,33 @@
     <div class="resource-box">
 
       <div class="resource-image">
-
         <div class="resource-image-header">
-          <button>back to all</button>
+          <button class="back-button">back to all</button>
         </div>
-
         <div class="resource-image-main">
           <img src="<%= resource.screenshot %>" alt="screenshot for <%= resource.link %>">
         </div>
-        
       </div>
       
       <div class="resource-content">
-
         <div class="resource-content-header">
-
           <div class="resource-content-header-link">
             <a href="<%= resource.link %>">visit the website</a>
           </div>
-          
-          <button>Save</button>
+          <button class="save-button">Save</button>
         </div>
 
         <div class="resource-content-main">
-
           <div class="resource-content-main-title">
             <%= resource.title %>
           </div>
-          
           <div class="resource-content-main-description">
             <%= resource.description %>
           </div>
-          
           <div class="resource-content-buttons">
             heart
             comment
           </div>
-
         </div>
 
         <div class="resource-content-footer">
