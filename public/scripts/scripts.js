@@ -41,13 +41,13 @@ $(document).ready(function() {
   $('.search-form').submit(function(e) {
     e.preventDefault();
     let input = $('.category-search').val();
-    console.log(input);
+    // console.log(input);
     $.ajax({
       url: "/display",
       data: { input },
       type: "POST"
     }).done(function() {
-      console.log('Done');
+      // console.log('Done');
     });
   });
 
@@ -58,13 +58,13 @@ $(document).ready(function() {
       renderResource(response.data);
     })
       .done(function() {
-        console.log("second success");
+        // console.log("second success");
       })
       .fail(function() {
-        console.log("error");
+        // console.log("error");
       })
       .always(function() {
-        console.log("complete");
+        // console.log("complete");
       });
   };
 
