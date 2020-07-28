@@ -9,12 +9,12 @@ $(document).ready(function() {
     console.log('FIRE', link, title, description, category, screenshot);
     $.ajax({
       url: "/api/newResource",
-      data: {link, title, description, category, screenshot},
+      data: { link, title, description, category, screenshot },
       type: "POST"
     })
-    .done(function(data) {
-      console.log('DONE');
-      $('.new-resource').hide();
-    })
-  })
+      .done(function(data) {
+        console.log('DONE');
+        $('.new-resource').hide();
+      });
+  });
 });

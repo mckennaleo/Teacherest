@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { addResource } = require('../db/index')
+const { addResource } = require('../db/index');
 
 module.exports = () => {
 
@@ -13,18 +13,17 @@ module.exports = () => {
       title: req.body.title,
       screenshot: req.body.screenshot
     };
-    
-    console.log('FIRE0')
+
     addResource(resource)
-    .then(function(data) {
-    res.redirect('/')
-  }).catch(err => {
-    console.log(err)
-    res
-      .status(400)
-      .json({ error: err.message });
+      .then(function(data) {
+        res.redirect('/');
+      }).catch(err => {
+        console.error(err);
+        res
+          .status(400)
+          .json({ error: err.message });
+      });
   });
-  })
   return router;
-}
+};
 
