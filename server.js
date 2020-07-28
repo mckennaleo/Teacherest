@@ -16,7 +16,7 @@ const cookieParser = require('cookie-parser');
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
-const {addUser, getResourceById} = require('./db/index')
+const { addUser, getResourceById } = require('./db/index')
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -74,7 +74,7 @@ const showResources = (db) => {
 app.get("/", (req, res) => {
   db.connect(function(err) {
     console.log(req)
-    let templateVars = {user: req.cookies.user_id}
+    let templateVars = { user: req.cookies.user_id }
     if (err) throw err;
     let sql = "SELECT * FROM resources";
     db.query(sql, function(err, result) {
@@ -93,10 +93,10 @@ app.get("/resource/:id", (req, res) => {
     if (err) throw err;
     const { id } = req.params;
     getResourceById(id)
-    .then(res => {
-      console.log("IS THIS IT:", res)
-      //res.render(`resource_view`);
-    })
+      .then(res => {
+        console.log("IS THIS IT:", res)
+        //res.render(`resource_view`);
+      })
     // const dbQuery = getResourceById(id);
     // console.log("REQ.PARAMS", id)
     // db.query(dbQuery, function(err, result) {
@@ -111,8 +111,13 @@ app.get("/resource/:id", (req, res) => {
   });
 });
 
-
 app.get("/register", (req, res) => {
+  // const user = req.cookies.user_id;
+  //   let templateVars = {user: user}
+  res.render("register");
+});
+
+/* app.get("/register", (req, res) => {
   const user = req.cookies.user_id;
   if (user) {
     let templateVars = {user: user}
@@ -121,7 +126,7 @@ app.get("/register", (req, res) => {
   } else {
     res.render("alreadyLoggedInError")
   }
-});
+}); */
 
 
 app.post("/display", (req, res) => {
@@ -131,14 +136,14 @@ app.post("/display", (req, res) => {
 
 //-----------APP POST----------//
 app.post("/register", (req, res) => {
-  const {name, email, password, bio} = req.body;
+  const { name, email, password, bio } = req.body;
   if (name === "" || email === "" || password === "" || bio === "") {
     res.redirect('/error')
   } else {
     addUser(req.body);
     res.redirect('/')
   }
-  
+
 });
 //-----------APP LISTEN-----------//
 app.listen(PORT, () => {

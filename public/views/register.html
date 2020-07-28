@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/posted-resources.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/register.css" type="text/css" />
 
   <!-- External JS -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -31,20 +32,57 @@
 </head>
 
 <body>
+  <header>
+    <nav class="navbar-navbar-expand-md-navbar-dark-bg-success">
+      <a class="navbar-brand" href="/">T e a c h e r e s t</a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      </div>
+    </nav>
+  </header>
     <main>
-      <div>
-      <form action="/register" method="POST" class="register-form">
-        <label for="name-field">Name: </label>
-        <input type="text" placeholder="Your name" name="name" class="name-field">
-        <label for="email-field">Email: </label>
-        <input type="email" placeholder="Your@email.com" id="email" name="email" class="email-field">
-        <label for="pw-field">Password: </label>
-        <input type="password" name="password" placeholder="password" class="pw-field">
-        <label for="bio-field">Bio: </label>
-        <input type="text" placeholder="What are you about?" name="bio" class="bio-field">
-        <button type="submit" class="register-button">Register</button>
-      </form>
+      <div class="column">
+      <div class="row-1">
+        <div class="register-form">
+        <form action="/register" method="POST" class="register-form">
+          <label for="name-field">Name: </label>
+          <input type="text" placeholder="Your name" name="name" class="name-field">
+          <label for="email-field">Email: </label>
+          <input type="email" placeholder="Your@email.com" id="email" name="email" class="email-field">
+          <label for="pw-field">Password: </label>
+          <input type="password" name="password" placeholder="password" class="pw-field">
+          <label for="bio-field">Bio: </label>
+          <input type="text" placeholder="What are you about?" name="bio" class="bio-field">
+          <button type="submit" class="register-button">Register</button>
+        </form>
+      </div>
+        <div id="cf" class="row-1-pictures">
+          <img class="bottom" src="/img/books.jpg" />
+          <img class="top" src="/img/anise.jpg" />
+        </div>
+      <div id="cf" class="row-1-pictures">
+        <img class="bottom" src="/img/cherries.jpg" />
+        <img class="top" src="/img/astronomy.jpg" />
+      </div>
+  </div>
+  <div class='image-container'>
+    <div id="cf" class="row-1-pictures">
+      <img class="bottom" src="/img/spring-bird.jpg" />
+      <img class="top" src="/img/plumeria.jpg" />
     </div>
+    <div id="cf" class="row-1-pictures">
+      <img class="bottom" src="/img/pug.jpg" />
+      <img class="top" src="/img/cat.jpg" />
+    </div>
+    <div id="cf" class="row-1-pictures">
+      <img class="bottom" src="/img/buddhism.jpg" />
+      <img class="top" src="/img/pencil.jpg" />
+    </div>
+    <div id="cf" class="row-1-pictures">
+      <img class="bottom" src="/img/macarons.jpg" />
+      <img class="top" src="/img/dandelion.jpg" />
+    </div>
+</div>
+</div>
     </main>
 </body>
 

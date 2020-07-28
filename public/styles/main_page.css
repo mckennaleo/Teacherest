@@ -143,7 +143,7 @@ ol, ul {
 }
 
 aside#nav-products.sidebar {
-  background-color: whitesmoke;
+  background-color: #EADAA2;
   display: none;
 }
 
@@ -214,6 +214,7 @@ div.menu:hover {
     color: #241E4E;
     border-bottom: 1px solid #241E4E;
     margin-bottom: 1em;
+    text-transform: uppercase;
   }
   
   .search-container {
