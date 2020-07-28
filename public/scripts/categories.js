@@ -1,6 +1,26 @@
+$(document).ready(function() {
+  $('.container-checkmark').click(function() {
+    let categories = [];
+    $("input:checkbox[name='categories']:checked").each(function() {
+      categories.push($(this).val());
+    });
+    $.ajax({
+      url: "/api/widgets/filter",
+      data: { categories },
+      type: "GET"
+    })
+      .done(function(data) {
+        console.log((data));
+        clearResources();
+        renderResource(data.data);
+        // pass resources to render function
+      });
+  });
+});
 
 
-//get the ressource by categories
+
+/* //get the ressource by categories
 $(document).ready(function() {
   $('.search-form').submit(function(e) {
     e.preventDefault();
@@ -14,7 +34,7 @@ $(document).ready(function() {
       console.log('Done', data);
     });
   });
-});
+}); */
 
 //toggle the search menu when clicked
 $(document).ready(function() {

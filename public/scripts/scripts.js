@@ -1,3 +1,7 @@
+const clearResources = () => {
+  $('.display').empty();
+};
+
 const renderResource = (data) => {
   for (let item of data) {
     $('.display').append(createResourceElement(item));
