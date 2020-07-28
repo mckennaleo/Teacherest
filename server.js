@@ -16,7 +16,7 @@ const cookieParser = require('cookie-parser');
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
-const {addUser} = require('./db/index')
+const {addUser} = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -53,6 +53,7 @@ app.set('view engine', 'html');
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
+
 
 // Note: mount other resources here, using the same pattern above
 

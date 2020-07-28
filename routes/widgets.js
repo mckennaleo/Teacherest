@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const { getAllResources } = require('../db/index');
+const { getResourceByCategories } = require('../db/index');
 
 module.exports = (db) => {
   router.get("/all", (req, res) => {
@@ -26,6 +27,20 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/filter", (req, res) => {
+    const categoryIds = req.query.categories || [];
+
+    getResourceByCategories(categoryIds)
+      .then(data => {
+        console.log(data);
+        res.json({ data });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
   
   return router;
 };

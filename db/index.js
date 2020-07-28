@@ -31,15 +31,17 @@ const getUserResources = function(userId) {
 };
 exports.getUserResources = getUserResources;
 
-const getResourceByCategory = function(category) {
+const getResourceByCategories = function(categories) {
+  console.log('categories', categories);
   return pool.query(`
   SELECT resources.*
   FROM resources
-  WHERE category_id = $1`, [category])
+  JOIN categories ON categories.id = category_id
+  WHERE categories.id = ANY ($1)`, [categories])
     .then(res => res.rows)
     .catch((res, err) => console.log(res, err));
 };
-exports.getResourceByCategory = getResourceByCategory;
+exports.getResourceByCategories = getResourceByCategories;
 
 //SHOULD THIS BE A QUERY?
 const getAllResources = function() {
