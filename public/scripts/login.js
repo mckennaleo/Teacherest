@@ -7,8 +7,8 @@ $(document).ready(function() {
       url: "/api/login",
       data: { email, password },
       type: "POST"
-    }).then(
-      console.log("all done!")
-    );
+    }).done(function(data) {
+      $('.login-form').hide();
+    });
   });
 });
