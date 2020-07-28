@@ -40,38 +40,12 @@ ol, ul {
       font: 1.2em Verdana, Geneva, sans-serif;
       padding-bottom: 50px;
   }
-  body > p {
-      display: none;
-  }
-  h1, h2, h3, h4, h5, h6 {
-      font-size: 1.16666666666667em;
-      /* 14px / 12px */
-      font-weight: bold;
-      margin: 1em 0 .5em;
-  }
-  h1 {
-      font-size: 1.33333333333333em;
-      /* 16px / 12px */
-      margin-top: 0;
-  }
-  h2 {
-  }
-  h3 {
-  }
-  p {
-      line-height: 1.5em;
-      /* 18px / 12px */
-      margin: 1em 0 .5em;
-  }
-  a {
-      color: #2e3191;
-  }
+
+  
   a:hover, a:active {
       color: rgb(172, 172, 235);
   }
 
- 
- 
  
  nav {
    background-image: url('/img/books-1163695_1920.jpeg');
@@ -223,3 +197,4 @@ div.menu:hover {
   .nav:hover div {
     width: 40px;
   }
+
