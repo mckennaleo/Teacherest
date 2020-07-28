@@ -80,7 +80,7 @@ const addResource = function(resource) {
   VALUES ($1, $2, $3, $4, $5, $6)
   RETURNING *`, [created_by, link, description, category_id, title, screenshot])
     .then(res => res.rows[0])
-    .catch((res, err) => res.send(err));
+    .catch((res, err) => console.log(err));
 };
 exports.addResource = addResource;
 
