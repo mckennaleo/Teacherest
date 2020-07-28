@@ -5,13 +5,13 @@ const renderResource = (data) => {
 };
 
 const createResourceElement = (item) => {
-  //tweet posting date from database
+  //posting date from database
   let dbDate = item.created_at;
 
   //calculation of relative time using moment.js
   let readableDate = moment(dbDate).fromNow();
 
-  //html for posted tweets
+  //html for posted resources
   const $resource = `
   <article class='resource-box'>
   <a href="http://localhost:8080/${item.id}">
@@ -51,7 +51,7 @@ $(document).ready(function() {
   const loadResources = () => {
     $.getJSON('/api/widgets/all', (response) => {
       console.log('success');
-      //response.data because thats what the getter is returning
+      //response.'data' because thats what the getter is returning
       renderResource(response.data);
     })
       .done(function() {
