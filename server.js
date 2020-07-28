@@ -95,7 +95,7 @@ app.get("/resource/:id", (req, res) => {
     getResourceById(id)
     .then(res => {
       console.log("IS THIS IT:", res)
-      res.render(`resource_view`);
+      //res.render(`resource_view`);
     })
     // const dbQuery = getResourceById(id);
     // console.log("REQ.PARAMS", id)
