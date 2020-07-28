@@ -84,7 +84,9 @@
 
       <div class="resource-image">
         <div class="resource-image-header">
+          <form method="GET" action="/">
           <button class="back-button">back to all</button>
+        </form>
         </div>
         <div class="resource-image-main">
           <img src="<%= resource.screenshot %>" alt="screenshot for <%= resource.link %>">
@@ -93,7 +95,9 @@
       
       <div class="resource-content">
         <div class="resource-content-header">
-            <a class="website" href="<%= resource.link %>" target="_blank" style="text-decoration: none";">visit the website</a>
+            <form method="GET" action="<%= resource.link %>">
+              <button class="website-button">visit the website</button>
+            </form>
           <button class="save-button">Save</button>
         </div>
 
