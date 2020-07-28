@@ -83,13 +83,21 @@
     <div class="resource-box">
 
       <div class="resource-image">
-        <img src="<%= resource.screenshot %>" alt="screenshot for <%= resource.url %>">
+
+        <div class="resource-image-header">
+          <button>back to all</button>
+        </div>
+
+        <div class="resource-image-main">
+          <img src="<%= resource.screenshot %>" alt="screenshot for <%= resource.link %>">
+        </div>
+        
       </div>
       
       <div class="resource-content">
 
         <div class="resource-content-header">
-          <%= resource.url %>
+          <%= resource.link %>
           <button>Save</button>
         </div>
 
