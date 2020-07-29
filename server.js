@@ -6,12 +6,12 @@ const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session')
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
 
-const cookieParser = require('cookie-parser');
-
+//----------ROUTES----------//
 
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
@@ -30,7 +30,10 @@ db.connect();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 // app.use(express.static(__dirname + "/../public"));
-app.use(cookieParser());
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -79,14 +82,14 @@ const showResources = (db) => {
 app.get("/", (req, res) => {
   db.connect(function(err) {
     console.log(req)
-    let templateVars = { user: req.cookies.user_id };
+    let templateVars = { user: req.session.user_id };
     if (err) throw err;
     let sql = "SELECT * FROM resources";
     db.query(sql, function(err, result) {
       if (err) {
         throw err;
       } else {
-        res.render('index');
+        res.render('index', templateVars);
       }
     });
   });
@@ -94,6 +97,7 @@ app.get("/", (req, res) => {
 
 //when you click on a resource, 
 app.get("/resource/:id", (req, res) => {
+  let templateVars = { user: req.session.user_id };
   const { id } = req.params;
   db.connect(function(err) {
     if (err) throw err;
@@ -105,22 +109,21 @@ app.get("/resource/:id", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  // const user = req.cookies.user_id;
-  //   let templateVars = {user: user}
-  res.render("register");
+  if (req.session.user_id) {
+    res.render('errors/errorAlreadyLogin')
+  } else {
+  res.render("register");    
+  }
 });
 
-/* app.get("/register", (req, res) => {
-  const user = req.cookies.user_id;
-  if (user) {
-    let templateVars = {user: user}
-    res.render("register", templateVars);
-    
+app.get("/logout", (req, res) => {
+  if (!req.session.user_id) {
+    res.render('errors/errorNotLogin')
   } else {
-    res.render("alreadyLoggedInError")
+  req.session = null;
+  res.redirect('/')
   }
-}); */
-
+})
 
 
 
