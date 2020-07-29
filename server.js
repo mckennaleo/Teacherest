@@ -17,8 +17,7 @@ const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
-const commentsRoutes = require('./routes/comments');
-const { addUser, getResourceById } = require('./db/index');
+const { addUser, getResourceById, getCommentsById } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -52,7 +51,6 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/newResource", newResourceRoutes(db));
-app.use("/api/comments", commentsRoutes(db));
 
 
 
@@ -92,7 +90,7 @@ app.get("/", (req, res) => {
   });
 });
 
-//when you click on a resource, 
+//when you click on a resource 
 app.get("/resource/:id", (req, res) => {
   const { id } = req.params;
   db.connect(function(err) {
@@ -102,6 +100,22 @@ app.get("/resource/:id", (req, res) => {
         res.render('resource_view', { resource: result });
       });
   });
+});
+
+//loads comments according to resource id
+app.get("/resource/:id/comments", (req, res) => {
+  console.log("QUESTCEQUE:", req.params.id);
+  const id = req.params.id;
+  getCommentsById(id)
+    .then(data => {
+      console.log(data)
+      res.json({ data });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 app.get("/register", (req, res) => {
