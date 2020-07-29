@@ -12,9 +12,9 @@ const createCommentElement = (item) => {
   let readableDate = moment(dbDate).fromNow();
 
   //html for posted resources
-  const $resource = `
-  <article class='resource-box'>
-  <a href="http://localhost:8080/resource/${item.id}">
+  const $comment = `
+  <article class='comments-box'>
+  
   <div class="container">
 
     <img src="${item.screenshot}" alt="screenshot" class="image" style="width:100%">
@@ -30,16 +30,17 @@ const createCommentElement = (item) => {
   </a>
   </article>`;
 
-  return $resource;
+  return $comment;
 };
 
 $(document).ready(function() {
 
   const loadComments = () => {
-    $.getJSON('/api/widgets/comments', (response) => {
+    $.getJSON('/api/comments', (response) => {
       // console.log('success');
       //response.'data' because thats what the getter is returning
-      renderResource(response.data);
+      console.log("COMMENTS???", response)
+      renderComment(response.data);
     })
       .done(function() {
         // console.log("second success");
