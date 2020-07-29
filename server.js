@@ -150,8 +150,8 @@ app.get("/resource/:id/comments", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  let templateVars = { user: req.session.user_id };
-  if (user) {
+
+  if (req.session.user_id ) {
     res.render('errors/errorAlreadyLogin')
   } else {
   res.render("register");    
@@ -159,8 +159,8 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-  let templateVars = { user: req.session.user_id };
-  if (!user) {
+
+  if (!req.session.user_id ) {
     res.render('errors/errorNotLogin')
   } else {
   req.session = null;
