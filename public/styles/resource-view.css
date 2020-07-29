@@ -76,12 +76,16 @@
   margin: 0 7px 0 0;
 }
 
+.spacer {
+  width: 10%;
+}
+
 .resource-image {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-right: 3em;
+
 }
 
 .resource-image-header {
@@ -110,5 +114,32 @@
 }
 
 .comments {
+
+}
+
+/* media query specs for responsive design  */
+
+@media only screen and (max-width: 550px) {
+  .resource-box{
+    flex-direction: column;
+  }
+  .resource-image-main img{
+    max-width: 15em;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .resource-box{
+    flex-direction: column;
+  }
+  .resource-image-main img{
+    max-width: 25em;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .resource-box{
+    flex-direction: column;
+  }
 
 }
