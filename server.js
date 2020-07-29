@@ -79,7 +79,7 @@ const showResources = (db) => {
 
 app.get("/", (req, res) => {
   db.connect(function(err) {
-    let templateVars = { user: req.cookies.user_id };
+    let templateVars = { user: req.session.user_id };
     if (err) throw err;
     let sql = "SELECT * FROM resources";
     db.query(sql, function(err, result) {
