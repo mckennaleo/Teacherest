@@ -55,19 +55,25 @@
         <li><a class="nav-item nav-link" href="/profile">My Profile</a>
         </li>
         </li>
-        <li> <a class="nav-item nav-link" href="/register">register</a>
-        <li> <a class="nav-item nav-link" href="/logout">logout</a>
+        
         <li class="login-container">
-          <aside class="login">
-            <form action="/login" type="POST" class="login-form">
-              <div class="login-form">
-                <p>Login:</p>
-                <input type="text" placeholder="email" class="email-field">
-                <input type="text" placeholder="password" class="pw-field">
-                <button type="submit" class="login-button">Login</button>
-              </div>
-            </form>
-          </aside>
+          <% if (user) { %>
+            <aside>
+              <a class="nav-item nav-link" href="/logout">logout</a>
+            </aside>
+          <% } else { %>
+            <aside class="login">
+              <form action="/login" type="POST" class="login-form">
+                <div class="login-form">
+                  <p>Login:</p>
+                  <input type="text" placeholder="email" class="email-field">
+                  <input type="text" placeholder="password" class="pw-field">
+                  <button type="submit" class="login-button">Login</button>
+                  <a class="nav-item nav-link" href="/register">register</a>
+                </div>
+              </form>
+            </aside>
+          <% } %>
         </li>
         <div class="search-container">
           <div class="menu-title-container">Search by category:</div>

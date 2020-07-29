@@ -17,7 +17,7 @@ const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
-const { addUser, getResourceById, getCommentsById } = require('./db/index');
+const { addUser, getResourceById, getCommentsById, getUserWithEmail } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -150,8 +150,16 @@ app.post("/register", (req, res) => {
   if (name === "" || email === "" || password === "" || bio === "") {
     res.redirect('/error');
   } else {
-    addUser(req.body);
-    res.redirect('/');
+    addUser(req.body).then(function() {
+      getUserWithEmail(email).then(data => {
+      const users = JSON.parse(JSON.stringify(data));
+      console.log(users)
+      req.session.user_id = users.id;
+      res.redirect('/')  
+      })
+    
+    })
+    
   }
 
 });
