@@ -54,109 +54,107 @@
         <li><a class="nav-item nav-link" href="/profile">My Profile</a>
         </li>
         </li>
-        <li> <a class="nav-item nav-link" href="/new">login</a>
-        </li>
         <li> <a class="nav-item nav-link" href="/register">register</a>
         <li>
         <li class="login-container">
-        <aside class="login">
-          <form action="/login" type="POST" class="login-form">
-            <div class="login-form">
-              <p>Login:</p>
-              <input type="text" placeholder="email" class="email-field">
-              <input type="text" placeholder="password" class="pw-field">
-              <button type="submit" class="login-button">Login</button>
-            </div>
-          </form>
-        </aside>
-      </li>
-      <div class="search-container">
-      <div class="title-container">Search by category:</div>
-        <div class="search-box">
-          <label class="container-checkmark">sports
-            <input type="checkbox" name="categories" value="4">
-            <span class="checkmark"></span>
-          </label>
+          <aside class="login">
+            <form action="/login" type="POST" class="login-form">
+              <div class="login-form">
+                <p>Login:</p>
+                <input type="text" placeholder="email" class="email-field">
+                <input type="text" placeholder="password" class="pw-field">
+                <button type="submit" class="login-button">Login</button>
+              </div>
+            </form>
+          </aside>
+        </li>
+        <div class="search-container">
+          <div class="title-container">Search by category:</div>
+          <div class="search-box">
+            <label class="container-checkmark">sports
+              <input type="checkbox" name="categories" value="4">
+              <span class="checkmark"></span>
+            </label>
 
-          <label class="container-checkmark">Science
-            <input type="checkbox" name="categories" value="1">
-            <span class="checkmark"></span>
-          </label>
+            <label class="container-checkmark">Science
+              <input type="checkbox" name="categories" value="1">
+              <span class="checkmark"></span>
+            </label>
 
-          <label class="container-checkmark">News
-            <input type="checkbox" name="categories" value="2">
-            <span class="checkmark"></span>
-          </label>
+            <label class="container-checkmark">News
+              <input type="checkbox" name="categories" value="2">
+              <span class="checkmark"></span>
+            </label>
 
-          <label class="container-checkmark">Arts and Entertainment
-            <input type="checkbox" name="categories" value="3">
-            <span class="checkmark"></span>
-          </label>
-          <label class="container-checkmark">Nature
-            <input type="checkbox" name="categories" value="8">
-            <span class="checkmark"></span>
-          </label>
+            <label class="container-checkmark">Arts and Entertainment
+              <input type="checkbox" name="categories" value="3">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container-checkmark">Nature
+              <input type="checkbox" name="categories" value="8">
+              <span class="checkmark"></span>
+            </label>
 
-          <label class="container-checkmark">Health
-            <input type="checkbox" name="categories" value="5">
-            <span class="checkmark"></span>
-          </label>
+            <label class="container-checkmark">Health
+              <input type="checkbox" name="categories" value="5">
+              <span class="checkmark"></span>
+            </label>
 
-          <label class="container-checkmark">Work
-            <input type="checkbox" name="categories" value="6">
-            <span class="checkmark"></span>
-          </label>
+            <label class="container-checkmark">Work
+              <input type="checkbox" name="categories" value="6">
+              <span class="checkmark"></span>
+            </label>
 
-          <label class="container-checkmark">Hobbies
-            <input type="checkbox" name="categories" value="7">
-            <span class="checkmark"></span>
-          </label>
-          <label class="container-checkmark">Music
-            <input type="checkbox" name="categories" value="9">
-            <span class="checkmark"></span>
-          </label>
-          <label class="container-checkmark">literature
-            <input type="checkbox" name="categories" value="10">
-            <span class="checkmark"></span>
-          </label>
+            <label class="container-checkmark">Hobbies
+              <input type="checkbox" name="categories" value="7">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container-checkmark">Music
+              <input type="checkbox" name="categories" value="9">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container-checkmark">literature
+              <input type="checkbox" name="categories" value="10">
+              <span class="checkmark"></span>
+            </label>
 
-          <label class="container-checkmark">Misc
-            <input type="checkbox" name="categories" value="11">
-            <span class="checkmark"></span>
-          </label>
+            <label class="container-checkmark">Misc
+              <input type="checkbox" name="categories" value="11">
+              <span class="checkmark"></span>
+            </label>
+          </div>
         </div>
-    </div>
       </ul>
     </nav>
   </aside>
+  <div class="create_resource-container">
+    <form action="/api/newResource" method="POST" class="new-resource">
+      <label for="link">URL: </label>
+      <input type="text" class="link">
+      <label for="title">Title: </label>
+      <input type="text" class="title">
+      <label for="description">Description: </label>
+      <input type="text" class="description">
+      <label for="category">Category: </label>
+      <select class="category">
+        <option value="1">Science</option>
+        <option value="2">News</option>
+        <option value="3">Arts & Entertainment</option>
+        <option value="4">Sports</option>
+        <option value="5">Health</option>
+        <option value="6">Work</option>
+        <option value="7">Hobbies</option>
+        <option value="8">Nature</option>
+        <option value="9">Music</option>
+        <option value="10">Literature</option>
+        <option value="11">Misc</option>
+      </select>
+      <label for="screenshotUrl">Screenshot URL: </label>
+      <input type="text" class="screenshotUrl">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
   <main>
-    <div>
-      <form action="/api/newResource" method="POST" class="new-resource">
-        <label for="link">URL: </label>
-        <input type="text" class="link">
-        <label for="title">Title: </label>
-        <input type="text" class="title">
-        <label for="description">Description: </label>
-        <input type="text" class="description">
-        <label for="category">Category: </label>
-        <select class="category">
-          <option value="1">Science</option>
-          <option value="2">News</option>
-          <option value="3">Arts & Entertainment</option>
-          <option value="4">Sports</option>
-          <option value="5">Health</option>
-          <option value="6">Work</option>
-          <option value="7">Hobbies</option>
-          <option value="8">Nature</option>
-          <option value="9">Music</option>
-          <option value="10">Literature</option>
-          <option value="11">Misc</option>
-        </select>
-        <label for="screenshotUrl">Screenshot URL: </label>
-        <input type="text" class="screenshotUrl">
-        <button type="submit">Submit</button>
-        </form>
-    </div>
     <div class="display">
     </div>
   </main>
