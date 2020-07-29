@@ -1,12 +1,13 @@
 const express = require('express');
 const router  = express.Router();
+const { getCommentsById } = require('../db/index');
 
 module.exports = (db) => {
 
   router.get("/comments", (req, res) => {
-    // console.log("WHAT IS THIS:", req.body)
+    console.log("WHAT IS THIS:", req.params)
     //let query = `SELECT * FROM resources`;
-    getAllResources(req)
+    getCommentsById(req)
       .then(data => {
         //data = query response from getAllResources!
         // console.log(data)
