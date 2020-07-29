@@ -50,7 +50,7 @@
     <h4>Menu</h4>
     <nav>
       <ul>
-        <li><a class="nav-item nav-link" href="/newResource">New Resource</a>
+        <li><a class="nav-item nav-link" href="/newResource">My Resources</a>
         </li>
         <li><a class="nav-item nav-link" href="/profile">My Profile</a>
         </li>
@@ -79,54 +79,54 @@
           <div class="menu-title-container">Search by category:</div>
           <div class="search-box">
             <label class="container-checkmark">sports
-              <input type="checkbox" name="categories" value="4">
+              <input type="checkbox" name="categories" value="4" checked>
               <span class="checkmark"></span>
             </label>
 
             <label class="container-checkmark">Science
-              <input type="checkbox" name="categories" value="1">
+              <input type="checkbox" name="categories" value="1" checked>
               <span class="checkmark"></span>
             </label>
 
             <label class="container-checkmark">News
-              <input type="checkbox" name="categories" value="2">
+              <input type="checkbox" name="categories" value="2" checked>
               <span class="checkmark"></span>
             </label>
 
             <label class="container-checkmark">Arts and Entertainment
-              <input type="checkbox" name="categories" value="3">
+              <input type="checkbox" name="categories" value="3" checked>
               <span class="checkmark"></span>
             </label>
             <label class="container-checkmark">Nature
-              <input type="checkbox" name="categories" value="8">
+              <input type="checkbox" name="categories" value="8" checked>
               <span class="checkmark"></span>
             </label>
 
             <label class="container-checkmark">Health
-              <input type="checkbox" name="categories" value="5">
+              <input type="checkbox" name="categories" value="5" checked>
               <span class="checkmark"></span>
             </label>
 
             <label class="container-checkmark">Work
-              <input type="checkbox" name="categories" value="6">
+              <input type="checkbox" name="categories" value="6" checked>
               <span class="checkmark"></span>
             </label>
 
             <label class="container-checkmark">Hobbies
-              <input type="checkbox" name="categories" value="7">
+              <input type="checkbox" name="categories" value="7" checked>
               <span class="checkmark"></span>
             </label>
             <label class="container-checkmark">Music
-              <input type="checkbox" name="categories" value="9">
+              <input type="checkbox" name="categories" value="9" checked>
               <span class="checkmark"></span>
             </label>
             <label class="container-checkmark">literature
-              <input type="checkbox" name="categories" value="10">
+              <input type="checkbox" name="categories" value="10" checked>
               <span class="checkmark"></span>
             </label>
 
             <label class="container-checkmark">Misc
-              <input type="checkbox" name="categories" value="11">
+              <input type="checkbox" name="categories" value="11" checked>
               <span class="checkmark"></span>
             </label>
           </div>
@@ -139,12 +139,12 @@
     <form action="/api/newResource" method="POST" class="new-resource" style="
     flex-wrap: wrap;
 ">
+
   <h2 class="create_resource-title">Create your own resource</h2>
-  <h3 class="create_resource-title">and let other people enjoy!</h3>
   <div class="content">
     <div class="title-URL-container">
       <div class="title-container">
-        <label for="title" class="title-text">Title: </label>
+        <label for="title" class="title-text">TITLE: </label>
         <input type="text" class="title-input">
       </div>
       <div class="URL-container">
@@ -154,11 +154,11 @@
     </div>
         <div class="screenshot-category-container">
           <div class="screenshot-container">
-            <label for="screenshotUrl" class="screenshot-text">Screenshot URL: </label>
+            <label for="screenshotUrl" class="screenshot-text">SCREENSHOT URL: </label>
             <input type="text" class="screenshotUrl-input">
           </div>
           <div class="category-container">
-            <label for="category">Category: </label>
+            <label for="category">CATEGORY: </label>
             <select class="category-input">
               <option value="1">Science</option>
               <option value="2">News</option>
@@ -176,11 +176,11 @@
         </div>
         <div class="description-submit-container">
           <div class="description-container">
-            <label for="description">Description: </label>
-            <input type="text" class="description-input">
+            <label  for="description">DESCRIPTION: </label>
+            <input placeholder="Enter a description of 255 characters or less" type="text" class="description-input">
           </div>
         <div class="submit-container">
-          <button type="submit" class="new_resource-button">Submit</button>
+          <button type="submit" class="new_resource-button">SUBMIT</button>
         </div>
       </div>
     </div>

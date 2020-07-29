@@ -49,7 +49,7 @@ ol, ul {
 
   
   a:hover, a:active {
-      color: rgb(172, 172, 235);
+      color: #CE6C47;
   }
 
  
@@ -263,9 +263,11 @@ div.menu:hover {
   }
 
   form.new-resource {
+    display: flex;
     background-color: #FFD046;
     border: 4px solid #241E4E;
     margin: 3em;
+    
     border-radius: 35%;
     color: #241E4E;
     font-family: 'Mulish', sans-serif;
@@ -274,22 +276,29 @@ div.menu:hover {
 
   h2.create_resource-title {
     margin-top: 1em;
-  }
-
-  h3.create_resource-title {
-    border-bottom: 4px solid #241E4E;
-    border-radius: 35%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    border-bottom: 5px solid #241E4E;
+    border-radius: 35%;
   }
 
+
+  .text-holder {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .create_resource-title {
     color: #960200;
     font-family: 'Permanent Marker', cursive;
     text-align: center;
     margin-top: 0.5em;
-    font-size: 2em;
+    font-size: 1.5em;
   }
   .content {
     display: flex;
@@ -297,6 +306,7 @@ div.menu:hover {
     flex-wrap: wrap;
     padding-left:2em;
     padding-right:2em;
+    width: 100%;
   }
   .content > div {
     flex: 0 50%;
@@ -307,6 +317,13 @@ div.menu:hover {
   @media only screen and (max-width: 600px) {
     div > input {
       width: 13rem;
+    }
+    .create_resource-title {
+      color: #960200;
+      font-family: 'Permanent Marker', cursive;
+      text-align: center;
+      margin-top: 0.5em;
+      font-size: 0.8em;
     }
   }
 
@@ -329,7 +346,7 @@ div.menu:hover {
   }
   
   .description-container {
-    margin: 2em;
+    margin-bottom: 2em;
   }
   
   .submit-container {
@@ -337,3 +354,31 @@ div.menu:hover {
     justify-content: center;
     margin-bottom: 2em;
   }
+
+  .category-input {
+    width: 100%;
+    background-color: #EADAA2;
+    border:2px solid #CE6C47;
+  }
+
+  .description-input {
+    height: 5em;
+    background-color: #EADAA2;
+    border-color: #CE6C47;
+  }
+
+  .link-input {
+    background-color: #EADAA2;
+    border-color: #CE6C47;
+  }
+
+  .title-input {
+    background-color: #EADAA2;
+    border-color: #CE6C47;
+  }
+
+  .screenshotUrl-input {
+    background-color: #EADAA2;
+    border-color: #CE6C47;
+  }
+
