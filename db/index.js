@@ -59,7 +59,7 @@ const getCommentsById = function(resourceId) {
   FROM comments
   WHERE resource_id = $1`, [resourceId])
     .then(res => res.rows)
-    .catch((res, err) => console.log(res, err));
+    .catch((err) => console.log(err));
 };
 exports.getCommentsById = getCommentsById;
 

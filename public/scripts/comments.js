@@ -33,13 +33,12 @@ const createCommentElement = (item) => {
   return $comment;
 };
 
-$(document).ready(function() {
-
+const initComments = function (id) {
   const loadComments = () => {
-    $.getJSON('/api/comments', (response) => {
+    $.getJSON(`/api/comments?id=${id}`, (response) => {
       // console.log('success');
       //response.'data' because thats what the getter is returning
-      console.log("COMMENTS???", response)
+      console.log("COMMENTS???", response);
       renderComment(response.data);
     })
       .done(function() {
@@ -54,6 +53,4 @@ $(document).ready(function() {
   };
 
   loadComments();
-
-  // console.log('Done');
-});
+};
