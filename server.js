@@ -163,7 +163,12 @@ app.post("/register", (req, res) => {
           .json({ error: err.message });
       });
     
-    })
+    }).catch(err => {
+      console.error(err);
+      res
+        .status(400)
+        .json({ error: err.message });
+    });
     
   }
 
