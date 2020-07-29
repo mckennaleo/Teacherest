@@ -22,24 +22,20 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log('QUERIES:    ', req.body);
 
     getUserWithEmail(email)
       .then(data => {
         const users = JSON.parse(JSON.stringify(data));
-        console.log("USERS", users);
         if (password === users.password) {
           res.cookie('user_id', users.id);
           res.send();
           
-          // console.log('COOKIES', req.cookies.user_id);
-          
         } else {
-          console.log('FAILED')
+          console.log('FAILED');
         }
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
         res
           .status(500)
           .json({ error: err.message });

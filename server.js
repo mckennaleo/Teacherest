@@ -32,12 +32,12 @@ app.use(morgan('dev'));
 // app.use(express.static(__dirname + "/../public"));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/styles", sass({
+/* app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
   debug: true,
   outputStyle: 'expanded'
-}));
+})); */
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
@@ -78,7 +78,6 @@ const showResources = (db) => {
 
 app.get("/", (req, res) => {
   db.connect(function(err) {
-    console.log(req)
     let templateVars = { user: req.cookies.user_id };
     if (err) throw err;
     let sql = "SELECT * FROM resources";

@@ -263,7 +263,102 @@ div.menu:hover {
   .create_resource-container {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
     background-color: #EADAA2;
     margin-right: 11em; 
     margin-top: 3em;
+    position: absolute;
+    color: #241E4E;
+    text-transform: uppercase;
+  }
+
+  form.new-resource {
+    width: 50%;
+    margin-right: 10em;
+  }
+
+  input.title-input{
+    height: 2em;
+  }
+
+  .title-text {
+    margin-right: 1em;
+    
+  }
+
+  input.link-input {
+    height: 2em;
+    width: 100%;
+    margin-left: 1em;
+  }
+
+  .URL-text {
+    
+  }
+
+  .URL-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1em;
+    width: 100%;
+  }
+  .title-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 2em;
+    padding: none;
+    border: none;
+  }
+
+  .title-URL-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2em;
+    width: 100%;
+    height: 2em;
+    border: none;
+  }
+  
+  input.title {
+    margin-left: 1em;
+  }
+
+  .description-category-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .description-input {
+    margin-left: 1em;
+    height: 2em;
+  }
+
+  .description-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2em;
+    margin-right: 2em;
+    width: 100%;
+    height: 3em;
+    border: none;
+  }
+  
+  .category-input {
+    display: flex;
+    align-items: center;
+    margin-left: 1em;
+  }
+
+  .category-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 2em;
+    width: 100%;
+    height: 2em;
+    border: none;
   }

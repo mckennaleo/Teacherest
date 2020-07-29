@@ -32,7 +32,6 @@ const getUserResources = function(userId) {
 exports.getUserResources = getUserResources;
 
 const getResourceByCategories = function(categories) {
-  console.log('categories', categories);
   return pool.query(`
   SELECT resources.*
   FROM resources

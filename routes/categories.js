@@ -26,7 +26,6 @@ module.exports = (db) => {
 
   router.get("/search", (req, res) => {
     const searchQuery = req.query.s;
-    console.log(req.query.s);
     /* db.query(`SELECT * FROM categories WHERE name ILIKE $1;`, [searchQuery]) */
     getResourceByCategory(searchQuery)
       .then(data => {

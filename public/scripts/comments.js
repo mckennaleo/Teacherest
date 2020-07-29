@@ -36,9 +36,7 @@ const createCommentElement = (item) => {
 const initComments = function (id) {
   const loadComments = () => {
     $.getJSON(`/api/comments?id=${id}`, (response) => {
-      // console.log('success');
       //response.'data' because thats what the getter is returning
-      console.log("COMMENTS???", response);
       renderComment(response.data);
     })
       .done(function() {

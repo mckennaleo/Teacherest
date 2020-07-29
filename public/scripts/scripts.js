@@ -42,19 +42,16 @@ $(document).ready(function() {
   $('.search-form').submit(function(e) {
     e.preventDefault();
     let input = $('.category-search').val();
-    // console.log(input);
     $.ajax({
       url: "/display",
       data: { input },
       type: "POST"
     }).done(function() {
-      // console.log('Done');
     });
   });
 
   const loadResources = () => {
     $.getJSON('/api/widgets/all', (response) => {
-      // console.log('success');
       //response.'data' because thats what the getter is returning
       renderResource(response.data);
     })

@@ -32,7 +32,6 @@ module.exports = (db) => {
 
     getResourceByCategories(categoryIds)
       .then(data => {
-        console.log(data);
         res.json({ data });
       })
       .catch(err => {

@@ -10,7 +10,6 @@ $(document).ready(function() {
       type: "GET"
     })
       .done(function(data) {
-        console.log((data));
         clearResources();
         renderResource(data.data);
       });
@@ -39,16 +38,12 @@ $(document).ready(function() {
 $(document).ready(function() {
   /* $('#nav-products .dropdown ul').width(0); */
   $('#search').on("click", function() {
-    console.log("clicked");
     const searchBox = $("ul#search-container");
-    console.log(searchBox);
     if (searchBox.is(":hidden")) {
-      console.log('IM hidden');
       searchBox.show().animate({
         'width': '180px'
       }, 175);
     } else if (searchBox.is(":visible")) {
-      console.log('IM visible');
       searchBox.hide();
     }
   });
