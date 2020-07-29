@@ -17,6 +17,7 @@ const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
+const commentsRoutes = require('./routes/comments');
 const { addUser, getResourceById } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -51,6 +52,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/newResource", newResourceRoutes(db));
+app.use("/api/comments", commentsRoutes(db));
 
 
 

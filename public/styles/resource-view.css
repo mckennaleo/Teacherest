@@ -4,8 +4,8 @@
   justify-content: space-between;
   padding-top: 3em;
   font-family: 'Source Sans Pro', sans-serif;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 5%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 15%;
@@ -15,15 +15,15 @@
 .resource-content {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   width: 100%;
 }
 
 .resource-content-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
-  padding-top: 1em;
   padding-bottom: 3em;
 }
 
@@ -39,27 +39,6 @@
   padding-bottom: 1em;
 }
 
-.a.website:link {
-  text-decoration: none;
-  font-weight: 600;
-  color: #CE6C47;
-}
-
-a.website:visited {
-  text-decoration: none;
-  color: #960200;
-  font-weight: 600;
-  font-size: medium;
-}
-
-a.website:hover {
-  text-decoration: underline;
-}
-
-a.website:active {
-  text-decoration: underline;
-}
-
 .resource-content-main {
   display: flex;
   flex-direction: column;
@@ -71,12 +50,20 @@ a.website:active {
   font-weight: 600;
   font-size: xx-large;
   color: #960200;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-bottom: 0.2em;
+}
+
+.website-button {
+  background-color: whitesmoke;
+  border: 1px #960200;
+  color: #960200;
+  font-size: x-small;
+  width: 6.6em;
 }
 
 .resource-content-main-description {
   font-size: medium;
+  padding-top: 1em;
   padding-bottom: 1em;
 }
 
@@ -89,15 +76,10 @@ a.website:active {
   margin: 0 7px 0 0;
 }
 
-
-.resource-content-footer {
-
-}
-
 .resource-image {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding-right: 3em;
 }
@@ -105,8 +87,8 @@ a.website:active {
 .resource-image-header {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   width: 100%;
-  padding-top: 1em;
   padding-bottom: 3em;
 }
 
@@ -118,11 +100,15 @@ a.website:active {
 .back-button {
   background-color: #CE6C47;
   border: none;
-  border-radius: 25%;
+  border-radius: 20%;
   color: white;
   font-size: small;
   font-weight: 600;
   width: 6em;
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+.comments {
+
 }

@@ -1,14 +1,10 @@
-const clearResources = () => {
-  $('.display').empty();
-};
-
-const renderResource = (data) => {
+const renderComment = (data) => {
   for (let item of data) {
-    $('.display').append(createResourceElement(item));
+    $('.comments').append(createCommentElement(item));
   }
 };
 
-const createResourceElement = (item) => {
+const createCommentElement = (item) => {
   //posting date from database
   let dbDate = item.created_at;
 
@@ -16,9 +12,9 @@ const createResourceElement = (item) => {
   let readableDate = moment(dbDate).fromNow();
 
   //html for posted resources
-  const $resource = `
-  <article class='resource-box'>
-  <a href="http://localhost:8080/resource/${item.id}">
+  const $comment = `
+  <article class='comments-box'>
+  
   <div class="container">
 
     <img src="${item.screenshot}" alt="screenshot" class="image" style="width:100%">
@@ -34,29 +30,17 @@ const createResourceElement = (item) => {
   </a>
   </article>`;
 
-  return $resource;
+  return $comment;
 };
 
-
 $(document).ready(function() {
-  $('.search-form').submit(function(e) {
-    e.preventDefault();
-    let input = $('.category-search').val();
-    // console.log(input);
-    $.ajax({
-      url: "/display",
-      data: { input },
-      type: "POST"
-    }).done(function() {
-      // console.log('Done');
-    });
-  });
 
-  const loadResources = () => {
-    $.getJSON('/api/widgets/all', (response) => {
+  const loadComments = () => {
+    $.getJSON('/api/comments', (response) => {
       // console.log('success');
       //response.'data' because thats what the getter is returning
-      renderResource(response.data);
+      console.log("COMMENTS???", response)
+      renderComment(response.data);
     })
       .done(function() {
         // console.log("second success");
@@ -69,6 +53,7 @@ $(document).ready(function() {
       });
   };
 
-  loadResources();
+  loadComments();
 
+  // console.log('Done');
 });
