@@ -11,7 +11,8 @@ $(document).ready(function() {
       alert("Wrong email/password combination. Please try again!")
     })
     .done(function(data) {
-      $('.login-form').hide();
+      $('.login').hide();
+      $('.logout').show();
     });
   });
 });

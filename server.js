@@ -17,7 +17,7 @@ const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
-const { addUser, getResourceById, getCommentsById, getUserWithEmail } = require('./db/index');
+const { addUser, getResourceById, getCommentsById, getUserWithEmail, addToFavourites } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -94,7 +94,6 @@ app.get("/", (req, res) => {
 
 //when you click on a resource 
 app.get("/resource/:id", (req, res) => {
-  let templateVars = { user: req.session.user_id };
   const { id } = req.params;
   db.connect(function(err) {
     if (err) throw err;
@@ -105,8 +104,38 @@ app.get("/resource/:id", (req, res) => {
   });
 });
 
+app.post("/resource/:id/favourite/add"), (req, res) => {
+  let templateVars = { user: req.session.user_id };
+  addToFavourites(favourite)
+    .then(data => {
+      console.log(data)
+      res.json({ data });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+}
+
+app.post("/resource/:id/favourite/remove"), (req, res) => {
+  db.connect(function(err) {
+    let templateVars = { user: req.session.user_id };
+    if (err) throw err;
+    let sql = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2";
+    db.query(sql, function(err, result) {
+      if (err) {
+        throw err;
+      } else {
+        res.render('index', templateVars);
+      }
+    });
+  });
+}
+
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
+  let templateVars = { user: req.session.user_id };
   const id = req.params.id;
   getCommentsById(id)
     .then(data => {
@@ -121,7 +150,8 @@ app.get("/resource/:id/comments", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  if (req.session.user_id) {
+
+  if (req.session.user_id ) {
     res.render('errors/errorAlreadyLogin')
   } else {
   res.render("register");    
@@ -129,7 +159,8 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-  if (!req.session.user_id) {
+
+  if (!req.session.user_id ) {
     res.render('errors/errorNotLogin')
   } else {
   req.session = null;
@@ -140,12 +171,14 @@ app.get("/logout", (req, res) => {
 
 
 app.post("/display", (req, res) => {
+  let templateVars = { user: req.session.user_id };
   // console.log("This is the res: ", res)
 });
 
 
 //-----------APP POST----------//
 app.post("/register", (req, res) => {
+  let templateVars = { user: req.session.user_id };
   const { name, email, password, bio } = req.body;
   if (name === "" || email === "" || password === "" || bio === "") {
     res.redirect('/error');
@@ -163,7 +196,12 @@ app.post("/register", (req, res) => {
           .json({ error: err.message });
       });
     
-    })
+    }).catch(err => {
+      console.error(err);
+      res
+        .status(400)
+        .json({ error: err.message });
+    });
     
   }
 
