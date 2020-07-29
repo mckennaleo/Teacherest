@@ -5,7 +5,8 @@ const { getCommentsById } = require('../db/index');
 module.exports = (db) => {
 
   router.get("/comments", (req, res) => {
-    console.log("WHAT IS THIS:", req.params)
+    console.log("WHAT IS THIS:", res)
+    console.log("QUESTCEQUE:", req.params)
     //let query = `SELECT * FROM resources`;
     getCommentsById(req)
       .then(data => {
