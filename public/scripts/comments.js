@@ -39,7 +39,7 @@ const createCommentElement = (item) => {
 
 $(document).ready(function() {
   const loadComments = () => {
-    $.getJSON(`/api/comments?id=${id}`, (response) => {
+    $.getJSON('/resource/'+window.location.pathname.split('/')[2]+'/comments', (response) => {
       //response.'data' because thats what the getter is returning
       renderComment(response.data);
     })
