@@ -133,10 +133,10 @@ app.post("/display", (req, res) => {
 app.post("/register", (req, res) => {
   const { name, email, password, bio } = req.body;
   if (name === "" || email === "" || password === "" || bio === "") {
-    res.redirect('/error')
+    res.redirect('/error');
   } else {
     addUser(req.body);
-    res.redirect('/')
+    res.redirect('/');
   }
 
 });
