@@ -9,6 +9,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&family=Noto+Sans+JP&display=swap" rel="stylesheet">
 
   <!-- App CSS -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -69,7 +70,7 @@
           </aside>
         </li>
         <div class="search-container">
-          <div class="title-container">Search by category:</div>
+          <div class="menu-title-container">Search by category:</div>
           <div class="search-box">
             <label class="container-checkmark">sports
               <input type="checkbox" name="categories" value="4">
@@ -128,54 +129,55 @@
     </nav>
   </aside>
   <div class="create_resource-container">
-    <form action="/api/newResource" method="POST" class="new-resource">
-
-      <div class="title-URL-container">
-        <div class="title-container">
-          <label for="title" class="title-text">Title: </label>
-          <input type="text" class="title-input">
-        </div>
-        <div class="URL-container">
-          <label for="link" class="URL-text">URL: </label>
-          <input type="text" class="link-input">
-        </div>
+    
+    <form action="/api/newResource" method="POST" class="new-resource" style="
+    flex-wrap: wrap;
+">
+  <h2 class="create_resource-title">Create your own resource</h2>
+  <h3 class="create_resource-title">and let other people enjoy!</h3>
+  <div class="content">
+    <div class="title-URL-container">
+      <div class="title-container">
+        <label for="title" class="title-text">Title: </label>
+        <input type="text" class="title-input">
       </div>
-
-      <div class="description-category-container">
-        <div class="description-container">
-          <label for="description">Description: </label>
-          <input type="text" class="description-input">
-        </div>
-
-        <div class="category-container">
-          <label for="category">Category: </label>
-          <select class="category-input">
-            <option value="1">Science</option>
-            <option value="2">News</option>
-            <option value="3">Arts & Entertainment</option>
-            <option value="4">Sports</option>
-            <option value="5">Health</option>
-            <option value="6">Work</option>
-            <option value="7">Hobbies</option>
-            <option value="8">Nature</option>
-            <option value="9">Music</option>
-            <option value="10">Literature</option>
-            <option value="11">Misc</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="screenshot-submit-container">
-      <div class="screenshot-container">
-        <label for="screenshotUrl">Screenshot URL: </label>
-        <input type="text" class="screenshotUrl-input">
-      </div>
-
-      <div class="submit-container">
-        <button type="submit">Submit</button>
+      <div class="URL-container">
+        <label for="link" class="URL-text">URL: </label>
+        <input type="text" class="link-input">
       </div>
     </div>
-
+        <div class="screenshot-category-container">
+          <div class="screenshot-container">
+            <label for="screenshotUrl" class="screenshot-text">Screenshot URL: </label>
+            <input type="text" class="screenshotUrl-input">
+          </div>
+          <div class="category-container">
+            <label for="category">Category: </label>
+            <select class="category-input">
+              <option value="1">Science</option>
+              <option value="2">News</option>
+              <option value="3">Arts &amp; Entertainment</option>
+              <option value="4">Sports</option>
+              <option value="5">Health</option>
+              <option value="6">Work</option>
+              <option value="7">Hobbies</option>
+              <option value="8">Nature</option>
+              <option value="9">Music</option>
+              <option value="10">Literature</option>
+              <option value="11">Misc</option>
+            </select>
+          </div>
+        </div>
+        <div class="description-submit-container">
+          <div class="description-container">
+            <label for="description">Description: </label>
+            <input type="text" class="description-input">
+          </div>
+        <div class="submit-container">
+          <button type="submit" class="new_resource-button">Submit</button>
+        </div>
+      </div>
+    </div>
     </form>
   </div>
   <main>
