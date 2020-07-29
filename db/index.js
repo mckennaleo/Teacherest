@@ -99,20 +99,28 @@ exports.addResource = addResource;
 
 const toggleFavourites = function(favourite) {
   const { user_id, resource_id } = favourite;
-  //query db and check if user id & resrouce id === userid and resrouce id
-  //then delete
-  //else
+
   return pool.query(`
-  INSERT INTO likes (user_id, resource_id)
-  VALUES ($1, $2)
-  RETURNING *`, [user_id, resource_id])
-    .then(res => res.rows[0])
+  SELECT * FROM likes
+  WHERE user_id = $1
+  AND resource_id = $2`, [user_id, resource_id])
+    .then(res => {
+      if(res.rows.length > 0) {
+        return pool.query(`
+        DELETE FROM likes WHERE user_id = $1 AND resource_id = $2`, [user_id, resource_id]);
+      } else {
+        return pool.query(`
+        INSERT INTO likes (user_id, resource_id)
+        VALUES ($1, $2)
+        RETURNING *`, [user_id, resource_id]);
+      }
+    })
     .catch((err) => {
       console.error(err);
       throw err;
     });
 };
-exports.addToFavourites = addToFavourites;
+exports.toggleFavourites = toggleFavourites;
 
 
 
