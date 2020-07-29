@@ -6,9 +6,22 @@ $(document).ready(function() {
 
   const $favouriteBtn = ('.favourite-button');
 
-  $($favouriteBtn).on('click', function(event) {
+  $($favouriteBtn).on('submit', function(event) {
     event.preventDefault();
-    
+    //if no like what am i checking??? if like = true?
+    $.ajax({
+      url: "/resource/:id/favourite/add",
+      type: "POST"
+    }).done(function() {
+    });
+
+    //else
+    $.ajax({
+      url: "/resource/:id/favourite/remove",
+      type: "POST"
+    }).done(function() {
+    });
+
   })
 
 });
