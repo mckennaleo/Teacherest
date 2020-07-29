@@ -104,7 +104,6 @@ app.get("/resource/:id", (req, res) => {
 
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
-  console.log("QUESTCEQUE:", req.params.id);
   const id = req.params.id;
   getCommentsById(id)
     .then(data => {
