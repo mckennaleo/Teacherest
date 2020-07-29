@@ -36,11 +36,11 @@ const createCommentElement = (item) => {
 
 $(document).ready(function() {
   const loadComments = () => {
-    $.getJSON('/api/comments', (response) => {
+    $.getJSON('/resource/'+window.location.pathname.split('/')[2]+'/comments', (response) => {
       // console.log('success');
       //response.'data' because thats what the getter is returning
       console.log("COMMENTS???", response.data);
-      renderComment(response.data);
+      //renderComment(response.data);
     })
       .done(function() {
         // console.log("second success");
