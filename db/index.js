@@ -98,11 +98,11 @@ const addResource = function(resource) {
 exports.addResource = addResource;
 
 const addToFavourites = function(favourite) {
-  let { user_id, resource_id, like } = favourite;
+  const { user_id, resource_id } = favourite;
   return pool.query(`
-  INSERT INTO likes (user_id, resource_id, like)
-  VALUES ($1, $2, $3)
-  RETURNING *`, [user_id, resource_id, like])
+  INSERT INTO likes (user_id, resource_id)
+  VALUES ($1, $2)
+  RETURNING *`, [user_id, resource_id])
     .then(res => res.rows[0])
     .catch((err) => {
       console.error(err);
