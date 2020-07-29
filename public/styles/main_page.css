@@ -381,6 +381,6 @@ div.menu:hover {
     border: 2px solid #E29578;
   }
 
-  /* .d-none {
+  .d-none {
     display: none;
-  } */
+  }

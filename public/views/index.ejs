@@ -49,7 +49,7 @@
     <h4>Menu</h4>
     <nav>
       <ul>
-        <li><a class="nav-item nav-link" href="/newResource">My Resources</a>
+        <li><a class="nav-item nav-link" href="/newResource">New Resource</a>
         </li>
         <li><a class="nav-item nav-link" href="/profile">My Profile</a>
         </li>
@@ -57,9 +57,7 @@
         
         <li class="login-container">
           <% if (user) { %>
-            <aside class="logout">
-              <a class="nav-item nav-link" href="/logout">logout</a>
-            </aside>
+            
             <aside class="login d-none">
               <form action="/login" type="POST" class="login-form">
                 <div class="login-form">
@@ -71,10 +69,12 @@
                 </div>
               </form>
             </aside>
-          <% } else { %>
-            <aside class="logout d-none">
+            <aside class="logout">
               <a class="nav-item nav-link" href="/logout">logout</a>
             </aside>
+            
+          <% } else { %>
+            
             <aside class="login">
               <form action="/login" type="POST" class="login-form">
                 <div class="login-form">
@@ -85,6 +85,9 @@
                   <a class="nav-item nav-link" href="/register">register</a>
                 </div>
               </form>
+            </aside>
+            <aside class="logout d-none">
+              <a class="nav-item nav-link" href="/logout">logout</a>
             </aside>
           <% } %>
         </li>
@@ -148,53 +151,51 @@
     </nav>
   </aside>
   <div class="create_resource-container">
-    
-    <form action="/api/newResource" method="POST" class="new-resource" style="
-    flex-wrap: wrap;
-">
+    <form action="/api/newResource" method="POST" class="new-resource">
 
-  <h2 class="create_resource-title">Create your own resource</h2>
-  <div class="content">
-    <div class="title-URL-container">
-      <div class="title-container">
-        <label for="title" class="title-text">TITLE: </label>
-        <input type="text" class="title-input">
-      </div>
-      <div class="URL-container">
-        <label for="link" class="URL-text">URL: </label>
-        <input type="text" class="link-input">
-      </div>
-    </div>
-        <div class="screenshot-category-container">
-          <div class="screenshot-container">
-            <label for="screenshotUrl" class="screenshot-text">SCREENSHOT URL: </label>
-            <input type="text" class="screenshotUrl-input">
-          </div>
-          <div class="category-container">
-            <label for="category">CATEGORY: </label>
-            <select class="category-input">
-              <option value="1">Science</option>
-              <option value="2">News</option>
-              <option value="3">Arts &amp; Entertainment</option>
-              <option value="4">Sports</option>
-              <option value="5">Health</option>
-              <option value="6">Work</option>
-              <option value="7">Hobbies</option>
-              <option value="8">Nature</option>
-              <option value="9">Music</option>
-              <option value="10">Literature</option>
-              <option value="11">Misc</option>
-            </select>
-          </div>
+      <div class="title-URL-container">
+        <div class="title-container">
+          <label for="title" class="title-text">Title: </label>
+          <input type="text" class="title-input">
         </div>
-        <div class="description-submit-container">
-          <div class="description-container">
-            <label  for="description">DESCRIPTION: </label>
-            <input placeholder="Enter a description of 255 characters or less" type="text" class="description-input">
-          </div>
-        <div class="submit-container">
-          <button type="submit" class="new_resource-button">SUBMIT</button>
+        <div class="URL-container">
+          <label for="link" class="URL-text">URL: </label>
+          <input type="text" class="link-input">
         </div>
+      </div>
+
+      <div class="description-category-container">
+        <div class="description-container">
+          <label for="description">Description: </label>
+          <input type="text" class="description-input">
+        </div>
+
+        <div class="category-container">
+          <label for="category">Category: </label>
+          <select class="category-input">
+            <option value="1">Science</option>
+            <option value="2">News</option>
+            <option value="3">Arts & Entertainment</option>
+            <option value="4">Sports</option>
+            <option value="5">Health</option>
+            <option value="6">Work</option>
+            <option value="7">Hobbies</option>
+            <option value="8">Nature</option>
+            <option value="9">Music</option>
+            <option value="10">Literature</option>
+            <option value="11">Misc</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="screenshot-submit-container">
+      <div class="screenshot-container">
+        <label for="screenshotUrl">Screenshot URL: </label>
+        <input type="text" class="screenshotUrl-input">
+      </div>
+
+      <div class="submit-container">
+        <button type="submit">Submit</button>
       </div>
     </div>
 
