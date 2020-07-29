@@ -27,9 +27,11 @@ const createResourceElement = (item) => {
       <div class="title">${item.title}</div>
       <div class="description">${item.description}</div>
       <div class="time">${readableDate}</div>
-      <button type="submit" class="save-button">&#9734;</button>
+      <form class="favourite-form" method="post">
+      <button type="submit" class="favourite-button">&#9734;</button>
+      </form>
     </div>
-    
+    <script type="text/javascript" src="/scripts/favourite.js"></script>
   </div>
   </a>
   </article>`;
