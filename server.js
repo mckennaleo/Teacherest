@@ -156,7 +156,12 @@ app.post("/register", (req, res) => {
       console.log(users)
       req.session.user_id = users.id;
       res.redirect('/')  
-      })
+      }).catch(err => {
+        console.error(err);
+        res
+          .status(400)
+          .json({ error: err.message });
+      });
     
     })
     
