@@ -105,6 +105,14 @@ app.get("/resource/:id", (req, res) => {
   });
 });
 
+app.post("/resource/:id/favourite/add"), (req, res) => {
+
+}
+
+app.post("/resource/:id/favourite/remove"), (req, res) => {
+  
+}
+
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
   const id = req.params.id;
