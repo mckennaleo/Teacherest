@@ -6,19 +6,18 @@ const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session')
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
 
-const cookieParser = require('cookie-parser');
-
+//----------ROUTES----------//
 
 const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
-const commentsRoutes = require('./routes/comments');
-const { addUser, getResourceById } = require('./db/index');
+const { addUser, getResourceById, getCommentsById } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -30,7 +29,10 @@ db.connect();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 // app.use(express.static(__dirname + "/../public"));
-app.use(cookieParser());
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 app.use(bodyParser.urlencoded({ extended: true }));
 /* app.use("/styles", sass({
   src: __dirname + "/styles",
@@ -52,7 +54,6 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/newResource", newResourceRoutes(db));
-app.use("/api/comments", commentsRoutes(db));
 
 
 
@@ -85,14 +86,15 @@ app.get("/", (req, res) => {
       if (err) {
         throw err;
       } else {
-        res.render('index');
+        res.render('index', templateVars);
       }
     });
   });
 });
 
-//when you click on a resource, 
+//when you click on a resource 
 app.get("/resource/:id", (req, res) => {
+  let templateVars = { user: req.session.user_id };
   const { id } = req.params;
   db.connect(function(err) {
     if (err) throw err;
@@ -103,23 +105,37 @@ app.get("/resource/:id", (req, res) => {
   });
 });
 
-app.get("/register", (req, res) => {
-  // const user = req.cookies.user_id;
-  //   let templateVars = {user: user}
-  res.render("register");
+//loads comments according to resource id
+app.get("/resource/:id/comments", (req, res) => {
+  const id = req.params.id;
+  getCommentsById(id)
+    .then(data => {
+      console.log(data)
+      res.json({ data });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
-/* app.get("/register", (req, res) => {
-  const user = req.cookies.user_id;
-  if (user) {
-    let templateVars = {user: user}
-    res.render("register", templateVars);
-    
+app.get("/register", (req, res) => {
+  if (req.session.user_id) {
+    res.render('errors/errorAlreadyLogin')
   } else {
-    res.render("alreadyLoggedInError")
+  res.render("register");    
   }
-}); */
+});
 
+app.get("/logout", (req, res) => {
+  if (!req.session.user_id) {
+    res.render('errors/errorNotLogin')
+  } else {
+  req.session = null;
+  res.redirect('/')
+  }
+})
 
 
 

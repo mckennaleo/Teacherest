@@ -27,7 +27,7 @@ const createResourceElement = (item) => {
       <div class="title">${item.title}</div>
       <div class="description">${item.description}</div>
       <div class="time">${readableDate}</div>
-      <button class="save-button">Save</button>
+      <button class="save-button">&#9734;</button>
     </div>
     
   </div>

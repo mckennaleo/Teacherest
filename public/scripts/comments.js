@@ -1,8 +1,9 @@
 const renderComment = (data) => {
   for (let item of data) {
-    $('.comments').append(createCommentElement(item));
+    $('.posted-comments').append(createCommentElement(item));
   }
 };
+
 
 const createCommentElement = (item) => {
   //posting date from database
@@ -12,28 +13,31 @@ const createCommentElement = (item) => {
   let readableDate = moment(dbDate).fromNow();
 
   //html for posted resources
-  const $comment = `
-  <article class='comments-box'>
-  
-  <div class="container">
+  const $postedComment = `
 
-    <img src="${item.screenshot}" alt="screenshot" class="image" style="width:100%">
-
-    <div class="middle">
-      <div class="title">${item.title}</div>
-      <div class="description">${item.description}</div>
-      <div class="time">${readableDate}</div>
-      <button class="save-button">Save</button>
-    </div>
-    
-  </div>
-  </a>
+  <article class='article-comment'>
+      <header class='article-comment-header'>
+        <span class='comment-profile'>
+          <span class='comment-profile-pic'>
+            <img src="${item.avatar}" alt="profile picture" width="35" height="35">
+              </span>
+              <span class='comment-profile-name'>
+              ${item.name}
+            </span>
+        </span> 
+              <span class='comment-date'>
+              ${readableDate}
+            </span>
+      </header>
+        <div class="comment-content">
+          <p>${item.comment}</p>
+        </div>
   </article>`;
 
-  return $comment;
+  return $postedComment;
 };
 
-const initComments = function (id) {
+$(document).ready(function() {
   const loadComments = () => {
     $.getJSON(`/api/comments?id=${id}`, (response) => {
       //response.'data' because thats what the getter is returning
@@ -51,4 +55,5 @@ const initComments = function (id) {
   };
 
   loadComments();
-};
+
+});

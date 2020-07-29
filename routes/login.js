@@ -27,7 +27,8 @@ module.exports = (db) => {
       .then(data => {
         const users = JSON.parse(JSON.stringify(data));
         if (password === users.password) {
-          res.cookie('user_id', users.id);
+          console.log(req);
+          req.session.user_id = users.id;
           res.send();
           
         } else {

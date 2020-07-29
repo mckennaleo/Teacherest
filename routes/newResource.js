@@ -6,7 +6,7 @@ module.exports = () => {
 
   router.post("/", (req, res) => {
     let resource = {
-      created_by: req.cookies.user_id,
+      created_by: req.session.user_id,
       link: req.body.link,
       description: req.body.description,
       category_id: req.body.category,
