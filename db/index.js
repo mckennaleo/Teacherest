@@ -97,8 +97,11 @@ const addResource = function(resource) {
 };
 exports.addResource = addResource;
 
-const addToFavourites = function(favourite) {
+const toggleFavourites = function(favourite) {
   const { user_id, resource_id } = favourite;
+  //query db and check if user id & resrouce id === userid and resrouce id
+  //then delete
+  //else
   return pool.query(`
   INSERT INTO likes (user_id, resource_id)
   VALUES ($1, $2)
