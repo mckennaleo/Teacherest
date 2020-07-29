@@ -77,7 +77,7 @@ const showResources = (db) => {
 app.get("/", (req, res) => {
   db.connect(function(err) {
     console.log(req)
-    let templateVars = { user: req.cookies.user_id }
+    let templateVars = { user: req.cookies.user_id };
     if (err) throw err;
     let sql = "SELECT * FROM resources";
     db.query(sql, function(err, result) {
@@ -93,13 +93,13 @@ app.get("/", (req, res) => {
 //when you click on a resource, 
 app.get("/resource/:id", (req, res) => {
   const { id } = req.params;
-    db.connect(function(err) {
-      if (err) throw err;
-      getResourceById(id)
+  db.connect(function(err) {
+    if (err) throw err;
+    getResourceById(id)
       .then(result => {
-        res.render('resource_view', {resource: result});
-      })
-    });
+        res.render('resource_view', { resource: result });
+      });
+  });
 });
 
 app.get("/register", (req, res) => {
