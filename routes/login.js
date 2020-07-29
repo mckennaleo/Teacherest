@@ -27,13 +27,11 @@ module.exports = (db) => {
     getUserWithEmail(email)
       .then(data => {
         const users = JSON.parse(JSON.stringify(data));
-        console.log("USERS", users);
+        // console.log("USERS", users);
         if (password === users.password) {
-          res.cookie('user_id', users.id);
+          console.log(req);
+          req.session.user_id = users.id;
           res.send();
-          
-          // console.log('COOKIES', req.cookies.user_id);
-          
         } else {
           console.log('FAILED')
         }

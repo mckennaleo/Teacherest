@@ -6,12 +6,17 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   font: inherit;
   vertical-align: baseline;
 }
+
+main {
+  background-color: #EADAA2;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
   display: block;
 }
 body {
   line-height: 1;
+  background-color: #EADAA2;
 }
 ol, ul {
   list-style: none;
@@ -39,6 +44,7 @@ ol, ul {
       color: #404041;
       font: 1.2em Verdana, Geneva, sans-serif;
       padding-bottom: 50px;
+      background-color: #EADAA2;
   }
 
   
@@ -66,7 +72,7 @@ ol, ul {
    margin: 1em;
    }
 
-   .search-form {
+/*    .search-form {
     display: flex;
     justify-content: space-around;
     margin-left: 2em;
@@ -78,7 +84,7 @@ ol, ul {
     padding: 20px;
     height: 12.5em;
     position: fixed;
-   }
+   } */
    
 
    .search-container {
@@ -113,13 +119,22 @@ ol, ul {
     color: #fff;
     display: block;
     font-size: 1em;
-    margin: 0 0 2px;
     padding: .83333333333333em 2.08333333333333em;
     text-transform: uppercase;
+    border-right: 2px solid #241E4E;
+    
+    border-bottom: 2px solid #241E4E;
 }
 #nav-products nav li {
     position: relative;
     z-index: 2;
+    background-color: #EADAA2;
+}
+
+li.login-container {
+  border-right: 2px solid #241E4E;
+  
+  border-bottom: 2px solid #241E4E;
 }
 
 #nav-products nav a {
@@ -221,6 +236,9 @@ div.menu:hover {
     display: flex;
     flex-direction: column;
     background-color: #EADAA2;
+    border-right: 2px solid #241E4E;
+    
+    border-bottom: 2px solid #241E4E;
   }
 
   .login-container{
@@ -240,4 +258,12 @@ div.menu:hover {
   label.container-checkmark {
     margin-bottom: 5px;
     margin-left: 5px;
+  }
+
+  .create_resource-container {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #EADAA2;
+    margin-right: 11em; 
+    margin-top: 3em;
   }
