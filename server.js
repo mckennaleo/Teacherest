@@ -94,6 +94,7 @@ app.get("/", (req, res) => {
 
 //when you click on a resource 
 app.get("/resource/:id", (req, res) => {
+  console.log("ARE WE HERE???")
   const { id } = req.params;
   db.connect(function(err) {
     if (err) throw err;
@@ -104,8 +105,11 @@ app.get("/resource/:id", (req, res) => {
   });
 });
 
-app.post("/resource/:id/favourite/add"), (req, res) => {
-  let templateVars = { user: req.session.user_id };
+app.post("/resource/:id/favourite", (req, res) => {
+  //console.log("ARE WE HERE", req)
+  // const { user_id, resource_id } = favourite;
+  const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
+
   addToFavourites(favourite)
     .then(data => {
       console.log(data)
@@ -116,22 +120,22 @@ app.post("/resource/:id/favourite/add"), (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
-}
+})
 
-app.post("/resource/:id/favourite/remove"), (req, res) => {
-  db.connect(function(err) {
-    let templateVars = { user: req.session.user_id };
-    if (err) throw err;
-    let sql = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2";
-    db.query(sql, function(err, result) {
-      if (err) {
-        throw err;
-      } else {
-        res.render('index', templateVars);
-      }
-    });
-  });
-}
+// app.post("/resource/:id/favourite/remove"), (req, res) => {
+//   db.connect(function(err) {
+//     let templateVars = { user: req.session.user_id };
+//     if (err) throw err;
+//     let sql = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2";
+//     db.query(sql, function(err, result) {
+//       if (err) {
+//         throw err;
+//       } else {
+//         res.render('index', templateVars);
+//       }
+//     });
+//   });
+// }
 
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
