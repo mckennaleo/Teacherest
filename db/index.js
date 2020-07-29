@@ -55,8 +55,9 @@ exports.getResourceById = getResourceById;
 
 const getCommentsById = function(resourceId) {
   return pool.query(`
-  SELECT *
+  SELECT comments.*, users.name as name, users.avatar_url as avatar
   FROM comments
+  JOIN users ON users.id = comments.user_id
   WHERE resource_id = $1`, [resourceId])
     .then(res => res.rows)
     .catch((err) => console.log(err));
