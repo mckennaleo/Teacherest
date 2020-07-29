@@ -107,6 +107,7 @@ app.get("/resource/:id", (req, res) => {
 
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
+  let templateVars = { user: req.session.user_id };
   const id = req.params.id;
   getCommentsById(id)
     .then(data => {
@@ -121,7 +122,8 @@ app.get("/resource/:id/comments", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  if (req.session.user_id) {
+  let templateVars = { user: req.session.user_id };
+  if (user) {
     res.render('errors/errorAlreadyLogin')
   } else {
   res.render("register");    
@@ -129,7 +131,8 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-  if (!req.session.user_id) {
+  let templateVars = { user: req.session.user_id };
+  if (!user) {
     res.render('errors/errorNotLogin')
   } else {
   req.session = null;
@@ -140,12 +143,14 @@ app.get("/logout", (req, res) => {
 
 
 app.post("/display", (req, res) => {
+  let templateVars = { user: req.session.user_id };
   // console.log("This is the res: ", res)
 });
 
 
 //-----------APP POST----------//
 app.post("/register", (req, res) => {
+  let templateVars = { user: req.session.user_id };
   const { name, email, password, bio } = req.body;
   if (name === "" || email === "" || password === "" || bio === "") {
     res.redirect('/error');

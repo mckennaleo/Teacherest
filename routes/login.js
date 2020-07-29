@@ -22,7 +22,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    // console.log('QUERIES:    ', req.body);
+    console.log('QUERIES:    ', req.body);
     
     getUserWithEmail(email)
       .then(data => {
