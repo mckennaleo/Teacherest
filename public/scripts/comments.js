@@ -1,6 +1,6 @@
 const renderComment = (data) => {
   for (let item of data) {
-    $('.comments').append(createCommentElement(item));
+    $('.posted-comments').append(createCommentElement(item));
   }
 };
 
@@ -14,21 +14,24 @@ const createCommentElement = (item) => {
 
   //html for posted resources
   const $postedComment = `
-  <article class='comments-box'>
-  
-  <div class="container">
 
-    <img src="${item.comment}" alt="screenshot" class="image" style="width:100%">
-
-    <div class="middle">
-      <div class="title">${item.user_id}</div>
-      <div class="description"></div>
-      <div class="time"></div>
-      <button class="save-button">Save</button>
-    </div>
-    
-  </div>
-  </a>
+  <article class='article-comment'>
+      <header class='article-comment-header'>
+        <span class='comment-profile'>
+          <span class='comment-profile-pic'>
+            <img src="${item.avatar}" alt="profile picture" width="35" height="35">
+              </span>
+              <span class='comment-profile-name'>
+              ${item.name}
+            </span>
+        </span> 
+              <span class='comment-date'>
+              ${readableDate}
+            </span>
+      </header>
+        <div class="comment-content">
+          <p>${item.comment}</p>
+        </div>
   </article>`;
 
   return $postedComment;
@@ -38,9 +41,7 @@ $(document).ready(function() {
   const loadComments = () => {
     $.getJSON('/resource/'+window.location.pathname.split('/')[2]+'/comments', (response) => {
       // console.log('success');
-      //response.'data' because thats what the getter is returning
-      console.log("COMMENTS???", response.data);
-      //renderComment(response.data);
+      renderComment(response.data);
     })
       .done(function() {
         // console.log("second success");
