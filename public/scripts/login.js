@@ -7,7 +7,10 @@ $(document).ready(function() {
       url: "/api/login",
       data: { email, password },
       type: "POST"
-    }).done(function(data) {
+    }).fail(function() {
+      alert("Wrong email/password combination. Please try again!")
+    })
+    .done(function(data) {
       $('.login-form').hide();
     });
   });
