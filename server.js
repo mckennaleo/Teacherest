@@ -88,7 +88,7 @@ app.get("/", (req, res) => {
   });
 });
 
-//when you click on a resource 
+//redirect to view a single resource, like and comment 
 app.get("/resource/:id", (req, res) => {
   const { id } = req.params;
   db.connect(function (err) {
@@ -100,14 +100,10 @@ app.get("/resource/:id", (req, res) => {
   });
 });
 
+//if signed in, allows user to add resource to likes/favourites
 app.post("/resource/:id/favourite", (req, res) => {
-  //console.log("ARE WE HERE", req)
-  // const { user_id, resource_id } = favourite;
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
 
-  console.log("IS THIS USER:", req.session)
-  const $favouriteBtn = ('.favourite-button');
-  
   if (!req.session.user_id) {
     res.json({ success: false });
     return;
@@ -116,7 +112,6 @@ app.post("/resource/:id/favourite", (req, res) => {
   toggleFavourites(favourite)
     .then(data => {
       res.json({ success: true });
-
     })
     .catch(err => {
       res
@@ -125,11 +120,11 @@ app.post("/resource/:id/favourite", (req, res) => {
     });
 })
 
-
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
   let templateVars = { user: req.session.user_id };
   const id = req.params.id;
+  console.log("PARAMS?", id)
   getCommentsById(id)
     .then(data => {
       console.log(data)
@@ -142,7 +137,17 @@ app.get("/resource/:id/comments", (req, res) => {
     });
 });
 
+//if signed in, allows user to post a comment on a resource
+app.post("/resource/:id/comments", function (req, res) {
+  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text};
 
+  console.log("WHATSUP:", userComment)
+
+  if (!req.body.text) {
+    res.status(400).json({ error: 'invalid request: no data in POST body' });
+    return;
+  }
+});
 
 app.get("/register", (req, res) => {
 
@@ -174,15 +179,15 @@ app.post("/display", (req, res) => {
 //-----------APP POST----------//
 app.post("/register", (req, res) => {
   let templateVars = { user: req.session.user_id };
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(req.body.password, salt, function(err, hash) {
-        const info = { 
-    name: req.body.name, 
-    email: req.body.email, 
-    password: hash, 
-    bio: req.body.bio 
-    };
-    if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(req.body.password, salt, function (err, hash) {
+      const info = {
+        name: req.body.name,
+        email: req.body.email,
+        password: hash,
+        bio: req.body.bio
+      };
+      if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
         res.redirect('/error');
       } else {
         addUser(info).then(function () {
@@ -207,17 +212,8 @@ app.post("/register", (req, res) => {
       }
 
 
+    });
   });
-});
-  
-  
-});
-
-app.post("/resource/:id/comments", function (req, res) {
-  if (!req.body.text) {
-    res.status(400).json({ error: 'invalid request: no data in POST body' });
-    return;
-  }
 });
 
 //-----------APP LISTEN-----------//

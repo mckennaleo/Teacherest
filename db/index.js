@@ -191,3 +191,47 @@ const addComment = function(userComment) {
     .catch((err) => console.log(err));
 };
 exports.addComment = addComment;
+
+const updateUser = function(userId) {
+  const queryParams = [];
+
+  let queryString = `
+  UPDATE users
+  SET 
+  `
+
+  if (userId.name) {
+    queryParams.push(`${userId.name}`);
+    queryString += ` name = ${queryParams.length}`;
+  }
+
+  if (userId.email) {
+    queryParams.push(`${userId.email}`);
+    queryString += ` email = ${queryParams.length}`;
+  }
+
+  if (userId.password) {
+    //does it need to be bcrytped here??
+    queryParams.push(`${userId.password}`);
+    queryString += ` password = ${queryParams.length}`;
+  }
+
+  if (userId.bio) {
+    queryParams.push(`${userId.bio}`);
+    queryString += ` bio = ${queryParams.length}`;
+  }
+
+  if (userId.avatar_url) {
+    queryParams.push(`${userId.avatar_url}`);
+    queryString += ` avatar_url = ${queryParams.length}`;
+  }
+
+  queryString += ` WHERE id = $1;`;
+
+  console.log("queryString:", queryString, "queryParams:", queryParams);
+
+  return pool.query(queryString, queryParams)
+    .then(res => res.rows);
+
+}
+exports.updateUser = updateUser;

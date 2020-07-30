@@ -4,7 +4,6 @@ const renderComment = (data) => {
   }
 };
 
-
 const createCommentElement = (item) => {
   //posting date from database
   let dbDate = item.created_at;
@@ -38,8 +37,7 @@ const createCommentElement = (item) => {
 };
 
 $(document).ready(function() {
-  //meta tag in head section
-  //use jquery to query the meta tag as with onclick
+
   const loadComments = () => {
     $.getJSON('/resource/'+window.location.pathname.split('/')[2]+'/comments', (response) => {
       //response.'data' because thats what the getter is returning
@@ -64,6 +62,10 @@ $(document).ready(function() {
 
     event.preventDefault();
 
+    const resourceId = $("body").data("resource-id");
+
+    console.log("body tag", resourceId)
+
     //variable to assess contents of tweet form input
     const $userComment = $(this).find('input').val();
     console.log($userComment)
@@ -83,7 +85,7 @@ $(document).ready(function() {
       $('#post-comment').val($("<div>").text($userComment).html());
 
       //empties tweet-container and reloads tweet database with new tweet
-      $.post("/resource/:id/comments", $(this).serialize(), function(result) {
+      $.post(`/resource/${resourceId}/comments`, $(this).serialize(), function(result) {
         //$('#tweet-container').empty();
         loadComments();
       });

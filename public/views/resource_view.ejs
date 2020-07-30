@@ -34,7 +34,7 @@
   <script type="text/javascript" src="/scripts/favourite.js"></script>
 </head>
 
-<body>
+<body data-resource-id="<%= resource.id %>">
     <header>
       <nav class="navbar-expand-md">
         <div class="big_wrapper">
@@ -83,7 +83,7 @@
         </form>
         </div>
         <div class="resource-image-main">
-          <img src="<%= resource.screenshot %>" alt="screenshot for <%= resource.link %>">
+          <img src="<%= resource.screenshot ? resource.screenshot : 'https://i.ibb.co/xffN5CF/placeholder-image.jpg' %>" alt="screenshot for <%= resource.link %>">
         </div>
       </div>
 
