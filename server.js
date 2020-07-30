@@ -11,7 +11,6 @@ const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
 const bcrypt = require('bcryptjs');
-const cors = require('cors')
 
 //----------ROUTES----------//
 
@@ -25,8 +24,9 @@ const {
   getResourceById, 
   getCommentsById, 
   getUserWithEmail, 
+  toggleFavourites,
   getUserById,
-  toggleFavourites } = require('./db/index');
+  addComment } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -37,7 +37,6 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
-app.use(cors());
 // app.use(express.static(__dirname + "/../public"));
 app.use(cookieSession({
   name: 'session',
@@ -115,25 +114,16 @@ app.get('/profile', (req, res) => {
 
 //when you click on a resource 
 app.get("/resource/:id", (req, res) => {
-const { id } = req.params;
+  const { id } = req.params;
 
-    getResourceById(id)
-      .then(result => {
-        res.render('resource_view', { resource: result });
-      }).catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      })
-
+  getResourceById(id)
+    .then(result => {
+      res.render('resource_view', { resource: result });
+    });
 });
 
 app.post("/resource/:id/favourite", (req, res) => {
-  //console.log("ARE WE HERE", req)
-  // const { user_id, resource_id } = favourite;
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
-
-  console.log("IS THIS USER:", req.session)
   const $favouriteBtn = ('.favourite-button');
   
   if (!req.session.user_id) {
@@ -144,7 +134,6 @@ app.post("/resource/:id/favourite", (req, res) => {
   toggleFavourites(favourite)
     .then(data => {
       res.json({ success: true });
-
     })
     .catch(err => {
       res
@@ -156,11 +145,9 @@ app.post("/resource/:id/favourite", (req, res) => {
 
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
-  let templateVars = { user: req.session.user_id };
   const id = req.params.id;
   getCommentsById(id)
     .then(data => {
-      console.log(data)
       res.json({ data });
     })
     .catch(err => {
@@ -170,7 +157,25 @@ app.get("/resource/:id/comments", (req, res) => {
     });
 });
 
+//if signed in, allows user to post a comment on a resource
+app.post("/resource/:id/comments", function (req, res) {
+  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
 
+  if (!req.session.user_id) {
+    res.json({ success: false });
+    return;
+  }
+
+  addComment(userComment)
+    .then(data => {
+      res.json({ data });
+    })
+    .catch(err => {
+      res
+        .status(406)
+        .json({ error: err.message });
+    });
+});
 
 app.get("/register", (req, res) => {
 
@@ -190,8 +195,6 @@ app.get("/logout", (req, res) => {
     res.redirect('/')
   }
 })
-
-
 
 app.post("/display", (req, res) => {
   let templateVars = { user: req.session.user_id };
@@ -233,12 +236,8 @@ app.post("/register", (req, res) => {
             .json({ error: err.message });
         });
       }
-
-
+    });
   });
-});
-  
-  
 });
 
 app.post("/resource/:id/comments", function (req, res) {
