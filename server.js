@@ -15,7 +15,6 @@ const bcrypt = require('bcryptjs')
 //----------ROUTES----------//
 
 const widgetsRoutes = require("./routes/widgets");
-const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
 const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites } = require('./db/index');
@@ -52,7 +51,6 @@ app.set('view engine', 'ejs');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/categories", categoriesRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/newResource", newResourceRoutes(db));
 
