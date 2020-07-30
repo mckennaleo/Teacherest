@@ -122,6 +122,25 @@ const toggleFavourites = function(favourite) {
 };
 exports.toggleFavourites = toggleFavourites;
 
+const keywordSearch = function(keyword) {
+  return pool.query(`
+  SELECT * 
+  FROM resources
+  WHERE title LIKE ('%$1%')
+  OR description LIKE ('%$1%');`, [keyword])
+    .then(res => res.rows)
+    .catch((err) => console.log(err));
+};
+exports.keywordSearch = keywordSearch;
 
-
+const addComment = function(userComment) {
+  let { user_id, resource_id, comment } = userComment;
+  return pool.query(`
+  INSERT INTO comments (user_id, resource_id, comment)
+  VALUES ($1, $2, $3)
+  RETURNING *`, [user_id, resource_id, comment])
+    .then(res => res.rows[0])
+    .catch((err) => console.log(err));
+};
+exports.addComment = addComment;
 
