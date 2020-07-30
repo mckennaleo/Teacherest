@@ -42,16 +42,19 @@
     <main>
       <div class="column">
       <div class="row-1">
-        <div class="register-form">
+        <div class="register-form-container">
+          
         <form action="/register" method="POST" class="register-form">
+          <h1 class="register-title">Sign up!</h1>
+          <h3 class="register-title">It takes only a second</h3>
           <label for="name-field">Name: </label>
-          <input type="text" placeholder="Your name" name="name" class="name-field">
+          <input type="text" placeholder="Your name" name="name" class="input">
           <label for="email-field">Email: </label>
-          <input type="email" placeholder="Your@email.com" id="email" name="email" class="email-field">
+          <input type="email" placeholder="Your@email.com" id="email" name="email" class="input">
           <label for="pw-field">Password: </label>
-          <input type="password" name="password" placeholder="password" class="pw-field">
+          <input type="password" name="password" placeholder="password" class="input">
           <label for="bio-field">Bio: </label>
-          <input type="text" placeholder="What are you about?" name="bio" class="bio-field">
+          <input type="text" placeholder="What are you about?" name="bio" class="input">
           <button type="submit" class="register-button">Register</button>
         </form>
       </div>
