@@ -10,6 +10,7 @@ const cookieSession = require('cookie-session')
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
+const bcrypt = require('bcryptjs')
 
 //----------ROUTES----------//
 
@@ -128,12 +129,7 @@ app.get("/resource/:id/comments", (req, res) => {
     });
 });
 
-app.post("/resource/:id/comments", function (req, res) {
-  if (!req.body.text) {
-    res.status(400).json({ error: 'invalid request: no data in POST body' });
-    return;
-  }
-});
+
 
 app.get("/register", (req, res) => {
 
@@ -165,33 +161,52 @@ app.post("/display", (req, res) => {
 //-----------APP POST----------//
 app.post("/register", (req, res) => {
   let templateVars = { user: req.session.user_id };
-  const { name, email, password, bio } = req.body;
-  if (name === "" || email === "" || password === "" || bio === "") {
-    res.redirect('/error');
-  } else {
-    addUser(req.body).then(function () {
-      getUserWithEmail(email).then(data => {
-        const users = JSON.parse(JSON.stringify(data));
-        console.log(users)
-        req.session.user_id = users.id;
-        res.redirect('/')
-      }).catch(err => {
-        console.error(err);
-        res
-          .status(400)
-          .json({ error: err.message });
-      });
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(req.body.password, salt, function(err, hash) {
+        const info = { 
+    name: req.body.name, 
+    email: req.body.email, 
+    password: hash, 
+    bio: req.body.bio 
+    };
+    if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
+        res.redirect('/error');
+      } else {
+        addUser(info).then(function () {
+          getUserWithEmail(info.email).then(data => {
+            const users = JSON.parse(JSON.stringify(data));
+            console.log(users)
+            req.session.user_id = users.id;
+            res.redirect('/')
+          }).catch(err => {
+            console.error(err);
+            res
+              .status(400)
+              .json({ error: err.message });
+          });
 
-    }).catch(err => {
-      console.error(err);
-      res
-        .status(400)
-        .json({ error: err.message });
-    });
+        }).catch(err => {
+          console.error(err);
+          res
+            .status(400)
+            .json({ error: err.message });
+        });
+      }
 
-  }
 
+  });
 });
+  
+  
+});
+
+app.post("/resource/:id/comments", function (req, res) {
+  if (!req.body.text) {
+    res.status(400).json({ error: 'invalid request: no data in POST body' });
+    return;
+  }
+});
+
 //-----------APP LISTEN-----------//
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
