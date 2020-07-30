@@ -17,6 +17,7 @@ const bcrypt = require('bcryptjs')
 const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
+const keywordRoutes = require('./routes/keyword');
 const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -53,6 +54,7 @@ app.set('view engine', 'ejs');
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/newResource", newResourceRoutes(db));
+app.use("/api/keyword", keywordRoutes(db));
 
 
 
