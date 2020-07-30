@@ -32,48 +32,20 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
-// app.use(express.static(__dirname + "/../public"));
 app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2']
 }))
 app.use(bodyParser.urlencoded({ extended: true }));
-/* app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
-  debug: true,
-  outputStyle: 'expanded'
-})); */
 app.use(express.static("public"));
-
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
-
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/newResource", newResourceRoutes(db));
 app.use("/api/keyword", keywordRoutes(db));
-// app.use("/api/profile"), profileRoutes(db);
-
-
-
-
-// Note: mount other resources here, using the same pattern above
-
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 
 
 //-----------GETS-----------//
@@ -122,27 +94,6 @@ app.get("/resource/:id", (req, res) => {
     });
 });
 
-app.post("/resource/:id/favourite", (req, res) => {
-  const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
-  const $favouriteBtn = ('.favourite-button');
-  
-  if (!req.session.user_id) {
-    res.json({ success: false });
-    return;
-  }
-
-  toggleFavourites(favourite)
-    .then(data => {
-      res.json({ success: true });
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-})
-
-
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
   const id = req.params.id;
@@ -153,26 +104,6 @@ app.get("/resource/:id/comments", (req, res) => {
     .catch(err => {
       res
         .status(500)
-        .json({ error: err.message });
-    });
-});
-
-//if signed in, allows user to post a comment on a resource
-app.post("/resource/:id/comments", function (req, res) {
-  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
-
-  if (!req.session.user_id) {
-    res.json({ success: false });
-    return;
-  }
-
-  addComment(userComment)
-    .then(data => {
-      res.json({ data });
-    })
-    .catch(err => {
-      res
-        .status(406)
         .json({ error: err.message });
     });
 });
@@ -195,11 +126,6 @@ app.get("/logout", (req, res) => {
     res.redirect('/')
   }
 })
-
-app.post("/display", (req, res) => {
-  let templateVars = { user: req.session.user_id };
-  // console.log("This is the res: ", res)
-});
 
 
 //-----------APP POST----------//
@@ -240,12 +166,46 @@ app.post("/register", (req, res) => {
   });
 });
 
+//if signed in, allows user to post a comment on a resource
 app.post("/resource/:id/comments", function (req, res) {
-  if (!req.body.text) {
-    res.status(400).json({ error: 'invalid request: no data in POST body' });
+  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
+
+  if (!req.session.user_id) {
+    res.json({ success: false });
     return;
   }
+
+  addComment(userComment)
+    .then(data => {
+      res.json({ data });
+    })
+    .catch(err => {
+      res
+        .status(406)
+        .json({ error: err.message });
+    });
 });
+
+//post for favouriting a resource
+app.post("/resource/:id/favourite", (req, res) => {
+  const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
+  const $favouriteBtn = ('.favourite-button');
+  
+  if (!req.session.user_id) {
+    res.json({ success: false });
+    return;
+  }
+
+  toggleFavourites(favourite)
+    .then(data => {
+      res.json({ success: true });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+})
 
 //-----------APP LISTEN-----------//
 app.listen(PORT, () => {

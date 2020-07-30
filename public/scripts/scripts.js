@@ -88,7 +88,7 @@ $(document).ready(function() {
 
   $('.error-1').hide();
   $('.error-comment').hide();
-  // $('.success').hide();
+  $('.error-login').hide();
   loadResources();
 
 });

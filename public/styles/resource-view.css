@@ -151,7 +151,8 @@
 }
 
 .comments {
-
+  display: flex;
+  flex-direction: column;
 }
 
 /* media query specs for responsive design  */
