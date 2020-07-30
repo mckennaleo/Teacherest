@@ -17,7 +17,7 @@ const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
-const { addUser, getResourceById, getCommentsById, getUserWithEmail, addToFavourites } = require('./db/index');
+const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -110,9 +110,17 @@ app.post("/resource/:id/favourite", (req, res) => {
   // const { user_id, resource_id } = favourite;
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
 
-  addToFavourites(favourite)
+  const $favouriteBtn = ('.favourite-button');
+
+  toggleFavourites(favourite)
     .then(data => {
-      console.log(data)
+      const userLiked = JSON.parse(JSON.stringify(data));
+      console.log("THIS IS IT?", userLiked.command)
+      if (userLiked.command === 'INSERT') {
+        console.log("this happened")
+        $favouriteBtn.addClass('.favourite-button-liked');
+      }
+
       res.json({ data });
     })
     .catch(err => {
