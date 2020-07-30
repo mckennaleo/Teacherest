@@ -1,11 +1,11 @@
 $(document).ready(function() {
   $('.new-resource').submit(function(e) {
     e.preventDefault();
-    let link = $('.link').val();
-    let title = $('.title').val();
-    let description = $('.description').val();
-    let category = $('.category').val();
-    let screenshot = $('.screenshotUrl').val();
+    let link = $('.link-input').val();
+    let title = $('.title-input').val();
+    let description = $('.description-input').val();
+    let category = $('.category-input').val();
+    let screenshot = $('.screenshotUrl-input').val();
     $.ajax({
       url: "/api/newResource",
       data: { link, title, description, category, screenshot },
@@ -13,6 +13,7 @@ $(document).ready(function() {
     })
       .done(function(data) {
         $('.new-resource').hide();
-      });
+      })
+      .success(location.reload);
   });
 });
