@@ -98,11 +98,17 @@ app.post("/resource/:id/favourite", (req, res) => {
   // const { user_id, resource_id } = favourite;
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
 
+  console.log("IS THIS USER:", req.session)
   const $favouriteBtn = ('.favourite-button');
-  //add if statement to check if user is LOGGED IN
+  
+  if (!req.session.user_id) {
+    res.json({ success: false });
+    return;
+  }
+
   toggleFavourites(favourite)
     .then(data => {
-      res.json({ data });
+      res.json({ success: true });
 
     })
     .catch(err => {

@@ -1,40 +1,34 @@
-//AJAX post request to resource/id?
-//if no like, post to add, if like post to remove
-
-$(document).ready(function() {
+$(document).ready(function () {
 
   const $favouriteBtn = ('.favourite-button');
 
-  $($favouriteBtn).on('click', function(event) {
+  $($favouriteBtn).on('click', function (event) {
     event.preventDefault();
-    //sconsole.log("BUTTON CLICKED", $( this ).data("resource-id"))
-    const resourceId = $( this ).data("resource-id");
-    //if no like what am i checking??? if like = true?
 
-    // user is not signed in
-    if () {
-      $(".error-1").slideLeft("slow");
-    } else {
-      $(".error-1").slideRight();
+    const resourceId = $(this).data("resource-id");
 
-      $.ajax({
-        url: `/resource/${resourceId}/favourite`,
-        type: "POST"
-      }).done(function() {
-      });
-    }
+    $.ajax({
+      url: `/resource/${resourceId}/favourite`,
+      type: "POST",
+      xhrFields: { withCredentials: true }
+    }).done(function (response) {
 
-    
+      if (response.success) {
+        $('.favourite-button').addClass('favourite-button-liked');
 
-    // const userLiked = JSON.parse(JSON.stringify(data));
-    //   if (userLiked.command === 'INSERT') {
-    //     console.log("this happened")
-    // $favouriteBtn.addClass('.favourite-button-liked');
+        // if ($(".success").first().is(":hidden")) {
+        //   $(".success").slideDown("slow");
+        // } else {
+        //   $(".success").slideUp();
+        // }
 
-    
-      
+      } else {
+        if ($(".error-1").first().is(":hidden")) {
+          $(".error-1").slideDown("slow");
+        } else {
+          $(".error-1").slideUp();
+        }
+      }
     });
-
   })
-
 });

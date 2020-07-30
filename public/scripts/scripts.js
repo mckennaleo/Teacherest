@@ -68,6 +68,8 @@ $(document).ready(function() {
       });
   };
 
+  $('.error-1').hide();
+  // $('.success').hide();
   loadResources();
 
 });
