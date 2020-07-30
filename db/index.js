@@ -183,11 +183,17 @@ const test = function (user_id) {
 
 const addComment = function(userComment) {
   let { user_id, resource_id, comment } = userComment;
+  console.log("COMMENT CHECK", userComment.comment)
   return pool.query(`
   INSERT INTO comments (user_id, resource_id, comment)
   VALUES ($1, $2, $3)
   RETURNING *`, [user_id, resource_id, comment])
-    .then(res => res.rows[0])
+    .then(res => {
+      const new_comment = res.rows[0];
+      console.log("IS THIS ANYTHING", new_comment);
+      return new_comment;
+    })
+      
     .catch((err) => console.log(err));
 };
 exports.addComment = addComment;

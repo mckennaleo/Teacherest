@@ -1,3 +1,7 @@
+const clearComments = () => {
+  $('.posted-comments').empty();
+};
+
 const renderComment = (data) => {
   for (let item of data) {
     $('.posted-comments').append(createCommentElement(item));
@@ -18,7 +22,7 @@ const createCommentElement = (item) => {
       <header class='article-comment-header'>
         <span class='comment-profile'>
           <span class='comment-profile-pic'>
-            <img src="${item.avatar}" alt="profile picture" width="35" height="35">
+            <img src="${item.avatar ? item.avatar : 'https://i.ibb.co/N31Xt3k/profile-placeholder.jpg'}" alt="profile picture" width="35" height="35">
               </span>
               <span class='comment-profile-name'>
               ${item.name}
@@ -36,70 +40,63 @@ const createCommentElement = (item) => {
   return $postedComment;
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
+  const resourceId = $("body").data("resource-id");
 
   const loadComments = () => {
-    $.getJSON('/resource/'+window.location.pathname.split('/')[2]+'/comments', (response) => {
+    $.getJSON('/resource/' + resourceId + '/comments', (response) => {
       //response.'data' because thats what the getter is returning
       renderComment(response.data);
     })
-      .done(function() {
+      .done(function () {
         // console.log("second success");
       })
-      .fail(function() {
+      .fail(function () {
         // console.log("error");
       })
-      .always(function() {
+      .always(function () {
         // console.log("complete");
       });
   };
 
   loadComments();
 
-
-  //submits tweet and loads updated page without refresh
-  $('#post-comment').on('submit', function(event) {
+  $('#post-comment').on('submit', function (event) {
 
     event.preventDefault();
 
-    const resourceId = $("body").data("resource-id");
-
-    console.log("body tag", resourceId)
-
-    //variable to assess contents of tweet form input
     const $userComment = $(this).find('input').val();
-    console.log($userComment)
+
+    console.log("REALLY INPUT", $userComment)
 
     if ($userComment.length < 1) {
-      //$(".error-1").slideDown("slow");
-
-    } else if ($userComment.length > 140) {
-      //$(".error-2").slideDown("slow");
-
+      //error for no comment
+      $(".error-1").slideDown("slow");
     } else {
-      //passed validation, hides error messages for submission
-      // $('.error-1').slideUp();
-      // $('.error-2').slideUp();
-
       //escapes unsafe characters
-      $('#post-comment').val($("<div>").text($userComment).html());
+      // $('#post-comment').val($("<form>").text($userComment).html());
 
-      //empties tweet-container and reloads tweet database with new tweet
-      $.post(`/resource/${resourceId}/comments`, $(this).serialize(), function(result) {
-        //$('#tweet-container').empty();
-        loadComments();
+      $.ajax({
+        url: `/resource/${resourceId}/comments`,
+        type: "POST",
+        data: { text: $userComment }
+      }).done(function (data) {
+        if (data) {
+          clearComments();
+          loadComments();
+          $('form').trigger('reset');
+        } else {
+          if ($(".error-1").first().is(":hidden")) {
+            $(".error-1").slideDown("slow");
+          } else {
+            $(".error-1").slideUp();
+          }
+        }
+
       });
-
-      //clears tweet form once posted
-      $('form').trigger('reset');
-      
-      
 
     }
 
-    
-   })
-
-  // });
+  })
 
 });

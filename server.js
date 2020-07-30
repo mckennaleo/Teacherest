@@ -18,7 +18,7 @@ const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
 const keywordRoutes = require('./routes/keyword');
-const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites } = require('./db/index');
+const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites, addComment } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -136,12 +136,21 @@ app.get("/resource/:id/comments", (req, res) => {
 app.post("/resource/:id/comments", function (req, res) {
   const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text};
 
-  console.log("WHATSUP:", userComment)
-
-  if (!req.body.text) {
-    res.status(400).json({ error: 'invalid request: no data in POST body' });
+  if (!req.session.user_id) {
+    res.json({ success: false });
     return;
   }
+
+  addComment(userComment)
+    .then(data => {
+      res.json({ data });
+      console.log("COMMENT?", data)
+    })
+    .catch(err => {
+      res
+        .status(406)
+        .json({ error: err.message });
+    });
 });
 
 app.get("/register", (req, res) => {
