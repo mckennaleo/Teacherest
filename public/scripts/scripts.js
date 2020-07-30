@@ -21,7 +21,7 @@ const createResourceElement = (item) => {
   <a href="http://localhost:8080/resource/${item.id}">
   <div class="container">
 
-    <img src="${item.screenshot ? item.screenshot : 'https://i.ibb.co/KFjVfFJ/placeholder-image.jpg'}" alt="screenshot" class="image" style="width:100%">
+    <img src="${item.screenshot ? item.screenshot : 'https://i.ibb.co/xffN5CF/placeholder-image.jpg'}" alt="screenshot" class="image" style="width:100%">
 
     <div class="middle">
       <div class="title">${item.title}</div>
