@@ -53,6 +53,16 @@ const getResourceById = function(resourceId) {
 };
 exports.getResourceById = getResourceById;
 
+const getUserById = function(userId) {
+  return pool.query(`
+  SELECT * 
+  FROM users
+  WHERE users.id = $1`, [userId])
+    .then(res => res.rows[0])
+    .catch((res, err) => console.log(res, err));
+};
+exports.getUserById = getUserById;
+
 const getCommentsById = function(resourceId) {
   return pool.query(`
   SELECT comments.*, users.name as name, users.avatar_url as avatar

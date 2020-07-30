@@ -33,11 +33,11 @@ module.exports = (db) => {
           req.session.user_id = users.id;
           res.send();
         } else {
-          console.log('FAILED')
+          console.log('FAILED');
         }
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
         res
           .status(500)
           .json({ error: err.message });

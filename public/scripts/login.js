@@ -8,11 +8,11 @@ $(document).ready(function() {
       data: { email, password },
       type: "POST"
     }).fail(function() {
-      alert("Wrong email/password combination. Please try again!")
+      alert("Wrong email/password combination. Please try again!");
     })
-    .done(function(data) {
-      $('.login').hide();
-      $('.logout').show();
-    });
+      .done(function(data) {
+        $('.login').hide();
+        $('.logout').show();
+      });
   });
 });

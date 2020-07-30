@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-  <title>Teacherest - Register Page</title>
+  <title>Teacherest - Home Page</title>
   <meta charset="utf-8">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">
 
   <!-- App CSS -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -18,7 +19,6 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/posted-resources.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/register.css" type="text/css" />
 
   <!-- External JS -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -57,6 +57,38 @@
       </li>
       
       <li class="login-container">
+        <% if (user) { %>
+          
+          <aside class="login d-none">
+            <form action="/login" type="POST" class="login-form">
+              <div class="login-form">
+                <p>Login:</p>
+                <input type="text" placeholder="email" class="email-field">
+                <input type="text" placeholder="password" class="pw-field">
+                <button type="submit" class="login-button">Login</button>
+              </div>
+            </form>
+          </aside>
+          <aside class="logout">
+            <a class="nav-item nav-link" href="/logout">logout</a>
+          </aside>
+          
+        <% } else { %>
+          
+          <aside class="login">
+            <form action="/login" type="POST" class="login-form">
+              <div class="login-form">
+                <p>Login:</p>
+                <input type="text" placeholder="email" class="email-field">
+                <input type="text" placeholder="password" class="pw-field">
+                <button type="submit" class="login-button">Login</button>
+              </div>
+            </form>
+          </aside>
+          <aside class="logout d-none">
+            <a class="nav-item nav-link" href="/logout">logout</a>
+          </aside>
+        <% } %>
       </li>
       <div class="search-by-keyword">
         <form action="/keyword" type="POST" class="search-form">
@@ -126,9 +158,7 @@
   </nav>
 </aside>
 <body>
-  <p>ERROR - You are already logged in.</p>
-  <a href="/">
-    <button>Back to home page</button>
-  </a>
+  
+  <p>My Profile</p>
 </body>
 </html>

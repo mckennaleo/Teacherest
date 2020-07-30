@@ -1,8 +1,8 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
   const $favouriteBtn = ('.favourite-button');
 
-  $($favouriteBtn).on('click', function (event) {
+  $($favouriteBtn).on('click', function(event) {
     event.preventDefault();
 
     const resourceId = $(this).data("resource-id");
@@ -11,7 +11,7 @@ $(document).ready(function () {
       url: `/resource/${resourceId}/favourite`,
       type: "POST",
       xhrFields: { withCredentials: true }
-    }).done(function (response) {
+    }).done(function(response) {
 
       if (response.success) {
         $('.favourite-button').addClass('favourite-button-liked');
@@ -30,5 +30,5 @@ $(document).ready(function () {
         }
       }
     });
-  })
+  });
 });
