@@ -27,6 +27,7 @@ input, style {
   background-color: #960200;
   color: whitesmoke;
   border: none;
+  outline: none;
   border-radius: 20%;
   padding-top: 0.3em;
   padding-bottom: 0.4em;
