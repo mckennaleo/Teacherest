@@ -4,7 +4,7 @@ const clearComments = () => {
 
 const renderComment = (data) => {
   for (let item of data) {
-    $('.posted-comments').append(createCommentElement(item));
+    $('.posted-comments').prepend(createCommentElement(item));
   }
 };
 
