@@ -4,7 +4,6 @@ const renderComment = (data) => {
   }
 };
 
-
 const createCommentElement = (item) => {
   //posting date from database
   let dbDate = item.created_at;
@@ -38,8 +37,7 @@ const createCommentElement = (item) => {
 };
 
 $(document).ready(function() {
-  //meta tag in head section
-  //use jquery to query the meta tag as with onclick
+
   const loadComments = () => {
     $.getJSON('/resource/'+window.location.pathname.split('/')[2]+'/comments', (response) => {
       //response.'data' because thats what the getter is returning
