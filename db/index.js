@@ -209,7 +209,6 @@ const addComment = function(userComment) {
 exports.addComment = addComment;
 
 const updateUser = function(userId) {
-<<<<<<< HEAD
   const queryParams = [];
 
   let queryString = `
@@ -248,7 +247,6 @@ const updateUser = function(userId) {
   console.log("queryString:", queryString, "queryParams:", queryParams);
 
   return pool.query(queryString, queryParams)
-=======
   let query = `UPDATE users SET `
   Object.entries(userId).map((entry, index) => {
     if (entry[1] && entry[0] !== 'id') {
@@ -262,7 +260,6 @@ const updateUser = function(userId) {
   query += ` WHERE id = ${userId.id};`
   console.log(query)
   return pool.query(query)
->>>>>>> profile
     .then(res => res.rows);
 
 };
