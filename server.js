@@ -18,7 +18,12 @@ const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
 const keywordRoutes = require('./routes/keyword');
-const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites } = require('./db/index');
+const { 
+  addUser, 
+  getResourceById, 
+  getCommentsById, 
+  getUserWithEmail, 
+  toggleFavourites } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
