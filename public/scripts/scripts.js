@@ -4,7 +4,7 @@ const clearResources = () => {
 
 const renderResource = (data) => {
   for (let item of data) {
-    $('.display').append(createResourceElement(item));
+    $('.display').prepend(createResourceElement(item));
   }
 };
 

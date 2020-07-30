@@ -127,6 +127,13 @@
   padding-bottom: 1em;
 }
 
+.error-1 {
+  padding: 15px;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 15px;
+}
+
 .comments {
 
 }
@@ -157,3 +164,4 @@
   }
 
 }
+
