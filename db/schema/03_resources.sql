@@ -7,5 +7,5 @@ CREATE TABLE resources
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   title TEXT,
   screenshot TEXT,
-  created_at TIMESTAMP DEFAULT now(),
+  created_at TIMESTAMP DEFAULT now()
 );

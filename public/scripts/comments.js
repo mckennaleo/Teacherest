@@ -81,12 +81,12 @@ $(document).ready(function () {
           if (!data.success) {
             $(".error-login").slideDown("slow");
           } else {
-          $('.error-comment').hide();
-          $('.error-login').hide();
-          clearComments();
-          loadComments();
-          $('form').trigger('reset');
-          } 
+            $('.error-comment').hide();
+            $('.error-login').hide();
+            clearComments();
+            loadComments();
+            $('form').trigger('reset');
+          }
         } else {
           if ($(".error-comment").first().is(":hidden")) {
             $(".error-comment").slideDown("slow");
@@ -99,6 +99,6 @@ $(document).ready(function () {
 
     }
 
-  })
+  });
 
 });

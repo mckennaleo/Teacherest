@@ -116,7 +116,7 @@ const toggleFavourites = function(favourite) {
   WHERE user_id = $1
   AND resource_id = $2`, [user_id, resource_id])
     .then(res => {
-      if(res.rows.length > 0) {
+      if (res.rows.length > 0) {
         return pool.query(`
         DELETE FROM likes WHERE user_id = $1 AND resource_id = $2`, [user_id, resource_id]);
       } else {
@@ -133,7 +133,7 @@ const toggleFavourites = function(favourite) {
 };
 exports.toggleFavourites = toggleFavourites;
 
-const keywordSearch = function(keyword) {  
+const keywordSearch = function(keyword) {
   const formatedKeyword = '%' + keyword + '%';
   return pool.query(`
   SELECT * 
@@ -193,7 +193,7 @@ const test = function (user_id) {
 
 const addComment = function(userComment) {
   let { user_id, resource_id, comment } = userComment;
-  console.log("COMMENT CHECK", userComment.comment)
+  console.log("COMMENT CHECK", userComment.comment);
   return pool.query(`
   INSERT INTO comments (user_id, resource_id, comment)
   VALUES ($1, $2, $3)
@@ -209,12 +209,13 @@ const addComment = function(userComment) {
 exports.addComment = addComment;
 
 const updateUser = function(userId) {
+<<<<<<< HEAD
   const queryParams = [];
 
   let queryString = `
   UPDATE users
   SET 
-  `
+  `;
 
   if (userId.name) {
     queryParams.push(`${userId.name}`);
@@ -247,7 +248,22 @@ const updateUser = function(userId) {
   console.log("queryString:", queryString, "queryParams:", queryParams);
 
   return pool.query(queryString, queryParams)
+=======
+  let query = `UPDATE users SET `
+  Object.entries(userId).map((entry, index) => {
+    if (entry[1] && entry[0] !== 'id') {
+      query += `${entry[0]} = '${entry[1]}'`;
+      if (index !== Object.entries(userId).length-2) {
+        query += ', ';
+        console.log(index, Object.entries(userId).length)
+      }
+    }
+  })
+  query += ` WHERE id = ${userId.id};`
+  console.log(query)
+  return pool.query(query)
+>>>>>>> profile
     .then(res => res.rows);
 
-}
+};
 exports.updateUser = updateUser;
