@@ -17,7 +17,6 @@ $(document).ready(function() {
 });
 
 
-
 /* //get the ressource by categories
 $(document).ready(function() {
   $('.search-form').submit(function(e) {

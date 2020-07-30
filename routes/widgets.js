@@ -10,6 +10,7 @@ const router  = express.Router();
 const { getAllResources } = require('../db/index');
 const { getResourceByCategories } = require('../db/index');
 const { getCreatedResources } = require('../db/index');
+const { getFavoritedResources } = require('../db/index');
 
 module.exports = (db) => {
   router.get("/all", (req, res) => {
@@ -42,6 +43,20 @@ module.exports = (db) => {
     const userId = req.session.user_id;
 
     getCreatedResources(userId)
+      .then(data => {
+        res.json({ data });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/favored_resources", (req, res) => {
+    const userId = req.session.user_id;
+
+    getFavoritedResources(userId)
       .then(data => {
         res.json({ data });
       })
