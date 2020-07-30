@@ -265,7 +265,7 @@ div.menu:hover {
     background-color: #FAEDCB;
     border: 4px solid #E29578;
     margin: 3em;
-    border-radius: 35%;
+    border-radius: 25%;
     color: #E29578;
     font-family: 'Mulish', sans-serif;
     font-size: small;
@@ -442,3 +442,26 @@ div.menu:hover {
     font-family: 'Permanent Marker', cursive;
     color: #E29578;
   }
+
+  .yolo {
+    display: flex;
+    justify-content: center;
+  }
+  .my_resource-title-container{
+    background-color: #FAEDCB;
+    border-bottom: 4px solid #E29578;
+    margin-top: 3em;
+    border-radius: 25%;
+    color: #E29578;
+    font-family: 'Permanent Marker', cursive;
+    font-size: x-large;
+    width: 50%;
+    height: 4em;
+    text-align: center;
+  }
+
+  .my_resource-title {
+    margin-top: 1em;
+  }
+
+  

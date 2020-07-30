@@ -136,12 +136,12 @@ exports.keywordSearch = keywordSearch;
 
 const getFavoritedResources = function(user_id) {
   return pool.query(`
-  SELECT * 
+  SELECT resources.* 
   FROM resources
   JOIN likes ON likes.resource_id = resources.id
   JOIN users ON users.id = likes.user_id
   WHERE users.id = $1`, [ user_id ])
-    .then(res => res.rows[0])
+    .then(res => res.rows)
     .catch((err) => {
       console.error(err);
       throw err;

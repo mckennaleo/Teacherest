@@ -2,6 +2,7 @@ $(document).ready(function() {
   $('.my_resources_button').on('click', (function(e) {
     e.preventDefault();
     clearResources();
+    $(".my_resource-title-container").show();
     $('.new-resource').hide();
     $.ajax({
       url: "/api/widgets/created_resources",
