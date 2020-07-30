@@ -127,8 +127,8 @@ const keywordSearch = function(keyword) {
   return pool.query(`
   SELECT * 
   FROM resources
-  WHERE title LIKE ('%$1%')
-  OR description LIKE ('%$1%');`, [keyword])
+  WHERE UPPER(title) LIKE UPPER('%$1%')
+  OR UPPER(description) LIKE UPPER('%$1%');`, [keyword])
     .then(res => res.rows)
     .catch((err) => console.log(err));
 };
