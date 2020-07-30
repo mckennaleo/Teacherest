@@ -27,7 +27,9 @@ const {
   getUserWithEmail,
   toggleFavourites,
   getUserById,
-  addComment } = require('./db/index');
+  addComment,
+  toggleFavourites,
+  updateUser } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -94,15 +96,20 @@ app.get("/", (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-
-  if (!req.session.user_id) {
-    res.render('/errors/errorNotLogin');
-  } else {
-    getUserById(req.session.user_id)
+    if (!req.session.user_id) {
+      res.render('/errors/errorNotLogin')
+    } else {
+      getUserById(req.session.user_id)
       .then(result => {
-        let templateVars = { user: req.session.user_id, name: result };
-        console.log('WORKS');
-        res.render('profile', templateVars);
+        let templateVars = { 
+          user: req.session.user_id, 
+          name: result.name,
+          password: result.password,
+          bio: result.bio,
+          email: result.email
+        };
+        
+      res.render('profile', templateVars)
       }).catch(err => {
         console.log('ERROR');
         res
@@ -229,7 +236,6 @@ app.post("/register", (req, res) => {
               .status(400)
               .json({ error: err.message });
           });
-
         }).catch(err => {
           console.error(err);
           res
@@ -241,7 +247,28 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.post("/resource/:id/comments", function(req, res) {
+app.post("/profile", (req, res) => {
+  const info = {
+    id: req.session.user_id,
+    name: req.body["name-change"],
+    email: req.body["email-change"],
+    bio: req.body["bio-change"],
+    password: req.body["pw-change"]
+  }
+  if (!req.session.user_id) {
+    res.render('/errors/errorNotLogin')
+  } else {
+    updateUser(info).catch(err => {
+      console.error(err);
+      res
+        .status(400)
+        .json({ error: err.message });
+      });
+  }
+  res.redirect('/')
+})
+
+app.post("/resource/:id/comments", function (req, res) {
   if (!req.body.text) {
     res.status(400).json({ error: 'invalid request: no data in POST body' });
     return;
