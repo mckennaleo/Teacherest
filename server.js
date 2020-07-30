@@ -17,7 +17,7 @@ const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
-const { addUser, getResourceById, getCommentsById, getUserWithEmail, addToFavourites } = require('./db/index');
+const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -67,23 +67,12 @@ app.use("/api/newResource", newResourceRoutes(db));
 
 
 //-----------GETS-----------//
-const showResources = (db) => {
-  let resourceList = {};
-  for (let objects in db) {
-    resourceList[objects] = db[objects];
-  }
-  return resourceList;
-};
-
-
-
-
 app.get("/", (req, res) => {
-  db.connect(function(err) {
+  db.connect(function (err) {
     let templateVars = { user: req.session.user_id };
     if (err) throw err;
     let sql = "SELECT * FROM resources";
-    db.query(sql, function(err, result) {
+    db.query(sql, function (err, result) {
       if (err) {
         throw err;
       } else {
@@ -96,7 +85,7 @@ app.get("/", (req, res) => {
 //when you click on a resource 
 app.get("/resource/:id", (req, res) => {
   const { id } = req.params;
-  db.connect(function(err) {
+  db.connect(function (err) {
     if (err) throw err;
     getResourceById(id)
       .then(result => {
@@ -105,34 +94,25 @@ app.get("/resource/:id", (req, res) => {
   });
 });
 
-app.post("/resource/:id/favourite/add"), (req, res) => {
-  let templateVars = { user: req.session.user_id };
-  addToFavourites(favourite)
+app.post("/resource/:id/favourite", (req, res) => {
+  //console.log("ARE WE HERE", req)
+  // const { user_id, resource_id } = favourite;
+  const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
+
+  const $favouriteBtn = ('.favourite-button');
+  //add if statement to check if user is LOGGED IN
+  toggleFavourites(favourite)
     .then(data => {
-      console.log(data)
       res.json({ data });
+
     })
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
-}
+})
 
-app.post("/resource/:id/favourite/remove"), (req, res) => {
-  db.connect(function(err) {
-    let templateVars = { user: req.session.user_id };
-    if (err) throw err;
-    let sql = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2";
-    db.query(sql, function(err, result) {
-      if (err) {
-        throw err;
-      } else {
-        res.render('index', templateVars);
-      }
-    });
-  });
-}
 
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
@@ -150,22 +130,29 @@ app.get("/resource/:id/comments", (req, res) => {
     });
 });
 
+app.post("/resource/:id/comments", function (req, res) {
+  if (!req.body.text) {
+    res.status(400).json({ error: 'invalid request: no data in POST body' });
+    return;
+  }
+});
+
 app.get("/register", (req, res) => {
 
-  if (req.session.user_id ) {
+  if (req.session.user_id) {
     res.render('errors/errorAlreadyLogin')
   } else {
-  res.render("register");    
+    res.render("register");
   }
 });
 
 app.get("/logout", (req, res) => {
 
-  if (!req.session.user_id ) {
+  if (!req.session.user_id) {
     res.render('errors/errorNotLogin')
   } else {
-  req.session = null;
-  res.redirect('/')
+    req.session = null;
+    res.redirect('/')
   }
 })
 
@@ -184,26 +171,26 @@ app.post("/register", (req, res) => {
   if (name === "" || email === "" || password === "" || bio === "") {
     res.redirect('/error');
   } else {
-    addUser(req.body).then(function() {
+    addUser(req.body).then(function () {
       getUserWithEmail(email).then(data => {
-      const users = JSON.parse(JSON.stringify(data));
-      console.log(users)
-      req.session.user_id = users.id;
-      res.redirect('/')  
+        const users = JSON.parse(JSON.stringify(data));
+        console.log(users)
+        req.session.user_id = users.id;
+        res.redirect('/')
       }).catch(err => {
         console.error(err);
         res
           .status(400)
           .json({ error: err.message });
       });
-    
+
     }).catch(err => {
       console.error(err);
       res
         .status(400)
         .json({ error: err.message });
     });
-    
+
   }
 
 });
