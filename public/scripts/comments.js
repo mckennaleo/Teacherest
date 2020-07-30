@@ -58,4 +58,46 @@ $(document).ready(function() {
 
   loadComments();
 
+
+  //submits tweet and loads updated page without refresh
+  $('#post-comment').on('submit', function(event) {
+
+    event.preventDefault();
+
+    //variable to assess contents of tweet form input
+    const $userComment = $(this).find('input').val();
+    console.log($userComment)
+
+    if ($userComment.length < 1) {
+      //$(".error-1").slideDown("slow");
+
+    } else if ($userComment.length > 140) {
+      //$(".error-2").slideDown("slow");
+
+    } else {
+      //passed validation, hides error messages for submission
+      // $('.error-1').slideUp();
+      // $('.error-2').slideUp();
+
+      //escapes unsafe characters
+      $('#post-comment').val($("<div>").text($userComment).html());
+
+      //empties tweet-container and reloads tweet database with new tweet
+      $.post("/resource/:id/comments", $(this).serialize(), function(result) {
+        //$('#tweet-container').empty();
+        loadComments();
+      });
+
+      //clears tweet form once posted
+      $('form').trigger('reset');
+      
+      
+
+    }
+
+    
+   })
+
+  // });
+
 });
