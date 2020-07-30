@@ -10,16 +10,30 @@ $(document).ready(function() {
     //sconsole.log("BUTTON CLICKED", $( this ).data("resource-id"))
     const resourceId = $( this ).data("resource-id");
     //if no like what am i checking??? if like = true?
-    $.ajax({
-      url: `/resource/${resourceId}/favourite`,
-      type: "POST"
-    }).done(function() {
-    });
+
+    // user is not signed in
+    if () {
+      $(".error-1").slideLeft("slow");
+    } else {
+      $(".error-1").slideRight();
+
+      $.ajax({
+        url: `/resource/${resourceId}/favourite`,
+        type: "POST"
+      }).done(function() {
+      });
+    }
+
+    
 
     // const userLiked = JSON.parse(JSON.stringify(data));
     //   if (userLiked.command === 'INSERT') {
     //     console.log("this happened")
     // $favouriteBtn.addClass('.favourite-button-liked');
+
+    
+      
+    });
 
   })
 
