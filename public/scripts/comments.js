@@ -59,6 +59,7 @@ $(document).ready(function () {
       });
   };
 
+  $('.error-comment').hide();
   loadComments();
 
   $('#post-comment').on('submit', function (event) {
@@ -71,7 +72,7 @@ $(document).ready(function () {
 
     if ($userComment.length < 1) {
       //error for no comment
-      $(".error-1").slideDown("slow");
+      $(".error-comment").slideDown("slow");
     } else {
       //escapes unsafe characters
       // $('#post-comment').val($("<form>").text($userComment).html());
@@ -82,14 +83,15 @@ $(document).ready(function () {
         data: { text: $userComment }
       }).done(function (data) {
         if (data) {
+          $('.error-comment').hide();
           clearComments();
           loadComments();
           $('form').trigger('reset');
         } else {
-          if ($(".error-1").first().is(":hidden")) {
-            $(".error-1").slideDown("slow");
+          if ($("..error-comment").first().is(":hidden")) {
+            $("..error-comment").slideDown("slow");
           } else {
-            $(".error-1").slideUp();
+            $("..error-comment").slideUp();
           }
         }
 
