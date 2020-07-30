@@ -26,7 +26,9 @@ const {
   getCommentsById, 
   getUserWithEmail, 
   getUserById,
-  toggleFavourites } = require('./db/index');
+  toggleFavourites,
+  updateUser
+ } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -94,14 +96,19 @@ app.get("/", (req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-
     if (!req.session.user_id) {
       res.render('/errors/errorNotLogin')
     } else {
       getUserById(req.session.user_id)
       .then(result => {
-        let templateVars = { user: req.session.user_id, name: result};
-        console.log('WORKS')
+        let templateVars = { 
+          user: req.session.user_id, 
+          name: result.name,
+          password: result.password,
+          bio: result.bio,
+          email: result.email
+        };
+        
       res.render('profile', templateVars)
       }).catch(err => {
         console.log('ERROR')
@@ -204,15 +211,15 @@ app.post("/register", (req, res) => {
   let templateVars = { user: req.session.user_id };
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(req.body.password, salt, function(err, hash) {
-        const info = { 
-    name: req.body.name, 
-    email: req.body.email, 
-    password: hash, 
-    bio: req.body.bio 
-    };
+      const info = { 
+        name: req.body.name, 
+        email: req.body.email, 
+        password: hash, 
+        bio: req.body.bio 
+      };
     if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
-        res.redirect('/error');
-      } else {
+      res.redirect('/error');
+        } else {
         addUser(info).then(function () {
           getUserWithEmail(info.email).then(data => {
             const users = JSON.parse(JSON.stringify(data));
@@ -225,7 +232,6 @@ app.post("/register", (req, res) => {
               .status(400)
               .json({ error: err.message });
           });
-
         }).catch(err => {
           console.error(err);
           res
@@ -233,13 +239,30 @@ app.post("/register", (req, res) => {
             .json({ error: err.message });
         });
       }
-
-
-  });
+    });
+  });  
 });
-  
-  
-});
+
+app.post("/profile", (req, res) => {
+  const info = {
+    id: req.session.user_id,
+    name: req.body["name-change"],
+    email: req.body["email-change"],
+    bio: req.body["bio-change"],
+    password: req.body["pw-change"]
+  }
+  if (!req.session.user_id) {
+    res.render('/errors/errorNotLogin')
+  } else {
+    updateUser(info).catch(err => {
+      console.error(err);
+      res
+        .status(400)
+        .json({ error: err.message });
+      });
+  }
+  res.redirect('/')
+})
 
 app.post("/resource/:id/comments", function (req, res) {
   if (!req.body.text) {

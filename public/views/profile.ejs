@@ -158,7 +158,27 @@
   </nav>
 </aside>
 <body>
-  
-  <p>My Profile</p>
+  <p>Edit Profile</p>
+  <form action="/profile" class="name-change" method="POST">
+    <label for="name-change">Name:</label>
+    <input type="text" class="name-change" name="name-change" id="name-change" placeholder="<%- name %>">
+    <!-- <button type="submit">Change Name</button> -->
+  <!-- </form>
+  <form action="/profile" class="email-change" method="POST"> -->
+    <label for="email-change">Email:</label>
+    <input type="text" class="email-change" name="email-change" id="email-change" placeholder="<%- email %>">
+    <!-- <button type="submit">Change Email</button> -->
+  <!-- </form>
+  <form action="/profile" class="bio-change" method="POST"> -->
+    <label for="name-change">Bio:</label>
+    <input type="text" class="bio-change" name="bio-change" id="bio-change" placeholder="<%- bio %>">
+    <!-- <button type="submit">Change Bio</button> -->
+  <!-- </form>
+  <form action="/profile" class="pw-change" method="POST"> -->
+    <label for="new-pw">New Password:</label>
+    <input type="text" name="new-pw" id="new-pw" class="new-pw" placeholder="your new password">
+    <button type="submit">Change Password</button>
+  </form>
+
 </body>
 </html>
