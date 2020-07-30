@@ -87,10 +87,11 @@ app.get('/profile', (req, res) => {
 //when you click on a resource 
 app.get("/resource/:id", (req, res) => {
   const { id } = req.params;
+  let templateVars = { user: req.session.user_id };
 
   getResourceById(id)
     .then(result => {
-      res.render('resource_view', { resource: result });
+      res.render('resource_view', { resource: result, user: req.session.user_id });
     });
 });
 
