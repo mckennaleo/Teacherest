@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const express = require('express');
 const router = express.Router();
 const { addResource } = require('../db/index');
@@ -6,6 +7,7 @@ module.exports = () => {
 
   router.post("/", (req, res) => {
     let resource = {
+      // eslint-disable-next-line camelcase
       created_by: req.session.user_id,
       link: req.body.link,
       description: req.body.description,

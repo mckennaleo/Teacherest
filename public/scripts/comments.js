@@ -39,7 +39,7 @@ const createCommentElement = (item) => {
 $(document).ready(function() {
 
   const loadComments = () => {
-    $.getJSON('/resource/'+window.location.pathname.split('/')[2]+'/comments', (response) => {
+    $.getJSON('/resource/' + window.location.pathname.split('/')[2] + '/comments', (response) => {
       //response.'data' because thats what the getter is returning
       renderComment(response.data);
     })
@@ -64,11 +64,8 @@ $(document).ready(function() {
 
     const resourceId = $("body").data("resource-id");
 
-    console.log("body tag", resourceId)
-
     //variable to assess contents of tweet form input
     const $userComment = $(this).find('input').val();
-    console.log($userComment)
 
     if ($userComment.length < 1) {
       //$(".error-1").slideDown("slow");
@@ -92,14 +89,6 @@ $(document).ready(function() {
 
       //clears tweet form once posted
       $('form').trigger('reset');
-      
-      
-
     }
-
-    
-   })
-
-  // });
-
+  });
 });

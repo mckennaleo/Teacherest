@@ -1,3 +1,4 @@
+//filters the resources by category using checkboxes
 $(document).ready(function() {
   $('.container-checkmark').click(function() {
     let categories = [];
@@ -15,23 +16,6 @@ $(document).ready(function() {
       });
   });
 });
-
-
-/* //get the ressource by categories
-$(document).ready(function() {
-  $('.search-form').submit(function(e) {
-    e.preventDefault();
-    let input = $('.category-search').val();
-    $.ajax({
-      url: "/api/categories/search",
-      data: { s: input },
-      type: "GET"
-    }).done(function(data) {
-      //prepend or whatever
-      console.log('Done', data);
-    });
-  });
-}); */
 
 //toggle the search menu when clicked
 $(document).ready(function() {
