@@ -227,9 +227,11 @@ div.menu:hover {
     flex-direction: column;
     background-color: #FAEDCB;
     color: #E29578;
-    border-bottom: 1px solid #E29578;
+    border-top: 2px solid #E29578;
+    margin-top: 1em;
     margin-bottom: 1em;
     text-transform: uppercase;
+    text-align: center;
   }
   
   .search-container {
@@ -509,4 +511,57 @@ div.menu:hover {
     }
   } 
 
+  .search-by-keyword {
+    margin-bottom: 1em;
+    margin-top: 1em;
+    background-color: #FAEDCB;
+    color: #E29578;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  ol, ul {
+    background-color: #FAEDCB;;
+  }
+
+  .keyword-searchbar {
+    background-color: #F1FAEE;
+    border: 2px solid #E29578;
+    margin: 1em;
+    color: #E29578;
+    text-align: center;
+    width: 75%;
+  }
   
+  .keyword-button {
+    border: 2px solid #E29578;
+    background-color: #F1FAEE;
+    font-family: 'Permanent Marker', cursive;
+    color: #E29578;
+    text-align: center;
+  }
+
+
+  .pw-field {
+    margin-bottom: 1em;
+    background-color: #F1FAEE;
+    border: 2px solid #E29578;
+    color: #E29578;
+  }
+
+  .email-field {
+    background-color: #F1FAEE;
+    border: 2px solid #E29578;
+    color: #E29578;
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+
+  .login-button {
+    border: 2px solid #E29578;
+    background-color: #F1FAEE;
+    font-family: 'Permanent Marker', cursive;
+    color: #E29578;
+    text-align: center;
+  }
+

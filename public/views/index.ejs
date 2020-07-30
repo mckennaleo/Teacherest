@@ -54,6 +54,7 @@
         </li>
         <li><a class="nav-item nav-link" href="/profile">My Profile</a>
         </li>
+        <li><a class="nav-item nav-link" href="/register">register</a>
         </li>
         
         <li class="login-container">
@@ -66,7 +67,6 @@
                   <input type="text" placeholder="email" class="email-field">
                   <input type="text" placeholder="password" class="pw-field">
                   <button type="submit" class="login-button">Login</button>
-                  <a class="nav-item nav-link" href="/register">register</a>
                 </div>
               </form>
             </aside>
@@ -83,7 +83,6 @@
                   <input type="text" placeholder="email" class="email-field">
                   <input type="text" placeholder="password" class="pw-field">
                   <button type="submit" class="login-button">Login</button>
-                  <a class="nav-item nav-link" href="/register">register</a>
                 </div>
               </form>
             </aside>
@@ -92,14 +91,15 @@
             </aside>
           <% } %>
         </li>
-        <div class="search-container">
+        <div class="search-by-keyword">
           <form action="/keyword" type="POST" class="search-form">
-            <div class="title-container-keyword">Search a resource by keyword:</div>
+            <div class="title-container-keyword">Search by keyword:</div>
             <div class="keyword-box">
               <input type="text" class="keyword-searchbar" placeholder="Your keyword here">
               <button type="submit" class="keyword-button">Search</button>
             </div>
           </form>
+        </div>
           <div class="title-container-category">Search by category:</div>
           <div class="search-box">
             <label class="container-checkmark">
