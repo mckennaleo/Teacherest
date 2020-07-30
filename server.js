@@ -23,7 +23,8 @@ const {
   getResourceById, 
   getCommentsById, 
   getUserWithEmail, 
-  toggleFavourites } = require('./db/index');
+  toggleFavourites,
+  addComment } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -91,13 +92,11 @@ app.get("/", (req, res) => {
 //redirect to view a single resource, like and comment 
 app.get("/resource/:id", (req, res) => {
   const { id } = req.params;
-  db.connect(function (err) {
-    if (err) throw err;
-    getResourceById(id)
-      .then(result => {
-        res.render('resource_view', { resource: result });
-      });
-  });
+
+  getResourceById(id)
+    .then(result => {
+      res.render('resource_view', { resource: result });
+    });
 });
 
 //if signed in, allows user to add resource to likes/favourites
@@ -122,12 +121,9 @@ app.post("/resource/:id/favourite", (req, res) => {
 
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
-  let templateVars = { user: req.session.user_id };
   const id = req.params.id;
-  console.log("PARAMS?", id)
   getCommentsById(id)
     .then(data => {
-      console.log(data)
       res.json({ data });
     })
     .catch(err => {
@@ -139,14 +135,23 @@ app.get("/resource/:id/comments", (req, res) => {
 
 //if signed in, allows user to post a comment on a resource
 app.post("/resource/:id/comments", function (req, res) {
-  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text};
+  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
 
-  console.log("WHATSUP:", userComment)
-
-  if (!req.body.text) {
-    res.status(400).json({ error: 'invalid request: no data in POST body' });
+  if (!req.session.user_id) {
+    res.json({ success: false });
     return;
   }
+
+  addComment(userComment)
+    .then(data => {
+      res.json({ data });
+      console.log("COMMENT?", data)
+    })
+    .catch(err => {
+      res
+        .status(406)
+        .json({ error: err.message });
+    });
 });
 
 app.get("/register", (req, res) => {
@@ -167,8 +172,6 @@ app.get("/logout", (req, res) => {
     res.redirect('/')
   }
 })
-
-
 
 app.post("/display", (req, res) => {
   let templateVars = { user: req.session.user_id };
@@ -210,8 +213,6 @@ app.post("/register", (req, res) => {
             .json({ error: err.message });
         });
       }
-
-
     });
   });
 });
