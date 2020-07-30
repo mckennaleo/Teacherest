@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -112,5 +113,49 @@ const addToFavourites = function(favourite) {
 exports.addToFavourites = addToFavourites;
 
 
+const getFavoritedResources = function(user_id) {
+  return pool.query(`
+  SELECT * 
+  FROM resources
+  JOIN likes ON likes.resource_id = resources.id
+  JOIN users ON users.id = likes.user_id
+  WHERE users.id = $1`, [ user_id ])
+    .then(res => res.rows[0])
+    .catch((err) => {
+      console.error(err);
+      throw err;
+    });
+};
+exports.getFavoritedResources = getFavoritedResources;
 
+const getCreatedResources = function(user_id) {
+  return pool.query(`
+  SELECT * 
+  FROM resources
+  JOIN users ON users.id = resources.created_by
+  WHERE users.id = $1`, [ user_id ])
+    .then(res => res.rows)
+    .catch((err) => {
+      console.error(err);
+      throw err;
+    });
+};
+exports.getCreatedResources = getCreatedResources;
+
+/* const getFavoritedAndCreatedResources = async function(user_id) {
+  const favorited = await getFavoritedResources(user_id);
+  const created = await getCreatedResources(user_id);
+
+  return [...favorited, ...created];
+};
+
+const test = function (user_id) {
+  return new Promise((resolve, reject) => {
+    getFavoritedResources(user_id).then(data => {
+      getCreatedResources(user_id).then(data2 => {
+        resolve([data, data2]);
+      });
+    });
+  });
+}; */
 

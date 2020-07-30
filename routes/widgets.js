@@ -9,6 +9,7 @@ const express = require('express');
 const router  = express.Router();
 const { getAllResources } = require('../db/index');
 const { getResourceByCategories } = require('../db/index');
+const { getCreatedResources } = require('../db/index');
 
 module.exports = (db) => {
   router.get("/all", (req, res) => {
@@ -27,6 +28,20 @@ module.exports = (db) => {
     const categoryIds = req.query.categories || [];
 
     getResourceByCategories(categoryIds)
+      .then(data => {
+        res.json({ data });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/created_resources", (req, res) => {
+    const userId = req.session.user_id;
+
+    getCreatedResources(userId)
       .then(data => {
         res.json({ data });
       })
