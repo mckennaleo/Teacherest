@@ -17,7 +17,7 @@ const widgetsRoutes = require("./routes/widgets");
 const categoriesRoutes = require("./routes/categories");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
-const { addUser, getResourceById, getCommentsById, getUserWithEmail, addToFavourites } = require('./db/index');
+const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -94,6 +94,7 @@ app.get("/", (req, res) => {
 
 //when you click on a resource 
 app.get("/resource/:id", (req, res) => {
+  console.log("ARE WE HERE???")
   const { id } = req.params;
   db.connect(function(err) {
     if (err) throw err;
@@ -104,11 +105,22 @@ app.get("/resource/:id", (req, res) => {
   });
 });
 
-app.post("/resource/:id/favourite/add"), (req, res) => {
-  let templateVars = { user: req.session.user_id };
-  addToFavourites(favourite)
+app.post("/resource/:id/favourite", (req, res) => {
+  //console.log("ARE WE HERE", req)
+  // const { user_id, resource_id } = favourite;
+  const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
+
+  const $favouriteBtn = ('.favourite-button');
+
+  toggleFavourites(favourite)
     .then(data => {
-      console.log(data)
+      const userLiked = JSON.parse(JSON.stringify(data));
+      console.log("THIS IS IT?", userLiked.command)
+      if (userLiked.command === 'INSERT') {
+        console.log("this happened")
+        $favouriteBtn.addClass('.favourite-button-liked');
+      }
+
       res.json({ data });
     })
     .catch(err => {
@@ -116,22 +128,22 @@ app.post("/resource/:id/favourite/add"), (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
-}
+})
 
-app.post("/resource/:id/favourite/remove"), (req, res) => {
-  db.connect(function(err) {
-    let templateVars = { user: req.session.user_id };
-    if (err) throw err;
-    let sql = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2";
-    db.query(sql, function(err, result) {
-      if (err) {
-        throw err;
-      } else {
-        res.render('index', templateVars);
-      }
-    });
-  });
-}
+// app.post("/resource/:id/favourite/remove"), (req, res) => {
+//   db.connect(function(err) {
+//     let templateVars = { user: req.session.user_id };
+//     if (err) throw err;
+//     let sql = "DELETE FROM likes WHERE user_id = $1 AND resource_id = $2";
+//     db.query(sql, function(err, result) {
+//       if (err) {
+//         throw err;
+//       } else {
+//         res.render('index', templateVars);
+//       }
+//     });
+//   });
+// }
 
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
@@ -147,6 +159,13 @@ app.get("/resource/:id/comments", (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
+});
+
+app.post("/resource/:id/comments", function(req, res) {
+  if (!req.body.text) {
+    res.status(400).json({ error: 'invalid request: no data in POST body'});
+    return;
+  }
 });
 
 app.get("/register", (req, res) => {

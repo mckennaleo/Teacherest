@@ -100,10 +100,7 @@
       
       <div class="resource-content">
         <div class="resource-content-header">
-          <form class="favourite-form" method="post">
-            <button type="submit" class="favourite-button">&#9734;</button>
-          </form>
-          
+          <button type="submit" data-resource-id="<%= resource.id %>" class="favourite-button">&#9734;</button>
         </div>
 
         <div class="resource-content-main">
@@ -122,9 +119,11 @@
 
         <div class="posted-comments"></div>
         
-        <textarea name="comment" form="usrform" placeholder="Add a comment"></textarea>
-        <form action="/" id="post-comment">
-          <input type="submit">
+        
+        
+        <form method="post" action="/" id="post-comment">
+          <input type="text" name="text" id="tweet-text" placeholder="Add a comment" />
+          <button type="submit">submit</button>
         </form>
         
         
