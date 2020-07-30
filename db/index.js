@@ -123,12 +123,13 @@ const toggleFavourites = function(favourite) {
 };
 exports.toggleFavourites = toggleFavourites;
 
-const keywordSearch = function(keyword) {
+const keywordSearch = function(keyword) {  
+  const formatedKeyword = '%' + keyword + '%';
   return pool.query(`
   SELECT * 
   FROM resources
-  WHERE UPPER(title) LIKE UPPER('%$1%')
-  OR UPPER(description) LIKE UPPER('%$1%');`, [keyword])
+  WHERE UPPER(title) LIKE UPPER($1)
+  OR UPPER(description) LIKE UPPER($1);`, [formatedKeyword])
     .then(res => res.rows)
     .catch((err) => console.log(err));
 };
