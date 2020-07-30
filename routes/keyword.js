@@ -8,7 +8,7 @@ module.exports = (db) => {
     keywordSearch(keyword)
       .then(data => {
         const search = data;
-        console.log(data)
+        console.log(data);
         res.json({ search });
       })
       .catch(err => {

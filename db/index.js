@@ -116,7 +116,7 @@ const toggleFavourites = function(favourite) {
   WHERE user_id = $1
   AND resource_id = $2`, [user_id, resource_id])
     .then(res => {
-      if(res.rows.length > 0) {
+      if (res.rows.length > 0) {
         return pool.query(`
         DELETE FROM likes WHERE user_id = $1 AND resource_id = $2`, [user_id, resource_id]);
       } else {
@@ -133,7 +133,7 @@ const toggleFavourites = function(favourite) {
 };
 exports.toggleFavourites = toggleFavourites;
 
-const keywordSearch = function(keyword) {  
+const keywordSearch = function(keyword) {
   const formatedKeyword = '%' + keyword + '%';
   return pool.query(`
   SELECT * 
@@ -193,7 +193,7 @@ const test = function (user_id) {
 
 const addComment = function(userComment) {
   let { user_id, resource_id, comment } = userComment;
-  console.log("COMMENT CHECK", userComment.comment)
+  console.log("COMMENT CHECK", userComment.comment);
   return pool.query(`
   INSERT INTO comments (user_id, resource_id, comment)
   VALUES ($1, $2, $3)
@@ -214,7 +214,7 @@ const updateUser = function(userId) {
   let queryString = `
   UPDATE users
   SET 
-  `
+  `;
 
   if (userId.name) {
     queryParams.push(`${userId.name}`);
@@ -249,5 +249,5 @@ const updateUser = function(userId) {
   return pool.query(queryString, queryParams)
     .then(res => res.rows);
 
-}
+};
 exports.updateUser = updateUser;

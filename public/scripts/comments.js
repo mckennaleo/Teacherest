@@ -40,7 +40,7 @@ const createCommentElement = (item) => {
   return $postedComment;
 };
 
-$(document).ready(function () {
+$(document).ready(function() {
   const resourceId = $("body").data("resource-id");
 
   const loadComments = () => {
@@ -48,13 +48,13 @@ $(document).ready(function () {
       //response.'data' because thats what the getter is returning
       renderComment(response.data);
     })
-      .done(function () {
+      .done(function() {
         // console.log("second success");
       })
-      .fail(function () {
+      .fail(function() {
         // console.log("error");
       })
-      .always(function () {
+      .always(function() {
         // console.log("complete");
       });
   };
@@ -62,13 +62,13 @@ $(document).ready(function () {
   $('.error-comment').hide();
   loadComments();
 
-  $('#post-comment').on('submit', function (event) {
+  $('#post-comment').on('submit', function(event) {
 
     event.preventDefault();
 
     const $userComment = $(this).find('input').val();
 
-    console.log("REALLY INPUT", $userComment)
+    console.log("REALLY INPUT", $userComment);
 
     if ($userComment.length < 1) {
       //error for no comment
@@ -81,7 +81,7 @@ $(document).ready(function () {
         url: `/resource/${resourceId}/comments`,
         type: "POST",
         data: { text: $userComment }
-      }).done(function (data) {
+      }).done(function(data) {
         if (data) {
           $('.error-comment').hide();
           clearComments();
@@ -99,6 +99,6 @@ $(document).ready(function () {
 
     }
 
-  })
+  });
 
 });
