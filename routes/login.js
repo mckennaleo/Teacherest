@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getUserWithEmail } = require('../db/index');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 module.exports = (db) => {
@@ -27,8 +27,9 @@ module.exports = (db) => {
     getUserWithEmail(email)
       .then(data => {
         const users = JSON.parse(JSON.stringify(data));
-        // console.log("USERS", users);
-        if (password === users.password) {
+        console.log("USERS", users);
+        
+        if (bcrypt.compareSync(password, users.password) === true) {
           req.session.user_id = users.id;
           res.send();
         } else {
