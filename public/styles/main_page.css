@@ -464,4 +464,40 @@ div.menu:hover {
     margin-top: 1em;
   }
 
+  @media only screen and (max-width: 900px) {
+  
+
+    .register-form-container {
+      margin-right: 2em;
+    }
+    #cherry {
+      display: none;
+    }
+  
+    #astronomy {
+      display: none;
+    }
+
+    #macarons {
+      display: none;
+    }
+
+    #dandelion {
+      display: none;
+    }
+  }
+
+/*   @media only screen and (max-width: 1000px) and (min-width: 801px) {
+  
+    #cf {
+      display: none;
+    }
+
+   
+
+    .register-form-container {
+      margin-right: 2em;
+    }
+  } */
+
   
