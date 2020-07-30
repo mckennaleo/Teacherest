@@ -83,7 +83,7 @@
         </form>
         </div>
         <div class="resource-image-main">
-          <img src="<%= resource.screenshot %>" alt="screenshot for <%= resource.link %>">
+          <img src="<%= resource.screenshot ? resource.screenshot : 'https://i.ibb.co/xffN5CF/placeholder-image.jpg' %>" alt="screenshot for <%= resource.link %>">
         </div>
       </div>
 
