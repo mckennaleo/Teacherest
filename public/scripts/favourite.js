@@ -16,6 +16,11 @@ $(document).ready(function() {
     }).done(function() {
     });
 
+    // const userLiked = JSON.parse(JSON.stringify(data));
+    //   if (userLiked.command === 'INSERT') {
+    //     console.log("this happened")
+    // $favouriteBtn.addClass('.favourite-button-liked');
+
   })
 
 });
