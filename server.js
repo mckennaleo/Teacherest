@@ -10,7 +10,8 @@ const cookieSession = require('cookie-session')
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const cors = require('cors')
 
 //----------ROUTES----------//
 
@@ -18,11 +19,13 @@ const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
 const keywordRoutes = require('./routes/keyword');
+// const profileRoutes = require('./routes/profile')
 const { 
   addUser, 
   getResourceById, 
   getCommentsById, 
   getUserWithEmail, 
+  getUserById,
   toggleFavourites } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -34,6 +37,7 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
+app.use(cors());
 // app.use(express.static(__dirname + "/../public"));
 app.use(cookieSession({
   name: 'session',
@@ -50,16 +54,17 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-
+app.set('view engine', 'ejs');
 app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/newResource", newResourceRoutes(db));
 app.use("/api/keyword", keywordRoutes(db));
+// app.use("/api/profile"), profileRoutes(db);
 
 
 
@@ -74,36 +79,63 @@ app.use("/api/keyword", keywordRoutes(db));
 
 //-----------GETS-----------//
 app.get("/", (req, res) => {
-  db.connect(function (err) {
-    let templateVars = { user: req.session.user_id };
-    if (err) throw err;
+  let templateVars = { user: req.session.user_id };
     let sql = "SELECT * FROM resources";
     db.query(sql, function (err, result) {
       if (err) {
-        throw err;
+          console.log("error on req.getConnection()", err);
+          res.sendStatus(500);
+          return;
       } else {
+        console.log('WORKS')
         res.render('index', templateVars);
       }
     });
-  });
 });
 
-//redirect to view a single resource, like and comment 
+app.get('/profile', (req, res) => {
+
+    if (!req.session.user_id) {
+      res.render('/errors/errorNotLogin')
+    } else {
+      getUserById(req.session.user_id)
+      .then(result => {
+        let templateVars = { user: req.session.user_id, name: result};
+        console.log('WORKS')
+      res.render('profile', templateVars)
+      }).catch(err => {
+        console.log('ERROR')
+        res
+          .status(500)
+          .json({ error: err.message });
+      })
+    }
+
+});
+
+//when you click on a resource 
 app.get("/resource/:id", (req, res) => {
-  const { id } = req.params;
-  db.connect(function (err) {
-    if (err) throw err;
+const { id } = req.params;
+
     getResourceById(id)
       .then(result => {
         res.render('resource_view', { resource: result });
-      });
-  });
+      }).catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      })
+
 });
 
-//if signed in, allows user to add resource to likes/favourites
 app.post("/resource/:id/favourite", (req, res) => {
+  //console.log("ARE WE HERE", req)
+  // const { user_id, resource_id } = favourite;
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
 
+  console.log("IS THIS USER:", req.session)
+  const $favouriteBtn = ('.favourite-button');
+  
   if (!req.session.user_id) {
     res.json({ success: false });
     return;
@@ -112,6 +144,7 @@ app.post("/resource/:id/favourite", (req, res) => {
   toggleFavourites(favourite)
     .then(data => {
       res.json({ success: true });
+
     })
     .catch(err => {
       res
@@ -120,11 +153,11 @@ app.post("/resource/:id/favourite", (req, res) => {
     });
 })
 
+
 //loads comments according to resource id
 app.get("/resource/:id/comments", (req, res) => {
   let templateVars = { user: req.session.user_id };
   const id = req.params.id;
-  console.log("PARAMS?", id)
   getCommentsById(id)
     .then(data => {
       console.log(data)
@@ -137,17 +170,7 @@ app.get("/resource/:id/comments", (req, res) => {
     });
 });
 
-//if signed in, allows user to post a comment on a resource
-app.post("/resource/:id/comments", function (req, res) {
-  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text};
 
-  console.log("WHATSUP:", userComment)
-
-  if (!req.body.text) {
-    res.status(400).json({ error: 'invalid request: no data in POST body' });
-    return;
-  }
-});
 
 app.get("/register", (req, res) => {
 
@@ -179,15 +202,15 @@ app.post("/display", (req, res) => {
 //-----------APP POST----------//
 app.post("/register", (req, res) => {
   let templateVars = { user: req.session.user_id };
-  bcrypt.genSalt(10, function (err, salt) {
-    bcrypt.hash(req.body.password, salt, function (err, hash) {
-      const info = {
-        name: req.body.name,
-        email: req.body.email,
-        password: hash,
-        bio: req.body.bio
-      };
-      if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(req.body.password, salt, function(err, hash) {
+        const info = { 
+    name: req.body.name, 
+    email: req.body.email, 
+    password: hash, 
+    bio: req.body.bio 
+    };
+    if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
         res.redirect('/error');
       } else {
         addUser(info).then(function () {
@@ -212,8 +235,17 @@ app.post("/register", (req, res) => {
       }
 
 
-    });
   });
+});
+  
+  
+});
+
+app.post("/resource/:id/comments", function (req, res) {
+  if (!req.body.text) {
+    res.status(400).json({ error: 'invalid request: no data in POST body' });
+    return;
+  }
 });
 
 //-----------APP LISTEN-----------//
