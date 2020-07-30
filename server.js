@@ -119,6 +119,7 @@ app.post("/resource/:id/favourite", (req, res) => {
 app.get("/resource/:id/comments", (req, res) => {
   let templateVars = { user: req.session.user_id };
   const id = req.params.id;
+  console.log("PARAMS?", id)
   getCommentsById(id)
     .then(data => {
       console.log(data)
@@ -133,7 +134,10 @@ app.get("/resource/:id/comments", (req, res) => {
 
 //if signed in, allows user to post a comment on a resource
 app.post("/resource/:id/comments", function (req, res) {
-  
+  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text};
+
+  console.log("WHATSUP:", userComment)
+
   if (!req.body.text) {
     res.status(400).json({ error: 'invalid request: no data in POST body' });
     return;

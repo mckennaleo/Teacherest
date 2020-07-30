@@ -64,6 +64,10 @@ $(document).ready(function() {
 
     event.preventDefault();
 
+    const resourceId = $("body").data("resource-id");
+
+    console.log("body tag", resourceId)
+
     //variable to assess contents of tweet form input
     const $userComment = $(this).find('input').val();
     console.log($userComment)
@@ -83,7 +87,7 @@ $(document).ready(function() {
       $('#post-comment').val($("<div>").text($userComment).html());
 
       //empties tweet-container and reloads tweet database with new tweet
-      $.post("/resource/:id/comments", $(this).serialize(), function(result) {
+      $.post(`/resource/${resourceId}/comments`, $(this).serialize(), function(result) {
         //$('#tweet-container').empty();
         loadComments();
       });
