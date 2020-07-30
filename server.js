@@ -17,6 +17,7 @@ const bcrypt = require('bcryptjs')
 const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
+const keywordRoutes = require('./routes/keyword');
 const { addUser, getResourceById, getCommentsById, getUserWithEmail, toggleFavourites } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -53,6 +54,7 @@ app.set('view engine', 'ejs');
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/login", loginRoutes(db));
 app.use("/api/newResource", newResourceRoutes(db));
+app.use("/api/keyword", keywordRoutes(db));
 
 
 
@@ -98,11 +100,17 @@ app.post("/resource/:id/favourite", (req, res) => {
   // const { user_id, resource_id } = favourite;
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
 
+  console.log("IS THIS USER:", req.session)
   const $favouriteBtn = ('.favourite-button');
-  //add if statement to check if user is LOGGED IN
+  
+  if (!req.session.user_id) {
+    res.json({ success: false });
+    return;
+  }
+
   toggleFavourites(favourite)
     .then(data => {
-      res.json({ data });
+      res.json({ success: true });
 
     })
     .catch(err => {
