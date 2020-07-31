@@ -65,9 +65,17 @@ app.get("/", (req, res) => {
   });
 });
 
+//ERROR 403 VIEW
+app.get('/error_403', (req, res) => {
+  const templateVars = {
+    user: null
+  };
+  res.render('error_403', templateVars);
+});
+
 app.get('/profile', (req, res) => {
   if (!req.session.user_id) {
-    res.render('/errors/errorNotLogin');
+    res.redirect('/error_403');
   } else {
     getUserById(req.session.user_id)
       .then(result => {
@@ -146,7 +154,7 @@ app.post("/register", (req, res) => {
         bio: req.body.bio
       };
       if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
-        alert("Error 411: Seems like you forgot to give us some important information... Let's try that again!");
+        window.alert("Error 411: Seems like you forgot to give us some important information... Let's try that again!");
       } else {
         addUser(info).then(function() {
           getUserWithEmail(info.email).then(data => {
@@ -170,7 +178,6 @@ app.post("/register", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
 app.post("/profile", (req, res) => {
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(req.body["new-pw"], salt, function(err, hash) {
@@ -196,7 +203,6 @@ app.post("/profile", (req, res) => {
   })
 })
 });
-=======
 //if signed in, allows user to post a comment on a resource
 app.post("/resource/:id/comments", function(req, res) {
   const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
@@ -221,7 +227,6 @@ app.post("/resource/:id/comments", function(req, res) {
 app.post("/resource/:id/favourite", (req, res) => {
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
   const $favouriteBtn = ('.favourite-button');
->>>>>>> ab17727a1e883a4b173ba6dca6d8c133eeb11741
 
   if (!req.session.user_id) {
     res.json({ success: false });
