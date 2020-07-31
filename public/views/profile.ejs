@@ -36,30 +36,30 @@
 </head>
 
 <%- include('partials/_header') %>
-
-<body>
-
-  <div class="profile-page-container">
-
+  <body>
+    <div class="profile-page-container">
     <h2 class="profile-title">Edit Profile</h2>
     <form action="/profile" class="profile-update" method="POST">
       <label for="name-change">Name:</label>
       <input type="text" class="name-change" name="name-change" id="name-change" placeholder="<%- name %>">
-
+      <button id="name-submit" type="submit">Change Name</button>
+    </form>
+    <form action="/profile" class="profile-update" method="POST">
       <label for="email-change">Email:</label>
       <input type="text" class="email-change" name="email-change" id="email-change" placeholder="<%- email %>">
-
+      <button id="email-submit" type="submit">Change Email</button>
+  </form>
+    <form action="/profile" class="profile-update" method="POST">
       <label for="name-change">Bio:</label>
       <input type="text" class="bio-change" name="bio-change" id="bio-change" placeholder="<%- bio %>">
-
+  <button id="bio-submit" type="submit">Change Bio</button>
+  </form>
+    <form action="/profile" class="profile-update" method="POST">
       <label for="new-pw">New Password:</label>
       <input type="text" name="new-pw" id="new-pw" class="new-pw" placeholder="your new password">
-
-      <button class="update-password" type="submit">Change Password</button>
+      <button id="password-submit" type="submit">Change Password</button>
     </form>
-  </div>
-
-
-</body>
+    </div>
+  </body>
 
 </html>
