@@ -116,7 +116,7 @@ const toggleFavourites = function(favourite) {
   WHERE user_id = $1
   AND resource_id = $2`, [user_id, resource_id])
     .then(res => {
-      if(res.rows.length > 0) {
+      if (res.rows.length > 0) {
         return pool.query(`
         DELETE FROM likes WHERE user_id = $1 AND resource_id = $2`, [user_id, resource_id]);
       } else {
@@ -133,7 +133,7 @@ const toggleFavourites = function(favourite) {
 };
 exports.toggleFavourites = toggleFavourites;
 
-const keywordSearch = function(keyword) {  
+const keywordSearch = function(keyword) {
   const formatedKeyword = '%' + keyword + '%';
   return pool.query(`
   SELECT * 
@@ -151,7 +151,7 @@ const getFavoritedResources = function(user_id) {
   FROM resources
   JOIN likes ON likes.resource_id = resources.id
   JOIN users ON users.id = likes.user_id
-  WHERE users.id = $1`, [ user_id ])
+  WHERE users.id = $1`, [user_id])
     .then(res => res.rows)
     .catch((err) => {
       console.error(err);
@@ -165,7 +165,7 @@ const getCreatedResources = function(user_id) {
   SELECT * 
   FROM resources
   JOIN users ON users.id = resources.created_by
-  WHERE users.id = $1`, [ user_id ])
+  WHERE users.id = $1`, [user_id])
     .then(res => res.rows)
     .catch((err) => {
       console.error(err);
@@ -197,7 +197,12 @@ const addComment = function(userComment) {
   INSERT INTO comments (user_id, resource_id, comment)
   VALUES ($1, $2, $3)
   RETURNING *`, [user_id, resource_id, comment])
-    .then(res => res.rows[0])
+    .then(res => {
+      const new_comment = res.rows[0];
+      console.log("IS THIS ANYTHING", new_comment);
+      return new_comment;
+    })
+
     .catch((err) => console.log(err));
 };
 exports.addComment = addComment;

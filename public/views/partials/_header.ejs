@@ -7,18 +7,29 @@
         <div class="three"></div>
       </a>
     </div>
-    <a class="navbar-brand" href="/">T e a c h e r e s t</a>
+    <% if(user){ %>
+      <a class="navbar-brand" href="/">T e a c h e r e s t</a>
+      <form class="form-inline" action="/logout" method="POST">
+        <div class="form-group mb-2">
+          <span class="mr-3">Logged in</span> 
+        </div>
+      </form>
+      <% } else{ %>
+        <a class="navbar-brand" href="/">T e a c h e r e s t</a>
+      <% } %>
   </nav>
 
   <aside id="nav-products" class="sidebar">
     <h4>Menu</h4>
     <nav>
       <ul>
+        <li><a class="nav-item-nav-link" href="/">Home page</a>
+        </li>
         <li><a class="my_resources_button">My Resources</a>
         </li>
-        <li><a class="nav-item nav-link" href="/profile">My Profile</a>
+        <li><a class="nav-item-nav-link" href="/profile">My Profile</a>
         </li>
-        <li><a class="nav-item nav-link" href="/register">register</a>
+        <li><a class="nav-item-nav-link" href="/register">register</a>
         </li>
 
         <li class="login-container">
@@ -35,7 +46,7 @@
             </form>
           </aside>
           <aside class="logout">
-            <a class="nav-item nav-link" href="/logout">logout</a>
+            <a class="nav-item-nav-link" href="/logout">logout</a>
           </aside>
 
           <% } else { %>
@@ -67,7 +78,7 @@
         <div class="title-container-category">Search by category:</div>
         <div class="search-box">
           <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="4" checked> sports
+            <input type="checkbox" name="categories" value="4" checked> Sports
             <span class="checkmark"></span>
           </label>
 
@@ -109,7 +120,7 @@
             <span class="checkmark"></span>
           </label>
           <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="10" checked> literature
+            <input type="checkbox" name="categories" value="10" checked> Literature
             <span class="checkmark"></span>
           </label>
 
