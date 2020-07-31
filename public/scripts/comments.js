@@ -78,7 +78,8 @@ $(document).ready(function () {
         data: { text: $userComment }
       }).done(function (data) {
         if (data) {
-          if (!data.success) {
+          if (!data) {
+            console.log("CQOUI?", data)
             $(".error-login").slideDown("slow");
           } else {
             $('.error-comment').hide();

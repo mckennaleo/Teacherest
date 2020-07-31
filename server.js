@@ -122,6 +122,47 @@ app.get("/resource/:id/comments", (req, res) => {
     });
 });
 
+//if signed in, allows user to post a comment on a resource
+app.post("/resource/:id/comments", function(req, res) {
+  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
+
+  if (!req.session.user_id) {
+    res.json({ success: false });
+    return;
+  }
+
+  addComment(userComment)
+    .then(data => {
+      res.json({ data });
+    })
+    .catch(err => {
+      res
+        .status(406)
+        .json({ error: err.message });
+    });
+});
+
+//post for favouriting a resource
+app.post("/resource/:id/favourite", (req, res) => {
+  const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
+  const $favouriteBtn = ('.favourite-button');
+
+  if (!req.session.user_id) {
+    res.json({ success: false });
+    return;
+  }
+
+  toggleFavourites(favourite)
+    .then(data => {
+      res.json({ success: true });
+    })
+    .catch(err => {
+      res
+        .status(406)
+        .json({ error: err.message });
+    });
+});
+
 app.get("/register", (req, res) => {
 
   if (req.session.user_id) {
@@ -206,46 +247,7 @@ app.post("/profile", (req, res) => {
   })
 })
 });
-//if signed in, allows user to post a comment on a resource
-app.post("/resource/:id/comments", function(req, res) {
-  const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
 
-  if (!req.session.user_id) {
-    res.json({ success: false });
-    return;
-  }
-
-  addComment(userComment)
-    .then(data => {
-      res.json({ data });
-    })
-    .catch(err => {
-      res
-        .status(406)
-        .json({ error: err.message });
-    });
-});
-
-//post for favouriting a resource
-app.post("/resource/:id/favourite", (req, res) => {
-  const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
-  const $favouriteBtn = ('.favourite-button');
-
-  if (!req.session.user_id) {
-    res.json({ success: false });
-    return;
-  }
-
-  toggleFavourites(favourite)
-    .then(data => {
-      res.json({ success: true });
-    })
-    .catch(err => {
-      res
-        .status(406)
-        .json({ error: err.message });
-    });
-});
 
 //-----------APP LISTEN-----------//
 app.listen(PORT, () => {
