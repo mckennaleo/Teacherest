@@ -185,9 +185,12 @@ app.post("/profile", (req, res) => {
         id: req.session.user_id,
         name: req.body["name-change"],
         email: req.body["email-change"],
-        bio: req.body["bio-change"],
-        password: hash,
+        bio: req.body["bio-change"]
       }
+
+      if (req.body["new-pw"]) {
+        info.password = hash;
+      } else {info.password = req.body["new-pw"]}
 
     if (!req.session.user_id) {
       res.render('/errors/errorNotLogin')
