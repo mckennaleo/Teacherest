@@ -28,7 +28,6 @@ const {
   toggleFavourites,
   getUserById,
   addComment,
-  toggleFavourites,
   updateUser } = require('./db/index');
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -89,7 +88,6 @@ app.get("/", (req, res) => {
       res.sendStatus(500);
       return;
     } else {
-      console.log('WORKS');
       res.render('index', templateVars);
     }
   });
@@ -111,7 +109,6 @@ app.get('/profile', (req, res) => {
         
       res.render('profile', templateVars)
       }).catch(err => {
-        console.log('ERROR');
         res
           .status(500)
           .json({ error: err.message });
@@ -227,7 +224,6 @@ app.post("/register", (req, res) => {
         addUser(info).then(function() {
           getUserWithEmail(info.email).then(data => {
             const users = JSON.parse(JSON.stringify(data));
-            console.log(users);
             req.session.user_id = users.id;
             res.redirect('/');
           }).catch(err => {
@@ -248,25 +244,30 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/profile", (req, res) => {
-  const info = {
-    id: req.session.user_id,
-    name: req.body["name-change"],
-    email: req.body["email-change"],
-    bio: req.body["bio-change"],
-    password: req.body["pw-change"]
-  }
-  if (!req.session.user_id) {
-    res.render('/errors/errorNotLogin')
-  } else {
-    updateUser(info).catch(err => {
-      console.error(err);
-      res
-        .status(400)
-        .json({ error: err.message });
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(req.body["new-pw"], salt, function(err, hash) {
+      const info = {
+        id: req.session.user_id,
+        name: req.body["name-change"],
+        email: req.body["email-change"],
+        bio: req.body["bio-change"],
+        password: hash,
+      }
+
+    if (!req.session.user_id) {
+      res.render('/errors/errorNotLogin')
+    } else {
+      updateUser(info).catch(err => {
+        console.error(err);
+        res
+          .status(400)
+          .json({ error: err.message });
       });
-  }
-  res.redirect('/')
+    }
+    res.redirect('/')
+  })
 })
+});
 
 app.post("/resource/:id/comments", function (req, res) {
   if (!req.body.text) {
