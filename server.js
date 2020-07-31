@@ -60,7 +60,6 @@ app.get("/", (req, res) => {
       res.sendStatus(500);
       return;
     } else {
-      console.log('WORKS');
       res.render('index', templateVars);
     }
   });
@@ -82,7 +81,6 @@ app.get('/profile', (req, res) => {
 
         res.render('profile', templateVars);
       }).catch(err => {
-        console.log('ERROR');
         res
           .status(500)
           .json({ error: err.message });
@@ -119,7 +117,7 @@ app.get("/resource/:id/comments", (req, res) => {
 app.get("/register", (req, res) => {
 
   if (req.session.user_id) {
-    res.render('errors/errorAlreadyLogin');
+    res.render("register");
   } else {
     res.render("register");
   }
@@ -128,7 +126,7 @@ app.get("/register", (req, res) => {
 app.get("/logout", (req, res) => {
 
   if (!req.session.user_id) {
-    res.render('errors/errorNotLogin');
+    res.redirect('/');
   } else {
     req.session = null;
     res.redirect('/');
@@ -148,12 +146,11 @@ app.post("/register", (req, res) => {
         bio: req.body.bio
       };
       if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
-        res.redirect('/error');
+        alert("Error 411: Seems like you forgot to give us some important information... Let's try that again!");
       } else {
         addUser(info).then(function() {
           getUserWithEmail(info.email).then(data => {
             const users = JSON.parse(JSON.stringify(data));
-            console.log(users);
             req.session.user_id = users.id;
             res.redirect('/');
           }).catch(err => {
@@ -173,6 +170,33 @@ app.post("/register", (req, res) => {
   });
 });
 
+<<<<<<< HEAD
+app.post("/profile", (req, res) => {
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(req.body["new-pw"], salt, function(err, hash) {
+      const info = {
+        id: req.session.user_id,
+        name: req.body["name-change"],
+        email: req.body["email-change"],
+        bio: req.body["bio-change"],
+        password: hash,
+      }
+
+    if (!req.session.user_id) {
+      res.render('/errors/errorNotLogin')
+    } else {
+      updateUser(info).catch(err => {
+        console.error(err);
+        res
+          .status(400)
+          .json({ error: err.message });
+      });
+    }
+    res.redirect('/')
+  })
+})
+});
+=======
 //if signed in, allows user to post a comment on a resource
 app.post("/resource/:id/comments", function(req, res) {
   const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
@@ -197,6 +221,7 @@ app.post("/resource/:id/comments", function(req, res) {
 app.post("/resource/:id/favourite", (req, res) => {
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
   const $favouriteBtn = ('.favourite-button');
+>>>>>>> ab17727a1e883a4b173ba6dca6d8c133eeb11741
 
   if (!req.session.user_id) {
     res.json({ success: false });
