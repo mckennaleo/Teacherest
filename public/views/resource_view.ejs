@@ -27,53 +27,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
   <!-- App JS -->
+    <script src="/scripts/scripts.js"></script>
   <script type="text/javascript" src="/scripts/categories.js"></script>
   <script type="text/javascript" src="/scripts/login.js"></script>
-  <script src="/scripts/scripts.js"></script>
   <script type="text/javascript" src="/scripts/menu.js"></script>
+  <script type="text/javascript" src="/scripts/my_resources.js"></script>
+  <script type="text/javascript" src="/scripts/keyword.js"></script>
   <script type="text/javascript" src="/scripts/comments.js"></script>
   <script type="text/javascript" src="/scripts/favourite.js"></script>
 </head>
 
 <body data-resource-id="<%= resource.id %>">
-    <header>
-      <nav class="navbar-expand-md">
-        <div class="big_wrapper">
-          <a href="#" class="nav">
-            <div class="one"></div>
-            <div class="two"></div>
-            <div class="three"></div>
-          </a>
-        </div>
-        <a class="navbar-brand" href="/">T e a c h e r e s t</a>
-      </nav>
-    </header>
-      <aside id="nav-products" class="sidebar">
-        <h4>Menu</h4>
-        <nav>
-          <ul>
-            <li><a class="nav-item nav-link" href="/new">New Resource</a>
-            </li>
-            <li><a class="nav-item nav-link" href="/profile">My Profile</a>
-            </li>
-            <li class="dropdown">
-              <a id="search" href="#">Search</a>
-              <ul class="search-container" id="search-container" style="display: none;">
-                <li>
-                  <!-- <div class="btn1">search</div> -->
-                  <form action="submit" type="POST" class="search-form">
-                    <div class=search-subdivision>
-                      <input type="text" placeholder="search by category" class="category-search">
-                      <button type="submit" class="category-button">Search</button>
-                    </div>
-                  </form>
-                </li>
-              </ul>
-            </li>
-            <li> <a class="nav-item nav-link" href="/new">login</a></li>
-          </ul>
-        </nav>
-      </aside>
+  <%- include('partials/_header') %>
     <main>
     <div class="resource-box">
 
@@ -117,6 +82,10 @@
           <div class="error-comment">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             Oops, your comment is empty!
+          </div>
+          <div class="error-login">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            Sign in to comment!
           </div>
           <form method="post" action="/" id="post-comment">
             <input type="text" name="text" id="tweet-text" placeholder="Add a comment" />

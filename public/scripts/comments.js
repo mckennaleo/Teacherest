@@ -3,19 +3,16 @@ const clearComments = () => {
 };
 
 const renderComment = (data) => {
-  for (let item of data) {
-    $('.posted-comments').prepend(createCommentElement(item));
+  for (let item of data.reverse()) {
+    $('.posted-comments').append(createCommentElement(item));
   }
 };
 
 const createCommentElement = (item) => {
-  //posting date from database
   let dbDate = item.created_at;
 
-  //calculation of relative time using moment.js
   let readableDate = moment(dbDate).fromNow();
 
-  //html for posted resources
   const $postedComment = `
 
   <article class='article-comment'>
@@ -40,21 +37,21 @@ const createCommentElement = (item) => {
   return $postedComment;
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
   const resourceId = $("body").data("resource-id");
 
   const loadComments = () => {
-    $.getJSON('/resource/' + resourceId + '/comments', (response) => {
+    $.getJSON(`/resource/${resourceId}/comments`, (response) => {
       //response.'data' because thats what the getter is returning
       renderComment(response.data);
     })
-      .done(function() {
+      .done(function () {
         // console.log("second success");
       })
-      .fail(function() {
+      .fail(function () {
         // console.log("error");
       })
-      .always(function() {
+      .always(function () {
         // console.log("complete");
       });
   };
@@ -62,36 +59,39 @@ $(document).ready(function() {
   $('.error-comment').hide();
   loadComments();
 
-  $('#post-comment').on('submit', function(event) {
-
+  $('#post-comment').on('submit', function (event) {
     event.preventDefault();
 
     const $userComment = $(this).find('input').val();
 
-    console.log("REALLY INPUT", $userComment);
-
     if ($userComment.length < 1) {
-      //error for no comment
-      $(".error-comment").slideDown("slow");
+      if ($(".error-comment").first().is(":hidden")) {
+        $(".error-comment").slideDown("slow");
+      } else {
+        $(".error-comment").slideUp();
+      }
     } else {
-      //escapes unsafe characters
-      // $('#post-comment').val($("<form>").text($userComment).html());
-
       $.ajax({
         url: `/resource/${resourceId}/comments`,
         type: "POST",
+        xhrFields: { withCredentials: true },
         data: { text: $userComment }
-      }).done(function(data) {
+      }).done(function (data) {
         if (data) {
-          $('.error-comment').hide();
-          clearComments();
-          loadComments();
-          $('form').trigger('reset');
-        } else {
-          if ($("..error-comment").first().is(":hidden")) {
-            $("..error-comment").slideDown("slow");
+          if (!data.success) {
+            $(".error-login").slideDown("slow");
           } else {
-            $("..error-comment").slideUp();
+            $('.error-comment').hide();
+            $('.error-login').hide();
+            clearComments();
+            loadComments();
+            $('form').trigger('reset');
+          }
+        } else {
+          if ($(".error-comment").first().is(":hidden")) {
+            $(".error-comment").slideDown("slow");
+          } else {
+            $(".error-comment").slideUp();
           }
         }
 

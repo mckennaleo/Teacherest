@@ -41,3 +41,10 @@ input, style {
   color: white;
   margin-bottom: 1em;
 }
+
+.error-login {
+  padding: 0.5em;
+  background-color: #f44336;
+  color: white;
+  margin-bottom: 1em;
+}
