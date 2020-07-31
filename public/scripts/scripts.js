@@ -77,11 +77,11 @@ $(document).ready(function() {
     $.ajax({
       url: "/api/newResource",
       data: { link, title, description, category, screenshot },
-      type: "POST"
+      type: "POST",
+      xhrFields: { withCredentials: true }
     })
       .done(function(data) {
         clearResources();
-        
         loadResources();
       });
   });
