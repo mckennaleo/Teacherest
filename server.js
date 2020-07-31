@@ -60,15 +60,27 @@ app.get("/", (req, res) => {
       res.sendStatus(500);
       return;
     } else {
-      console.log('WORKS');
-      res.render('index', templateVars);
+      // if (!req.session.user_id) {
+      //   res.redirect('/')
+      // }
+
+      res.render('index', templateVars)
+      
     }
   });
 });
 
+//ERROR 403 VIEW
+app.get('/error_403', (req, res) => {
+  const templateVars = {
+    user: null
+  };
+  res.render('error_403', templateVars);
+});
+
 app.get('/profile', (req, res) => {
   if (!req.session.user_id) {
-    res.render('/errors/errorNotLogin');
+    res.redirect('/error_403');
   } else {
     getUserById(req.session.user_id)
       .then(result => {
@@ -148,7 +160,7 @@ app.post("/register", (req, res) => {
         bio: req.body.bio
       };
       if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
-        alert("Error 411: Seems like you forgot to give us some important information... Let's try that again!");
+        window.alert("Error 411: Seems like you forgot to give us some important information... Let's try that again!");
       } else {
         addUser(info).then(function() {
           getUserWithEmail(info.email).then(data => {
