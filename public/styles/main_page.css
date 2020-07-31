@@ -631,3 +631,11 @@ div.menu:hover {
   .img-top {
     height: 20em;
   }
+
+  .nav-item-nav-link:link {
+    color: #FAEDCB; 
+  }
+
+  a.nav-item-nav-link:visited {
+   color: #E29578; 
+  }

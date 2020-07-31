@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/posted-resources.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/profile_page.css" type="text/css" />
 
   <!-- External JS -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -33,152 +34,32 @@
   <script type="text/javascript" src="/scripts/my_resources.js"></script>
   <script type="text/javascript" src="/scripts/keyword.js"></script>
 </head>
-<header>
-  <nav class="navbar-expand-md">
-    <div class="big_wrapper">
-      <a href="#" class="nav">
-        <div class="one"></div>
-        <div class="two"></div>
-        <div class="three"></div>
-      </a>
-    </div>
-    <a class="navbar-brand" href="/">T e a c h e r e s t</a>
-  </nav>
-</header>
-<aside id="nav-products" class="sidebar">
-  <h4>Menu</h4>
-  <nav>
-    <ul>
-      <li><a class="my_resources_button">My Resources</a>
-      </li>
-      <li><a class="nav-item nav-link" href="/profile">My Profile</a>
-      </li>
-      <li><a class="nav-item nav-link" href="/register">register</a>
-      </li>
-      
-      <li class="login-container">
-        <% if (user) { %>
-          
-          <aside class="login d-none">
-            <form action="/login" type="POST" class="login-form">
-              <div class="login-form">
-                <p>Login:</p>
-                <input type="text" placeholder="email" class="email-field">
-                <input type="text" placeholder="password" class="pw-field">
-                <button type="submit" class="login-button">Login</button>
-              </div>
-            </form>
-          </aside>
-          <aside class="logout">
-            <a class="nav-item nav-link" href="/logout">logout</a>
-          </aside>
-          
-        <% } else { %>
-          
-          <aside class="login">
-            <form action="/login" type="POST" class="login-form">
-              <div class="login-form">
-                <p>Login:</p>
-                <input type="text" placeholder="email" class="email-field">
-                <input type="text" placeholder="password" class="pw-field">
-                <button type="submit" class="login-button">Login</button>
-              </div>
-            </form>
-          </aside>
-          <aside class="logout d-none">
-            <a class="nav-item nav-link" href="/logout">logout</a>
-          </aside>
-        <% } %>
-      </li>
-      <div class="search-by-keyword">
-        <form action="/keyword" type="POST" class="search-form">
-          <div class="title-container-keyword">Search by keyword:</div>
-          <div class="keyword-box">
-            <input type="text" class="keyword-searchbar" placeholder="Your keyword here">
-            <button type="submit" class="keyword-button">Search</button>
-          </div>
-        </form>
-      </div>
-        <div class="title-container-category">Search by category:</div>
-        <div class="search-box">
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="4" checked> sports
-            <span class="checkmark"></span>
-          </label>
 
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="1" checked> Science
-            <span class="checkmark"></span>
-          </label>
+<%- include('partials/_header') %>
 
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="2" checked> News
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="3" checked> Arts and Entertainment
-            <span class="checkmark"></span>
-          </label>
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="8" checked> Nature
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="5" checked> Health
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="6" checked> Work
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="7" checked> Hobbies
-            <span class="checkmark"></span>
-          </label>
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="9" checked> Music
-            <span class="checkmark"></span>
-          </label>
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="10" checked> literature
-            <span class="checkmark"></span>
-          </label>
-
-          <label class="container-checkmark">
-            <input type="checkbox" name="categories" value="11" checked> Misc
-            <span class="checkmark"></span>
-          </label>
-        </div>
-      </div>
-    </ul>
-  </nav>
-</aside>
 <body>
-  <p>Edit Profile</p>
-  <form action="/profile" class="name-change" method="POST">
-    <label for="name-change">Name:</label>
-    <input type="text" class="name-change" name="name-change" id="name-change" placeholder="<%- name %>">
-    <!-- <button type="submit">Change Name</button> -->
-  <!-- </form>
-  <form action="/profile" class="email-change" method="POST"> -->
-    <label for="email-change">Email:</label>
-    <input type="text" class="email-change" name="email-change" id="email-change" placeholder="<%- email %>">
-    <!-- <button type="submit">Change Email</button> -->
-  <!-- </form>
-  <form action="/profile" class="bio-change" method="POST"> -->
-    <label for="name-change">Bio:</label>
-    <input type="text" class="bio-change" name="bio-change" id="bio-change" placeholder="<%- bio %>">
-    <!-- <button type="submit">Change Bio</button> -->
-  <!-- </form>
-  <form action="/profile" class="pw-change" method="POST"> -->
-    <label for="new-pw">New Password:</label>
-    <input type="text" name="new-pw" id="new-pw" class="new-pw" placeholder="your new password">
-    <button type="submit">Change Password</button>
-  </form>
+
+  <div class="profile-page-container">
+
+    <h2 class="profile-title">Edit Profile</h2>
+    <form action="/profile" class="profile-update" method="POST">
+      <label for="name-change">Name:</label>
+      <input type="text" class="name-change" name="name-change" id="name-change" placeholder="<%- name %>">
+
+      <label for="email-change">Email:</label>
+      <input type="text" class="email-change" name="email-change" id="email-change" placeholder="<%- email %>">
+
+      <label for="name-change">Bio:</label>
+      <input type="text" class="bio-change" name="bio-change" id="bio-change" placeholder="<%- bio %>">
+
+      <label for="new-pw">New Password:</label>
+      <input type="text" name="new-pw" id="new-pw" class="new-pw" placeholder="your new password">
+
+      <button class="update-password" type="submit">Change Password</button>
+    </form>
+  </div>
+
 
 </body>
+
 </html>

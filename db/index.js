@@ -151,7 +151,7 @@ const getFavoritedResources = function(user_id) {
   FROM resources
   JOIN likes ON likes.resource_id = resources.id
   JOIN users ON users.id = likes.user_id
-  WHERE users.id = $1`, [ user_id ])
+  WHERE users.id = $1`, [user_id])
     .then(res => res.rows)
     .catch((err) => {
       console.error(err);
@@ -165,7 +165,7 @@ const getCreatedResources = function(user_id) {
   SELECT * 
   FROM resources
   JOIN users ON users.id = resources.created_by
-  WHERE users.id = $1`, [ user_id ])
+  WHERE users.id = $1`, [user_id])
     .then(res => res.rows)
     .catch((err) => {
       console.error(err);
@@ -203,7 +203,7 @@ const addComment = function(userComment) {
       console.log("IS THIS ANYTHING", new_comment);
       return new_comment;
     })
-      
+
     .catch((err) => console.log(err));
 };
 exports.addComment = addComment;
@@ -251,7 +251,7 @@ const updateUser = function(userId) {
   Object.entries(userId).map((entry, index) => {
     if (entry[1] && entry[0] !== 'id') {
       query += `${entry[0]} = '${entry[1]}'`;
-      if (index !== Object.entries(userId).length-2) {
+      if (index !== Object.entries(userId).length - 2) {
         query += ', ';
         console.log(index, Object.entries(userId).length)
       }
