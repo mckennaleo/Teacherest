@@ -360,27 +360,32 @@ div.menu:hover {
     width: 50%;
     background-color: #F1FAEE;
     border: 2px solid #E29578;
+    color: #E29578;
   }
 
   .description-input {
     height: 5em;
     background-color: #F1FAEE;
     border: 2px solid #E29578;
+    color: #E29578;
   }
 
   .link-input {
     background-color: #F1FAEE;
     border: 2px solid #E29578;
+    color: #E29578;
   }
 
   .title-input {
     background-color: #F1FAEE;
     border: 2px solid #E29578;
+    color: #E29578;
   }
 
   .screenshotUrl-input {
     background-color: #F1FAEE;
     border: 2px solid #E29578;
+    color: #E29578;
   }
 
  .d-none {
@@ -641,7 +646,7 @@ div.menu:hover {
    color: #E29578; 
   }
 
-  .submit-resource {
+  .description-input {
     color: #E29578;
   }
 

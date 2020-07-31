@@ -3,7 +3,7 @@
   display: block;
   margin: auto;
   width: 60%;
-  height: 45em;
+  height: 50em;
   margin-top: 5em;
   padding: 4em;
   border-radius: 25%;
@@ -20,7 +20,8 @@
   flex-direction: column;
   width: 50%;
   justify-content: center;
-  margin-top: 5em;
+  margin-top: 1.5em;
+  
 }
 
 .profile-title {
@@ -29,9 +30,10 @@
   border-bottom: 4px solid #E29578;
   border-radius: 50%;
   width: 50%;
-  margin-left: 6em;
+  margin-left: 7.5em;
   font-family: 'Permanent Marker', cursive;
   font-size: x-large;
+  margin-bottom: 1em;
 }
 
 #name-change {
@@ -72,4 +74,32 @@
     background-color: #F1FAEE;
     font-family: 'Permanent Marker', cursive;
     color: #E29578;
+}
+
+#name-submit{
+  border: 2px solid #E29578;
+  background-color: #F1FAEE;
+  font-family: 'Permanent Marker', cursive;
+  color: #E29578;
+}
+
+#email-submit{
+  border: 2px solid #E29578;
+  background-color: #F1FAEE;
+  font-family: 'Permanent Marker', cursive;
+  color: #E29578;
+}
+
+#bio-submit{
+  border: 2px solid #E29578;
+  background-color: #F1FAEE;
+  font-family: 'Permanent Marker', cursive;
+  color: #E29578;
+}
+
+#password-submit{
+  border: 2px solid #E29578;
+  background-color: #F1FAEE;
+  font-family: 'Permanent Marker', cursive;
+  color: #E29578;
 }

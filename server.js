@@ -18,7 +18,9 @@ const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
 const keywordRoutes = require('./routes/keyword');
-// const profileRoutes = require('./routes/profile')
+
+//----------IMPORTED FUNCTIONS---------//
+
 const {
   addUser,
   getResourceById,
@@ -28,11 +30,16 @@ const {
   getUserById,
   addComment,
   updateUser } = require('./db/index');
-// PG database client/connection setup
+
+//----------DATABASE SETUP----------//
+
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+
+//----------APP.USE----------//
+
 app.use(morgan('dev'));
 app.use(cookieSession({
   name: 'session',
@@ -50,6 +57,8 @@ app.use("/api/keyword", keywordRoutes(db));
 
 
 //-----------GETS-----------//
+
+//home
 app.get("/", (req, res) => {
   let templateVars = { user: req.session.user_id };
   let sql = "SELECT * FROM resources";
@@ -62,14 +71,6 @@ app.get("/", (req, res) => {
       res.render('index', templateVars);
     }
   });
-});
-
-//ERROR 403 VIEW
-app.get('/error_403', (req, res) => {
-  const templateVars = {
-    user: null
-  };
-  res.render('error_403', templateVars);
 });
 
 app.get('/profile', (req, res) => {
@@ -121,6 +122,33 @@ app.get("/resource/:id/comments", (req, res) => {
     });
 });
 
+app.get("/register", (req, res) => {
+
+  if (req.session.user_id) {
+    res.render("register");
+  } else {
+    res.render("register");
+  }
+});
+
+app.get("/logout", (req, res) => {
+
+  if (!req.session.user_id) {
+    res.redirect('/');
+  } else {
+    req.session = null;
+    res.redirect('/');
+  }
+});
+
+//ERROR 403 VIEW
+app.get('/error_403', (req, res) => {
+  const templateVars = {
+    user: null
+  };
+  res.render('error_403', templateVars);
+});
+
 //if signed in, allows user to post a comment on a resource
 app.post("/resource/:id/comments", function(req, res) {
   const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
@@ -140,6 +168,8 @@ app.post("/resource/:id/comments", function(req, res) {
         .json({ error: err.message });
     });
 });
+
+//-----------APP POST----------//
 
 //post for favouriting a resource
 app.post("/resource/:id/favourite", (req, res) => {
@@ -162,27 +192,6 @@ app.post("/resource/:id/favourite", (req, res) => {
     });
 });
 
-app.get("/register", (req, res) => {
-
-  if (req.session.user_id) {
-    res.render("register");
-  } else {
-    res.render("register");
-  }
-});
-
-app.get("/logout", (req, res) => {
-
-  if (!req.session.user_id) {
-    res.redirect('/');
-  } else {
-    req.session = null;
-    res.redirect('/');
-  }
-});
-
-
-//-----------APP POST----------//
 app.post("/register", (req, res) => {
   let templateVars = { user: req.session.user_id };
   bcrypt.genSalt(10, function(err, salt) {
