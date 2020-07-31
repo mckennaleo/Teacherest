@@ -170,7 +170,6 @@ app.post("/register", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
 app.post("/profile", (req, res) => {
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(req.body["new-pw"], salt, function(err, hash) {
@@ -178,9 +177,12 @@ app.post("/profile", (req, res) => {
         id: req.session.user_id,
         name: req.body["name-change"],
         email: req.body["email-change"],
-        bio: req.body["bio-change"],
-        password: hash,
+        bio: req.body["bio-change"]
       }
+
+      if (req.body["new-pw"]) {
+        info.password = hash;
+      } else {info.password = req.body["new-pw"]}
 
     if (!req.session.user_id) {
       res.render('/errors/errorNotLogin')
@@ -196,7 +198,6 @@ app.post("/profile", (req, res) => {
   })
 })
 });
-=======
 //if signed in, allows user to post a comment on a resource
 app.post("/resource/:id/comments", function(req, res) {
   const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
@@ -221,7 +222,6 @@ app.post("/resource/:id/comments", function(req, res) {
 app.post("/resource/:id/favourite", (req, res) => {
   const favourite = { user_id: req.session.user_id, resource_id: req.params.id };
   const $favouriteBtn = ('.favourite-button');
->>>>>>> ab17727a1e883a4b173ba6dca6d8c133eeb11741
 
   if (!req.session.user_id) {
     res.json({ success: false });

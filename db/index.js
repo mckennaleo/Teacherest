@@ -203,23 +203,29 @@ const addComment = function(userComment) {
 exports.addComment = addComment;
 
 const updateUser = function(userId) {
-  console.log(userId)
-  let query = `UPDATE users SET `
-  Object.entries(userId).map((entry, index) => {
-    let counter = 1;
-    if (!entry[1]) {
-      counter += 1;
-    }
-    if (entry[1] && entry[0] !== 'id') {
-      query += `${entry[0]} = '${entry[1]}'`;
-      if (index !== Object.entries(userId).length - counter) {
-        query += ', ';
-      }
-    }
-  })
-  query += ` WHERE id = ${userId.id};`
-  console.log(query)
-  return pool.query(query)
+
+  if (userId.name) {
+    let queryString = `UPDATE users SET name = '${userId.name}' WHERE id = ${userId.id};`
+    return pool.query(queryString)
     .then(res => res.rows);
   }
+
+  if (userId.email) {
+    let queryString = `UPDATE users SET email = '${userId.email}' WHERE id = ${userId.id};`
+    return pool.query(queryString)
+    .then(res => res.rows);
+  }
+
+  if (userId.password) {
+    let queryString = `UPDATE users SET password = '${hash}' WHERE id = ${userId.id};`
+    return pool.query(queryString)
+    .then(res => res.rows);
+  }
+
+  if (userId.bio) {
+    let queryString = `UPDATE users SET bio = '${userId.bio}' WHERE id = ${userId.id};`
+    return pool.query(queryString)
+    .then(res => res.rows);
+  }
+}
 exports.updateUser = updateUser;
