@@ -6,6 +6,8 @@ const { addResource } = require('../db/index');
 module.exports = () => {
 
   router.post("/", (req, res) => {
+    console.log("CQOIT?", res)
+    const loggedIn = { user_id: req.session.user_id }
     let resource = {
       // eslint-disable-next-line camelcase
       created_by: req.session.user_id,
@@ -18,6 +20,7 @@ module.exports = () => {
 
     addResource(resource)
       .then(function(data) {
+        console.log("WHAT???", data)
         res.redirect('/');
       }).catch(err => {
         console.error(err);

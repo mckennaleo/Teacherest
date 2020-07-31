@@ -5,3 +5,9 @@ body {
 body h1 {
   color: #244751;
 }
+
+.error-message {
+  padding: 2em;
+  font: 'Permanent Marker', cursive;
+  font-size: medium;
+}
