@@ -116,7 +116,7 @@ const toggleFavourites = function(favourite) {
   WHERE user_id = $1
   AND resource_id = $2`, [user_id, resource_id])
     .then(res => {
-      if (res.rows.length > 0) {
+      if(res.rows.length > 0) {
         return pool.query(`
         DELETE FROM likes WHERE user_id = $1 AND resource_id = $2`, [user_id, resource_id]);
       } else {
@@ -133,7 +133,7 @@ const toggleFavourites = function(favourite) {
 };
 exports.toggleFavourites = toggleFavourites;
 
-const keywordSearch = function(keyword) {
+const keywordSearch = function(keyword) {  
   const formatedKeyword = '%' + keyword + '%';
   return pool.query(`
   SELECT * 
@@ -193,67 +193,27 @@ const test = function (user_id) {
 
 const addComment = function(userComment) {
   let { user_id, resource_id, comment } = userComment;
-  console.log("COMMENT CHECK", userComment.comment);
   return pool.query(`
   INSERT INTO comments (user_id, resource_id, comment)
   VALUES ($1, $2, $3)
   RETURNING *`, [user_id, resource_id, comment])
-    .then(res => {
-      const new_comment = res.rows[0];
-      console.log("IS THIS ANYTHING", new_comment);
-      return new_comment;
-    })
-      
+    .then(res => res.rows[0])
     .catch((err) => console.log(err));
 };
 exports.addComment = addComment;
 
 const updateUser = function(userId) {
-  const queryParams = [];
-
-  let queryString = `
-  UPDATE users
-  SET 
-  `;
-
-  if (userId.name) {
-    queryParams.push(`${userId.name}`);
-    queryString += ` name = ${queryParams.length}`;
-  }
-
-  if (userId.email) {
-    queryParams.push(`${userId.email}`);
-    queryString += ` email = ${queryParams.length}`;
-  }
-
-  if (userId.password) {
-    //does it need to be bcrytped here??
-    queryParams.push(`${userId.password}`);
-    queryString += ` password = ${queryParams.length}`;
-  }
-
-  if (userId.bio) {
-    queryParams.push(`${userId.bio}`);
-    queryString += ` bio = ${queryParams.length}`;
-  }
-
-  if (userId.avatar_url) {
-    queryParams.push(`${userId.avatar_url}`);
-    queryString += ` avatar_url = ${queryParams.length}`;
-  }
-
-  queryString += ` WHERE id = $1;`;
-
-  console.log("queryString:", queryString, "queryParams:", queryParams);
-
-  return pool.query(queryString, queryParams)
+  console.log(userId)
   let query = `UPDATE users SET `
   Object.entries(userId).map((entry, index) => {
+    let counter = 1;
+    if (!entry[1]) {
+      counter += 1;
+    }
     if (entry[1] && entry[0] !== 'id') {
       query += `${entry[0]} = '${entry[1]}'`;
-      if (index !== Object.entries(userId).length-2) {
+      if (index !== Object.entries(userId).length - counter) {
         query += ', ';
-        console.log(index, Object.entries(userId).length)
       }
     }
   })
@@ -261,6 +221,5 @@ const updateUser = function(userId) {
   console.log(query)
   return pool.query(query)
     .then(res => res.rows);
-
-};
+  }
 exports.updateUser = updateUser;

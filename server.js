@@ -60,12 +60,7 @@ app.get("/", (req, res) => {
       res.sendStatus(500);
       return;
     } else {
-      // if (!req.session.user_id) {
-      //   res.redirect('/')
-      // }
-
-      res.render('index', templateVars)
-      
+      res.render('index', templateVars);
     }
   });
 });
@@ -94,7 +89,6 @@ app.get('/profile', (req, res) => {
 
         res.render('profile', templateVars);
       }).catch(err => {
-        console.log('ERROR');
         res
           .status(500)
           .json({ error: err.message });
@@ -165,7 +159,6 @@ app.post("/register", (req, res) => {
         addUser(info).then(function() {
           getUserWithEmail(info.email).then(data => {
             const users = JSON.parse(JSON.stringify(data));
-            console.log(users);
             req.session.user_id = users.id;
             res.redirect('/');
           }).catch(err => {
@@ -185,6 +178,31 @@ app.post("/register", (req, res) => {
   });
 });
 
+app.post("/profile", (req, res) => {
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(req.body["new-pw"], salt, function(err, hash) {
+      const info = {
+        id: req.session.user_id,
+        name: req.body["name-change"],
+        email: req.body["email-change"],
+        bio: req.body["bio-change"],
+        password: hash,
+      }
+
+    if (!req.session.user_id) {
+      res.render('/errors/errorNotLogin')
+    } else {
+      updateUser(info).catch(err => {
+        console.error(err);
+        res
+          .status(400)
+          .json({ error: err.message });
+      });
+    }
+    res.redirect('/')
+  })
+})
+});
 //if signed in, allows user to post a comment on a resource
 app.post("/resource/:id/comments", function(req, res) {
   const userComment = { user_id: req.session.user_id, resource_id: req.params.id, comment: req.body.text };
