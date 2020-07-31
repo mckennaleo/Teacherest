@@ -7,12 +7,12 @@ $(document).ready(function() {
       data: { keyword },
       type: "POST"
     }).fail(function() {
-      alert("Invalid input. Please try again!")
+      alert("Invalid input. Please try again!");
     })
-    .done(function(data) {
-      console.log(data.search)
-      clearResources();
-      renderResource(data.search);
-    });
+      .done(function(data) {
+        console.log(data.search);
+        clearResources();
+        renderResource(data.search);
+      });
   });
 });

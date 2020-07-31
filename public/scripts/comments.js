@@ -4,7 +4,7 @@ const clearComments = () => {
 
 const renderComment = (data) => {
   for (let item of data.reverse()) {
-    $('.posted-comments').append(createCommentElement(item));
+    $('.posted-comments').prepend(createCommentElement(item));
   }
 };
 
@@ -79,7 +79,6 @@ $(document).ready(function () {
       }).done(function (data) {
         if (data) {
           if (!data) {
-            console.log("CQOUI?", data)
             $(".error-login").slideDown("slow");
           } else {
             $('.error-comment').hide();
