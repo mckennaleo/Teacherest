@@ -3,7 +3,7 @@ const clearComments = () => {
 };
 
 const renderComment = (data) => {
-  for (let item of data.reverse()) {
+  for (let item of data) {
     $('.posted-comments').prepend(createCommentElement(item));
   }
 };
