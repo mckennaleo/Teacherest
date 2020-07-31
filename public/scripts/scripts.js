@@ -67,8 +67,8 @@ $(document).ready(function() {
 
   $('.new-resource').submit(function(e) {
     e.preventDefault();
-    // $('#contact-form input[type="text"]').val('');
-    // $('#contact-form textarea').val('');
+    /* $('#contact-form input[type="text"]').val('');
+    $('#contact-form textarea').val(''); */
     let link = $('.link-input').val();
     let title = $('.title-input').val();
     let description = $('.description-input').val();

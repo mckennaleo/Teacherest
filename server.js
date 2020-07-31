@@ -16,7 +16,7 @@ const bcrypt = require('bcryptjs');
 //----------ROUTES----------//
 
 const widgetsRoutes = require("./routes/widgets");
-const loginRoutes = require("./routes/login");wsa
+const loginRoutes = require("./routes/login");
 const newResourceRoutes = require('./routes/newResource');
 const keywordRoutes = require('./routes/keyword');
 
