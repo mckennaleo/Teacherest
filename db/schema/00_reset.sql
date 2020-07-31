@@ -13,3 +13,5 @@ DROP TABLE IF EXISTS comment_reviews CASCADE;
 \i db/schema/05_ratings.sql;
 \i db/schema/06_likes.sql;
 \i db/schema/07_comment_reviews.sql;
+
+CREATE ROLE labber LOGIN SUPERUSER PASSWORD 'labber';
