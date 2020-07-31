@@ -119,7 +119,7 @@ app.get("/resource/:id/comments", (req, res) => {
 app.get("/register", (req, res) => {
 
   if (req.session.user_id) {
-    res.render('errors/errorAlreadyLogin');
+    res.render("register");
   } else {
     res.render("register");
   }
@@ -128,7 +128,7 @@ app.get("/register", (req, res) => {
 app.get("/logout", (req, res) => {
 
   if (!req.session.user_id) {
-    res.render('errors/errorNotLogin');
+    res.redirect('/');
   } else {
     req.session = null;
     res.redirect('/');
@@ -148,7 +148,7 @@ app.post("/register", (req, res) => {
         bio: req.body.bio
       };
       if (info.name === "" || info.email === "" || req.body.password === "" || info.bio === "") {
-        res.redirect('/error');
+        alert("Error 411: Seems like you forgot to give us some important information... Let's try that again!");
       } else {
         addUser(info).then(function() {
           getUserWithEmail(info.email).then(data => {
